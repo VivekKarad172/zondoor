@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
 
@@ -17,12 +17,19 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
   const isColorCard = type === "color";
   const isDesignCard = type === "design";
   const isCncCard = type === "cnc";
+  const [imageError, setImageError] = useState(false);
   
   const defaultDescription = 
     isDesignCard ? "Premium embossed pattern with precise detailing" :
     isColorCard ? color : 
     "Precision CNC groove detailing for added sophistication";
   
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log(`Failed to load image: ${image}`);
+    e.currentTarget.src = "/placeholder.svg";
+    setImageError(true);
+  };
+
   return (
     <AnimateInView
       key={id}
@@ -37,18 +44,14 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
           <div className="relative overflow-hidden">
             {image && (
               <img
-                src={image}
+                src={imageError ? "/placeholder.svg" : image}
                 alt={name}
                 className={cn(
                   "w-full object-cover transition-transform duration-500 group-hover:scale-105",
                   isDesignCard ? "aspect-[4/3]" : "h-full"
                 )}
                 loading="lazy"
-                onError={(e) => {
-                  console.error(`Failed to load image: ${image}`);
-                  // Use built-in placeholder if image fails to load
-                  e.currentTarget.src = "/placeholder.svg";
-                }}
+                onError={handleImageError}
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">

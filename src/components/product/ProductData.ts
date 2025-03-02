@@ -1,3 +1,4 @@
+
 // Product data used by the Products component
 
 export const designOptions = [
@@ -49,5 +50,5 @@ export const categories = [
 export const websiteInfo = {
   mainWebsite: "https://zondoor.com/",
   companyName: "Z-ON DOOR",
-  contactEmail: "info@zondoor.com", // Replace with actual email from your website
+  contactEmail: "info@zondoor.com",
 };
