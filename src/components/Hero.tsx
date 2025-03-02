@@ -95,25 +95,25 @@ const Hero = () => {
           <div className="order-1 md:order-2 relative">
             <AnimateInView animation="fade-in" delay={200}>
               <div className="relative">
-                {/* Door image with reflection and shadow effect */}
-                <div className="rounded-lg overflow-hidden bg-gradient-to-b from-accent to-primary/10 transform hover:scale-[1.02] transition-all duration-500 shadow-xl">
+                {/* Updated door image with new catalog image */}
+                <div className="rounded-lg overflow-hidden bg-gradient-to-b from-accent/50 to-primary/5 transform hover:scale-[1.02] transition-all duration-500 shadow-xl border border-primary/10">
                   <img
-                    src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Z-on Door Premium PVC Door"
-                    className="w-full object-cover aspect-[3/4] rounded-lg"
+                    src="/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png"
+                    alt="Z-on Door Premium PVC Doors Collection"
+                    className="w-full h-auto object-cover rounded-lg"
                     loading="lazy"
                   />
                 </div>
                 
-                {/* Floating badges */}
-                <div className="absolute -bottom-6 -left-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px]">
-                  <p className="text-xs font-medium mb-1">Available in</p>
-                  <p className="text-xl font-bold">17 Designs</p>
+                {/* Updated floating badges to match the door catalog design */}
+                <div className="absolute -bottom-6 -left-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px] border-l-4 border-primary">
+                  <p className="text-xs font-medium mb-1">Featured Models</p>
+                  <p className="text-xl font-bold">ZN Series</p>
                 </div>
                 
-                <div className="absolute -top-6 -right-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px]">
-                  <p className="text-xs font-medium mb-1">Choose from</p>
-                  <p className="text-xl font-bold">10 Colors</p>
+                <div className="absolute -top-6 -right-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px] border-r-4 border-secondary">
+                  <p className="text-xs font-medium mb-1">Premium</p>
+                  <p className="text-xl font-bold">Emboss Series</p>
                 </div>
               </div>
             </AnimateInView>

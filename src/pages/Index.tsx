@@ -13,6 +13,10 @@ const Index = () => {
   useEffect(() => {
     // Update document title
     document.title = "Z-ON DOOR | Premium PVC Embossed Doors";
+    
+    // Preload the hero image for better performance
+    const preloadImage = new Image();
+    preloadImage.src = "/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png";
   }, []);
 
   return (
