@@ -22,14 +22,25 @@ const Products = () => {
     };
   }, []);
 
-  // Sample data updated with door-specific images - in a real app, this would come from a backend
+  // Updated with uploaded door images
   const designOptions = [
-    { id: 1, name: "Classic Panel", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-1.jpg" },
-    { id: 2, name: "Modern Groove", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-2.jpg" },
-    { id: 3, name: "Lattice", image: "https://praveshdoors.com/assets/img/products/upvc/upvc-door-1.jpg" },
-    { id: 4, name: "Diagonal", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-2.jpg" },
-    { id: 5, name: "Minimalist", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-5.jpg" },
-    { id: 6, name: "Geometric", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-4.jpg" },
+    { id: 1, name: "ZN-01", image: "/door1.jpg" },
+    { id: 2, name: "ZN-02", image: "/door2.jpg" },
+    { id: 3, name: "ZN-03", image: "/door3.jpg" },
+    { id: 4, name: "ZN-04", image: "/door4.jpg" },
+    { id: 5, name: "ZN-05", image: "/door5.jpg" },
+    { id: 6, name: "ZN-06", image: "/door6.jpg" },
+    { id: 7, name: "ZN-07", image: "/door7.jpg" },
+    { id: 8, name: "ZN-08", image: "/door8.jpg" },
+    { id: 9, name: "ZN-09", image: "/door9.jpg" },
+    { id: 10, name: "ZN-10", image: "/door10.jpg" },
+    { id: 11, name: "ZN-11", image: "/door11.jpg" },
+    { id: 12, name: "ZN-12", image: "/door12.jpg" },
+    { id: 13, name: "ZN-13", image: "/door13.jpg" },
+    { id: 14, name: "ZN-14", image: "/door14.jpg" },
+    { id: 15, name: "ZN-15", image: "/door15.jpg" },
+    { id: 16, name: "ZN-16", image: "/door16.jpg" },
+    { id: 17, name: "ZN-17", image: "/door17.jpg" },
   ];
 
   const colorOptions = [
@@ -163,8 +174,8 @@ const Products = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-4 left-4 right-4">
-                            <p className="text-white text-sm font-medium">Design #{design.id}</p>
-                            <p className="text-white/90 text-xs mt-1">Premium quality PVC door with durable finish</p>
+                            <p className="text-white text-sm font-medium">Design {design.name}</p>
+                            <p className="text-white/90 text-xs mt-1">Premium quality PVC embossed door</p>
                           </div>
                         </div>
                       </div>
