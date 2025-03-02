@@ -35,15 +35,21 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
       )}>
         {!isColorCard && (
           <div className="relative overflow-hidden">
-            <img
-              src={image}
-              alt={name}
-              className={cn(
-                "w-full object-cover transition-transform duration-500 group-hover:scale-105",
-                isDesignCard ? "aspect-[4/3]" : "h-full"
-              )}
-              loading="lazy"
-            />
+            {image && (
+              <img
+                src={image}
+                alt={name}
+                className={cn(
+                  "w-full object-cover transition-transform duration-500 group-hover:scale-105",
+                  isDesignCard ? "aspect-[4/3]" : "h-full"
+                )}
+                loading="lazy"
+                onError={(e) => {
+                  console.error(`Failed to load image: ${image}`);
+                  e.currentTarget.src = "/placeholder.svg";
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-4 left-4 right-4">
                 <p className="text-white text-sm font-medium">
