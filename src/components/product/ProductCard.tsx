@@ -43,19 +43,19 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
         {!isColorCard && (
           <div className="relative overflow-hidden">
             {image && (
-              <div className="relative">
+              <div className="relative h-full">
                 <img
                   src={imageError ? "/placeholder.svg" : image}
                   alt={name}
                   className={cn(
-                    "w-full object-cover transition-transform duration-500",
-                    isDesignCard ? "aspect-[3/4]" : "h-full"
+                    "w-full h-full object-contain transition-transform duration-500",
+                    "min-h-[400px]" // Ensures minimum height for proper door display
                   )}
                   loading="lazy"
                   onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4">
+                  <div className="absolute top-4 left-4 right-4">
                     <p className="text-white text-lg font-bold">
                       {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
                     </p>
