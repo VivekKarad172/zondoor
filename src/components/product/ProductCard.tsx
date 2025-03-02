@@ -30,7 +30,7 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
       delay={index * 100}
     >
       <div className={cn(
-        "bg-white rounded-xl overflow-hidden border border-border transition-all duration-300 h-full",
+        "bg-white rounded-xl overflow-hidden border border-border shadow-sm transition-all duration-300 h-full",
         !isColorCard && "group hover:shadow-xl"
       )}>
         {!isColorCard && (
@@ -46,7 +46,8 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                 loading="lazy"
                 onError={(e) => {
                   console.error(`Failed to load image: ${image}`);
-                  e.currentTarget.src = "/placeholder.svg";
+                  // Use unsplash placeholders if image fails to load
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop";
                 }}
               />
             )}

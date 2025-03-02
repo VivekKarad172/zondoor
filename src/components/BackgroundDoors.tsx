@@ -14,21 +14,26 @@ const BackgroundDoors = () => {
       
       doors.forEach((door, index) => {
         const doorEl = door as HTMLElement;
-        const speed = 0.05 + (index % 3) * 0.02;
+        // Increase rotation and movement for more noticeable effect
+        const speed = 0.15 + (index % 3) * 0.05;
         const rotation = scrollY * speed;
-        const translateY = scrollY * (0.1 + (index % 4) * 0.05);
+        const translateY = scrollY * (0.2 + (index % 4) * 0.05);
+        const translateX = Math.sin(scrollY * 0.002) * (20 + (index % 3) * 10);
         
-        doorEl.style.transform = `translateY(${translateY}px) rotate(${rotation}deg)`;
-        doorEl.style.opacity = `${Math.max(0.1, 0.3 - (scrollY * 0.0003))}`;
+        doorEl.style.transform = `translateY(${translateY}px) translateX(${translateX}px) rotate(${rotation}deg)`;
+        doorEl.style.opacity = `${Math.max(0.2, 0.4 - (scrollY * 0.0003))}`;
       });
     };
+    
+    // Call handler once to initialize positions
+    handleScroll();
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Select a subset of doors for the background
-  const backgroundDoors = designOptions.filter((_, index) => index % 3 === 0).slice(0, 5);
+  // Use more doors and distribute them better
+  const backgroundDoors = designOptions.filter((_, index) => index % 2 === 0).slice(0, 8);
   
   return (
     <div 
@@ -39,21 +44,25 @@ const BackgroundDoors = () => {
       {backgroundDoors.map((door, index) => (
         <div
           key={door.id}
-          className="bg-door absolute opacity-20"
+          className="bg-door absolute opacity-30"
           style={{
-            top: `${10 + (index * 15)}%`,
-            left: `${5 + (index * 20)}%`,
-            width: '200px',
-            height: '300px',
+            top: `${5 + (index * 10)}%`,
+            left: `${(index % 4) * 25}%`,
+            width: '250px',
+            height: '350px',
             transformOrigin: 'center center',
-            transition: 'transform 0.5s ease-out, opacity 0.5s ease-out'
+            transition: 'transform 0.3s ease-out, opacity 0.3s ease-out',
+            zIndex: -10 - index
           }}
         >
           <img
-            src={door.image}
+            src={door.image || "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"}
             alt=""
-            className="w-full h-full object-cover rounded-lg shadow-lg"
+            className="w-full h-full object-cover rounded-lg shadow-xl"
             loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = "https://images.unsplash.com/photo-1485827404703-89b55fcc595e";
+            }}
           />
         </div>
       ))}
