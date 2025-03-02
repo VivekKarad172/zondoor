@@ -8,6 +8,7 @@ import CategoryDropdown from "./product/CategoryDropdown";
 import ProductTabs from "./product/ProductTabs";
 import { designOptions, colorOptions, cncOptions, categories, websiteInfo } from "./product/ProductData";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("designs");
@@ -62,6 +63,48 @@ const Products = () => {
                 </svg>
                 Download Our Complete Catalog
               </a>
+            </div>
+            <div className="mt-4">
+              <Link
+                to="/gallery"
+                className={cn(
+                  "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "transition-all duration-300 transform hover:translate-y-[-2px]",
+                  "shadow-md shadow-secondary/10 mx-auto border border-border/50"
+                )}
+              >
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2"
+                >
+                  <path 
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  />
+                  <path 
+                    d="M14 16l-4-4" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  />
+                  <rect x="3" y="6" width="18" height="12" rx="2" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Browse Door Gallery
+              </Link>
             </div>
           </div>
         </AnimateInView>

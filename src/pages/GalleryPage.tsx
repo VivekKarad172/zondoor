@@ -1,29 +1,26 @@
 
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Products from "@/components/Products";
-import Process from "@/components/Process";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
 import BackgroundDoors from "@/components/BackgroundDoors";
 
-const Index = () => {
+const GalleryPage = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Z-ON DOOR | Premium PVC Embossed Doors";
+    document.title = "Door Gallery | Z-ON DOOR";
+    
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background relative">
       <BackgroundDoors />
       <Navbar />
-      <Hero />
-      <About />
-      <Products />
-      <Process />
-      <Gallery />
+      <div className="pt-24">
+        <Gallery />
+      </div>
       <div id="contact">
         <Footer />
       </div>
@@ -31,4 +28,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default GalleryPage;
