@@ -1,24 +1,23 @@
-
 // Product data used by the Products component
 
 export const designOptions = [
-  { id: 1, name: "ZN-01", image: "/door-images/zn-01.jpg" },
-  { id: 2, name: "ZN-02", image: "/door-images/zn-02.jpg" },
-  { id: 3, name: "ZN-03", image: "/door-images/zn-03.jpg" },
-  { id: 4, name: "ZN-04", image: "/door-images/zn-04.jpg" },
-  { id: 5, name: "ZN-05", image: "/door-images/zn-05.jpg" },
-  { id: 6, name: "ZN-06", image: "/door-images/zn-06.jpg" },
-  { id: 7, name: "ZN-07", image: "/door-images/zn-07.jpg" },
-  { id: 8, name: "ZN-08", image: "/door-images/zn-08.jpg" },
-  { id: 9, name: "ZN-09", image: "/door-images/zn-09.jpg" },
-  { id: 10, name: "ZN-10", image: "/door-images/zn-10.jpg" },
-  { id: 11, name: "ZN-11", image: "/door-images/zn-11.jpg" },
-  { id: 12, name: "ZN-12", image: "/door-images/zn-12.jpg" },
-  { id: 13, name: "ZN-13", image: "/door-images/zn-13.jpg" },
-  { id: 14, name: "ZN-14", image: "/door-images/zn-14.jpg" },
-  { id: 15, name: "ZN-15", image: "/door-images/zn-15.jpg" },
-  { id: 16, name: "ZN-16", image: "/door-images/zn-16.jpg" },
-  { id: 17, name: "ZN-17", image: "/door-images/zn-17.jpg" },
+  { id: 1, name: "ZN-01", image: "/placeholder.svg" },
+  { id: 2, name: "ZN-02", image: "/placeholder.svg" },
+  { id: 3, name: "ZN-03", image: "/placeholder.svg" },
+  { id: 4, name: "ZN-04", image: "/placeholder.svg" },
+  { id: 5, name: "ZN-05", image: "/placeholder.svg" },
+  { id: 6, name: "ZN-06", image: "/placeholder.svg" },
+  { id: 7, name: "ZN-07", image: "/placeholder.svg" },
+  { id: 8, name: "ZN-08", image: "/placeholder.svg" },
+  { id: 9, name: "ZN-09", image: "/placeholder.svg" },
+  { id: 10, name: "ZN-10", image: "/placeholder.svg" },
+  { id: 11, name: "ZN-11", image: "/placeholder.svg" },
+  { id: 12, name: "ZN-12", image: "/placeholder.svg" },
+  { id: 13, name: "ZN-13", image: "/placeholder.svg" },
+  { id: 14, name: "ZN-14", image: "/placeholder.svg" },
+  { id: 15, name: "ZN-15", image: "/placeholder.svg" },
+  { id: 16, name: "ZN-16", image: "/placeholder.svg" },
+  { id: 17, name: "ZN-17", image: "/placeholder.svg" },
 ];
 
 export const colorOptions = [
@@ -31,10 +30,10 @@ export const colorOptions = [
 ];
 
 export const cncOptions = [
-  { id: 1, name: "Linear Pattern", image: "/door-images/cnc-01.jpg" },
-  { id: 2, name: "Circular Accent", image: "/door-images/cnc-02.jpg" },
-  { id: 3, name: "Diamond Grid", image: "/door-images/cnc-03.jpg" },
-  { id: 4, name: "Wave Pattern", image: "/door-images/cnc-04.jpg" },
+  { id: 1, name: "Linear Pattern", image: "/placeholder.svg" },
+  { id: 2, name: "Circular Accent", image: "/placeholder.svg" },
+  { id: 3, name: "Diamond Grid", image: "/placeholder.svg" },
+  { id: 4, name: "Wave Pattern", image: "/placeholder.svg" },
 ];
 
 // Categories for dropdown
@@ -45,3 +44,10 @@ export const categories = [
   { id: "frp", name: "FRP Doors" },
   { id: "custom", name: "Custom Designs" },
 ];
+
+// Add website connection information
+export const websiteInfo = {
+  mainWebsite: "https://zondoor.com/",
+  companyName: "Z-ON DOOR",
+  contactEmail: "info@zondoor.com", // Replace with actual email from your website
+};

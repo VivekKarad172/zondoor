@@ -33,7 +33,7 @@ const BackgroundDoors = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Use more doors and better distribution
+  // Use reliable placeholder image
   const backgroundDoors = designOptions.filter((_, index) => index % 2 === 0).slice(0, 10);
   
   return (
@@ -57,13 +57,10 @@ const BackgroundDoors = () => {
           }}
         >
           <img
-            src={door.image || "/door-images/placeholder.jpg"}
+            src="/placeholder.svg"
             alt=""
             className="w-full h-full object-cover rounded-lg shadow-xl"
             loading="lazy"
-            onError={(e) => {
-              e.currentTarget.src = "/door-images/placeholder.jpg";
-            }}
           />
         </div>
       ))}

@@ -46,8 +46,8 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                 loading="lazy"
                 onError={(e) => {
                   console.error(`Failed to load image: ${image}`);
-                  // Use local placeholder if image fails to load
-                  e.currentTarget.src = "/door-images/placeholder.jpg";
+                  // Use built-in placeholder if image fails to load
+                  e.currentTarget.src = "/placeholder.svg";
                 }}
               />
             )}

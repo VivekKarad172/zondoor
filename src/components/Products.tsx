@@ -6,12 +6,16 @@ import ColorsTab from "./product/ColorsTab";
 import CncTab from "./product/CncTab";
 import CategoryDropdown from "./product/CategoryDropdown";
 import ProductTabs from "./product/ProductTabs";
-import { designOptions, colorOptions, cncOptions, categories } from "./product/ProductData";
+import { designOptions, colorOptions, cncOptions, categories, websiteInfo } from "./product/ProductData";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("designs");
   const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+  const handleVisitMainWebsite = () => {
+    window.open(websiteInfo.mainWebsite, '_blank');
+  };
 
   return (
     <section id="products" className="section-padding bg-secondary/30">
@@ -60,12 +64,20 @@ const Products = () => {
               With our extensive range of designs, colors, and patterns, you can create a door
               that perfectly complements your interior space.
             </p>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] shadow-lg"
-            >
-              Request a Catalog
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] shadow-lg"
+              >
+                Request a Catalog
+              </a>
+              <button
+                onClick={handleVisitMainWebsite}
+                className="inline-flex items-center justify-center bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] border border-primary-foreground/40"
+              >
+                Visit Our Main Website
+              </button>
+            </div>
           </div>
         </AnimateInView>
       </div>
