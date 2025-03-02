@@ -22,14 +22,14 @@ const Products = () => {
     };
   }, []);
 
-  // Sample data - in a real app, this would come from a backend
+  // Sample data updated with door-specific images - in a real app, this would come from a backend
   const designOptions = [
-    { id: 1, name: "Classic Panel", image: "https://images.unsplash.com/photo-1559818454-1b46997bfe30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 2, name: "Modern Groove", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 3, name: "Lattice", image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 4, name: "Diagonal", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 5, name: "Minimalist", image: "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 6, name: "Geometric", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+    { id: 1, name: "Classic Panel", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-1.jpg" },
+    { id: 2, name: "Modern Groove", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-2.jpg" },
+    { id: 3, name: "Lattice", image: "https://praveshdoors.com/assets/img/products/upvc/upvc-door-1.jpg" },
+    { id: 4, name: "Diagonal", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-2.jpg" },
+    { id: 5, name: "Minimalist", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-5.jpg" },
+    { id: 6, name: "Geometric", image: "https://praveshdoors.com/assets/img/products/frp/frp-door-4.jpg" },
   ];
 
   const colorOptions = [
@@ -42,10 +42,10 @@ const Products = () => {
   ];
 
   const cncOptions = [
-    { id: 1, name: "Linear Pattern", image: "https://images.unsplash.com/photo-1629139695548-26de789ba1e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 2, name: "Circular Accent", image: "https://images.unsplash.com/photo-1629140727571-9b5c6f6267b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 3, name: "Diamond Grid", image: "https://images.unsplash.com/photo-1616046619722-ebc3817069d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 4, name: "Wave Pattern", image: "https://images.unsplash.com/photo-1595815796144-ed6f757a9ad7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+    { id: 1, name: "Linear Pattern", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-3.jpg" },
+    { id: 2, name: "Circular Accent", image: "https://praveshdoors.com/assets/img/products/designer/designer-door-4.jpg" },
+    { id: 3, name: "Diamond Grid", image: "https://praveshdoors.com/assets/img/products/upvc/upvc-door-2.jpg" },
+    { id: 4, name: "Wave Pattern", image: "https://praveshdoors.com/assets/img/products/upvc/upvc-door-3.jpg" },
   ];
 
   // Categories for dropdown
@@ -161,9 +161,10 @@ const Products = () => {
                           className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-4 left-4 right-4">
                             <p className="text-white text-sm font-medium">Design #{design.id}</p>
+                            <p className="text-white/90 text-xs mt-1">Premium quality PVC door with durable finish</p>
                           </div>
                         </div>
                       </div>
@@ -226,9 +227,10 @@ const Products = () => {
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-4 left-4 right-4">
                             <p className="text-white text-sm font-medium">CNC Pattern #{pattern.id}</p>
+                            <p className="text-white/90 text-xs mt-1">Precision CNC grooves for unique styling</p>
                           </div>
                         </div>
                       </div>
