@@ -43,13 +43,13 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
         {!isColorCard && (
           <div className="relative overflow-hidden">
             {image && (
-              <div className="relative h-full">
+              <div className="relative h-full flex justify-center">
                 <img
                   src={imageError ? "/placeholder.svg" : image}
                   alt={name}
                   className={cn(
-                    "w-full h-full object-contain transition-transform duration-500",
-                    "min-h-[400px]" // Ensures minimum height for proper door display
+                    "w-auto h-auto max-w-full object-contain transition-transform duration-500",
+                    "min-h-[400px] max-h-[600px]" // Ensures proper height while preserving aspect ratio
                   )}
                   loading="lazy"
                   onError={handleImageError}
