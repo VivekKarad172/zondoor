@@ -1,16 +1,32 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
+import { ChevronDown } from "lucide-react";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("designs");
+  const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
+  const categoryRef = useRef<HTMLDivElement>(null);
+
+  // Close the dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (categoryRef.current && !categoryRef.current.contains(event.target as Node)) {
+        setCategoryMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Sample data - in a real app, this would come from a backend
   const designOptions = [
-    { id: 1, name: "Classic Panel", image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 2, name: "Modern Groove", image: "https://images.unsplash.com/photo-1501183638710-841dd1904471?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { id: 3, name: "Lattice", image: "https://images.unsplash.com/photo-1534081333815-ae5019106622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+    { id: 1, name: "Classic Panel", image: "https://images.unsplash.com/photo-1559818454-1b46997bfe30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+    { id: 2, name: "Modern Groove", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
+    { id: 3, name: "Lattice", image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
     { id: 4, name: "Diagonal", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
     { id: 5, name: "Minimalist", image: "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
     { id: 6, name: "Geometric", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
@@ -32,6 +48,27 @@ const Products = () => {
     { id: 4, name: "Wave Pattern", image: "https://images.unsplash.com/photo-1595815796144-ed6f757a9ad7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
   ];
 
+  // Categories for dropdown
+  const categories = [
+    { id: "all", name: "All Products" },
+    { id: "premium", name: "Premium PVC Doors" },
+    { id: "economy", name: "Economy PVC Doors" },
+    { id: "frp", name: "FRP Doors" },
+    { id: "custom", name: "Custom Designs" },
+  ];
+  
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+  const toggleCategoryMenu = () => {
+    setCategoryMenuOpen(!categoryMenuOpen);
+  };
+
+  const selectCategory = (category: typeof categories[0]) => {
+    setSelectedCategory(category);
+    setCategoryMenuOpen(false);
+    // In a real application, this would filter products based on category
+  };
+
   return (
     <section id="products" className="section-padding bg-secondary/30">
       <div className="container px-4 md:px-8 mx-auto">
@@ -49,6 +86,43 @@ const Products = () => {
             </p>
           </div>
         </AnimateInView>
+
+        {/* Category Dropdown */}
+        <div className="mb-8">
+          <AnimateInView animation="fade-in" delay={200}>
+            <div className="relative w-full md:w-64 mx-auto" ref={categoryRef}>
+              <button
+                onClick={toggleCategoryMenu}
+                className="w-full bg-background border border-border flex items-center justify-between px-4 py-3 rounded-lg shadow-sm hover:bg-background/80 transition-colors"
+              >
+                <span className="font-medium">{selectedCategory.name}</span>
+                <ChevronDown 
+                  className={cn(
+                    "h-5 w-5 text-foreground/70 transition-transform duration-200",
+                    categoryMenuOpen ? "transform rotate-180" : ""
+                  )} 
+                />
+              </button>
+              
+              {categoryMenuOpen && (
+                <div className="absolute top-full left-0 mt-1 w-full z-20 bg-background rounded-lg shadow-lg border border-border py-1 animate-in fade-in-80 zoom-in-95">
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => selectCategory(category)}
+                      className={cn(
+                        "w-full text-left px-4 py-2 hover:bg-secondary/50 transition-colors",
+                        selectedCategory.id === category.id ? "bg-secondary/30 font-medium" : ""
+                      )}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </AnimateInView>
+        </div>
 
         <div className="mb-12">
           <div className="flex flex-wrap justify-center gap-4 mb-8">

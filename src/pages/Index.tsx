@@ -20,7 +20,9 @@ const Index = () => {
       <About />
       <Products />
       <Process />
-      <Footer />
+      <div id="contact">
+        <Footer />
+      </div>
     </div>
   );
 };
