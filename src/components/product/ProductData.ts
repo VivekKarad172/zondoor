@@ -1,4 +1,3 @@
-
 // Product data used by the Products component
 
 export const designOptions = [
@@ -18,7 +17,6 @@ export const designOptions = [
   { id: 14, name: "ZN-14", image: "/lovable-uploads/649ae861-ffd6-485b-8bbc-52386a72941f.png" },
   { id: 15, name: "ZN-15", image: "/lovable-uploads/3581a943-1d90-4657-8128-8bbf4a57a772.png" },
   { id: 16, name: "ZN-16", image: "/lovable-uploads/a0ab414a-77cb-4ba3-8e55-070e78510255.png" },
-  { id: 17, name: "ZN-17", image: "/placeholder.svg" },
 ];
 
 export const colorOptions = [

@@ -29,7 +29,7 @@ const Products = () => {
               Customize Your Perfect <span className="text-gradient">Door</span>
             </h2>
             <p className="text-foreground/80">
-              With 17 embossing designs, 10 foil color options, and custom CNC grooves,
+              With 16 embossing designs, 6 foil color options, and custom CNC grooves,
               create a door that perfectly matches your interior style.
             </p>
           </div>
