@@ -10,21 +10,21 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
     >
       {/* Background with subtle patterns */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-secondary/30 -z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/5 -z-10"></div>
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzBoLTZWMGg2djMwem0wIDBoLTZ2MzBoNlYzMHoiLz48cGF0aCBkPSJNMzAgMzZWMEgwdjZoMjR2MjRoNnYtNnptMCAwVjYwaDMwdi02SDM2VjMwaC02eiIvPjwvZz48L2c+PC9zdmc+')] bg-repeat opacity-5 -z-10"></div>
 
       <div className="container px-4 md:px-8 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <AnimateInView animation="fade-in" delay={300}>
-              <span className="bg-primary/5 border border-primary/10 text-foreground/80 text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
+              <span className="bg-primary/10 border border-primary/20 text-foreground/80 text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
                 Premium PVC Embossed Doors
               </span>
             </AnimateInView>
 
             <AnimateInView animation="slide-in-up" delay={400}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-                <span className="text-gradient">Zero Compromise</span> on
+                <span className="text-primary">Zero Compromise</span> on
                 <br />
                 Design & Quality
               </h1>
@@ -53,8 +53,8 @@ const Hero = () => {
                 <a
                   href="#process"
                   className={cn(
-                    "bg-transparent border border-primary/20 text-foreground",
-                    "hover:bg-primary/5 px-6 py-3 rounded-md font-medium inline-flex items-center",
+                    "bg-transparent border border-secondary/20 text-secondary",
+                    "hover:bg-secondary/5 px-6 py-3 rounded-md font-medium inline-flex items-center",
                     "transition-all duration-300"
                   )}
                 >
@@ -68,7 +68,7 @@ const Hero = () => {
             <AnimateInView animation="fade-in" delay={200}>
               <div className="relative">
                 {/* Door image with reflection and shadow effect */}
-                <div className="rounded-lg overflow-hidden bg-gradient-to-b from-accent to-secondary transform hover:scale-[1.02] transition-all duration-500 shadow-xl">
+                <div className="rounded-lg overflow-hidden bg-gradient-to-b from-accent to-primary/10 transform hover:scale-[1.02] transition-all duration-500 shadow-xl">
                   <img
                     src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     alt="Z-on Door Premium PVC Door"

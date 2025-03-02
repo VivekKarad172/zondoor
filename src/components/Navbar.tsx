@@ -41,9 +41,11 @@ const Navbar = () => {
       <div className="container mx-auto">
         <nav className="flex items-center justify-between">
           <a href="#home" className="flex items-center">
-            <span className="text-xl font-display font-bold tracking-tight">
-              Z-ON <span className="text-gradient">DOOR</span>
-            </span>
+            <img 
+              src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
+              alt="Z-ON DOOR Logo" 
+              className="h-12 md:h-14" 
+            />
           </a>
 
           {/* Desktop Menu */}
@@ -90,6 +92,11 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex flex-col items-center justify-center h-full">
+            <img 
+              src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
+              alt="Z-ON DOOR Logo" 
+              className="h-20 mb-8" 
+            />
             <ul className="flex flex-col items-center space-y-8">
               {navLinks.map((link) => (
                 <li key={link.name}>

@@ -54,7 +54,7 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                   loading="lazy"
                   onError={handleImageError}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent opacity-100 transition-opacity duration-300">
                   <div className="absolute top-4 left-4 right-4">
                     <p className="text-white text-lg font-bold">
                       {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
