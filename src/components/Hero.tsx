@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
-import { Check } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,12 +38,22 @@ const Hero = () => {
     "PVC rigid sheet fillers for stability and longevity"
   ];
 
+  const goToNextSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === doorImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? doorImages.length - 1 : prevIndex - 1
+    );
+  };
+
   useEffect(() => {
     // Auto-rotate images every 5 seconds
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === doorImages.length - 1 ? 0 : prevIndex + 1
-      );
+      goToNextSlide();
     }, 5000);
     
     // Preload all images for smoother transitions
@@ -58,37 +68,75 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-16 bg-gray-50"
+      className="relative h-screen w-full flex items-center justify-center bg-gray-50 overflow-hidden"
     >
-      <div className="wesmarc-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16">
-        <div className="order-2 lg:order-1">
+      {/* Full-screen slideshow background */}
+      <div className="absolute inset-0 w-full h-full">
+        {doorImages.map((image, index) => (
+          <div 
+            key={index}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-black/50 bg-gradient-to-r from-black/70 to-transparent"></div>
+          </div>
+        ))}
+
+        {/* Slideshow navigation arrows */}
+        <button 
+          onClick={goToPrevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 rounded-full p-2 text-white transition-all"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={28} />
+        </button>
+        <button 
+          onClick={goToNextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 rounded-full p-2 text-white transition-all"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={28} />
+        </button>
+      </div>
+
+      {/* Content overlay */}
+      <div className="wesmarc-container relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
           <AnimateInView animation="fade-in" delay={300}>
-            <span className="bg-primary/10 text-primary text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
+            <span className="bg-primary/20 text-white text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
               Quality PVC Embossed Doors
             </span>
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={400}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-secondary">
-              Premium PVC <span className="text-primary">Doors</span> <br />For Modern Interiors
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+              Premium PVC <span className="text-primary-foreground">Doors</span> <br />For Modern Interiors
             </h1>
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={600}>
-            <p className="text-foreground/80 text-lg mb-8 max-w-lg">
+            <p className="text-white/90 text-lg mb-8 max-w-lg">
               At Z-ON DOOR, we specialize in manufacturing premium PVC embossed 
               doors using the latest technology and highest quality materials.
             </p>
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={700}>
-            <div className="bg-white rounded-lg p-6 border border-gray-200 mb-8 shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-primary">Superior Materials</h3>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 mb-8">
+              <h3 className="text-xl font-semibold mb-4 text-white">Superior Materials</h3>
               <ul className="space-y-3">
                 {specifications.map((spec, index) => (
                   <li key={index} className="flex items-start">
-                    <Check className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
-                    <span className="text-foreground/80">{spec}</span>
+                    <Check className="h-5 w-5 text-primary-foreground mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-white/90">{spec}</span>
                   </li>
                 ))}
               </ul>
@@ -112,7 +160,7 @@ const Hero = () => {
                 href="/ZON DOOR CATALOG.pdf"
                 download
                 className={cn(
-                  "bg-white text-secondary border border-gray-300 hover:bg-gray-50",
+                  "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",
                   "px-6 py-3 rounded-md font-medium inline-flex items-center",
                   "transition-all duration-300 transform hover:translate-y-[-2px]",
                   "shadow-sm"
@@ -140,56 +188,20 @@ const Hero = () => {
           </AnimateInView>
         </div>
 
-        <div className="order-1 lg:order-2">
-          <AnimateInView animation="fade-in" delay={200}>
-            <div className="relative">
-              {/* Image carousel with fade transition */}
-              <div className="relative h-[400px] md:h-[500px] w-full rounded-lg overflow-hidden shadow-xl">
-                {doorImages.map((image, index) => (
-                  <div 
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                      index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                    }`}
-                  >
-                    <div className="h-full w-full rounded-lg overflow-hidden">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover rounded-lg"
-                        loading={index === 0 ? "eager" : "lazy"}
-                      />
-                    </div>
-                  </div>
-                ))}
-                
-                {/* Overlay with gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
-                
-                {/* Text overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
-                  <h3 className="text-2xl font-bold mb-2">Quality PVC Doors</h3>
-                  <p className="text-white/90">Elegant designs for modern homes</p>
-                </div>
-              </div>
-              
-              {/* Image navigation dots */}
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {doorImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex 
-                        ? 'bg-primary scale-125' 
-                        : 'bg-gray-300 hover:bg-gray-400'
-                    }`}
-                    aria-label={`View image ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </AnimateInView>
+        {/* Slideshow indicator dots */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {doorImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex 
+                  ? 'bg-primary scale-125' 
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

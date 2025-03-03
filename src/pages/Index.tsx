@@ -31,7 +31,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white relative">
-      <Navbar />
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Navbar />
+      </div>
       <Hero />
       <About />
       <Products />
