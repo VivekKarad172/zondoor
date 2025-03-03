@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home } from "lucide-react";
 import { AnimateInView } from "./ui/motion";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -24,11 +27,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Products", href: "#products" },
-    { name: "Process", href: "#process" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: isHomePage ? "#home" : "/" },
+    { name: "About", href: isHomePage ? "#about" : "/#about" },
+    { name: "Products", href: isHomePage ? "#products" : "/#products" },
+    { name: "Process", href: isHomePage ? "#process" : "/#process" },
+    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
   ];
 
   return (
@@ -40,13 +43,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto">
         <nav className="flex items-center justify-between">
-          <a href="#home" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
               alt="Z-ON DOOR Logo" 
               className="h-12 md:h-14" 
             />
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center space-x-8">
@@ -57,13 +60,23 @@ const Navbar = () => {
                 delay={index * 100 + 300}
               >
                 <li>
-                  <a
-                    href={link.href}
-                    className="text-sm font-medium hover:text-primary transition-colors px-1 py-2 relative group"
-                  >
-                    {link.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span>
-                  </a>
+                  {isHomePage ? (
+                    <a
+                      href={link.href}
+                      className="text-sm font-medium hover:text-primary transition-colors px-1 py-2 relative group"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-sm font-medium hover:text-primary transition-colors px-1 py-2 relative group"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </Link>
+                  )}
                 </li>
               </AnimateInView>
             ))}
@@ -100,13 +113,23 @@ const Navbar = () => {
             <ul className="flex flex-col items-center space-y-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-xl font-medium"
-                    onClick={toggleMenu}
-                  >
-                    {link.name}
-                  </a>
+                  {isHomePage ? (
+                    <a
+                      href={link.href}
+                      className="text-xl font-medium"
+                      onClick={toggleMenu}
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-xl font-medium"
+                      onClick={toggleMenu}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
