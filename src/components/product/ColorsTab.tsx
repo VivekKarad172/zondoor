@@ -41,12 +41,14 @@ const ColorsTab = ({ colors }: ColorsTabProps) => {
             >
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
                 {color.image ? (
-                  <div className="h-60 w-full relative overflow-hidden group">
+                  <div 
+                    className="h-60 w-full relative overflow-hidden group cursor-pointer"
+                    onClick={() => openImageModal(color.image!, color.name)}
+                  >
                     <img 
                       src={color.image} 
                       alt={`${color.name}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
-                      onClick={() => openImageModal(color.image!, color.name)}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm p-3">
                       <p className="text-white font-medium text-sm">

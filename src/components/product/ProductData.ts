@@ -34,10 +34,16 @@ export const colorOptions = [
 ];
 
 export const cncOptions = [
-  { id: 1, name: "Linear Pattern", image: "/placeholder.svg" },
-  { id: 2, name: "Circular Accent", image: "/placeholder.svg" },
-  { id: 3, name: "Diamond Grid", image: "/placeholder.svg" },
-  { id: 4, name: "Wave Pattern", image: "/placeholder.svg" },
+  { id: 1, name: "Linear Pattern", image: "/lovable-uploads/2fc0e82d-a8a3-4ecc-b226-ef1e9dc54d20.png" },
+  { id: 2, name: "Diagonal Cross", image: "/lovable-uploads/85186266-f6bb-4e08-bf75-02483c4850f7.png" },
+  { id: 3, name: "Curved Line", image: "/lovable-uploads/6cd44021-8596-4afb-abe8-1788047e1ebf.png" },
+  { id: 4, name: "Modern Burgundy", image: "/lovable-uploads/6254a950-3b06-474d-9bec-0cea4a4044ab.png" },
+  { id: 5, name: "Centered Emblem", image: "/lovable-uploads/1082913a-cf43-42e5-9198-65c45df1078c.png" },
+  { id: 6, name: "Curved Arc", image: "/lovable-uploads/44ff23a5-2654-4cb9-a62e-a3fb7670e629.png" },
+  { id: 7, name: "Zigzag Lines", image: "/lovable-uploads/4a42daef-8f86-4ecd-9c22-f7fe19ab0e3c.png" },
+  { id: 8, name: "Burgundy Segments", image: "/lovable-uploads/63b3a843-6d75-4d96-b949-c1a2d19c58f0.png" },
+  { id: 9, name: "Modern Corner", image: "/lovable-uploads/4d9bb5d3-de2d-4dec-9c14-a45353b70363.png" },
+  { id: 10, name: "Grid Pattern", image: "/lovable-uploads/78b8dec8-0caf-4cdc-8110-3fa851ee9bb1.png" },
 ];
 
 // Categories for dropdown
