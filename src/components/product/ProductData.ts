@@ -21,16 +21,11 @@ export const designOptions = [
 ];
 
 export const colorOptions = [
-  { id: 1, name: "Snow White", color: "#FFFFFF" },
-  { id: 2, name: "Charcoal Black", color: "#333333" },
-  { id: 3, name: "Walnut", color: "#5E4B3C", foil: true, image: "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png" },
-  { id: 4, name: "Ash Grey", color: "#B2BEB5" },
-  { id: 5, name: "Mahogany", color: "#C04000", foil: true, image: "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png" },
-  { id: 6, name: "Navy Blue", color: "#003366" },
-  { id: 7, name: "Teak", color: "#A67B5B", foil: true, image: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png" },
-  { id: 8, name: "Cherry", color: "#8B0000", foil: true, image: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png" },
-  { id: 9, name: "Golden Oak", color: "#B87333", foil: true, image: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png" },
-  { id: 10, name: "Maple", color: "#D9A76A" },
+  { id: 1, name: "Walnut", color: "#5E4B3C", foil: true, image: "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png" },
+  { id: 2, name: "Mahogany", color: "#C04000", foil: true, image: "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png" },
+  { id: 3, name: "Teak", color: "#A67B5B", foil: true, image: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png" },
+  { id: 4, name: "Cherry", color: "#8B0000", foil: true, image: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png" },
+  { id: 5, name: "Golden Oak", color: "#B87333", foil: true, image: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png" },
 ];
 
 export const cncOptions = [
