@@ -9,24 +9,44 @@ const Hero = () => {
   
   const doorImages = [
     {
-      src: "/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png",
-      alt: "Z-on Door Premium PVC Doors Collection"
+      src: "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png",
+      alt: "Walnut Wood Finish - Premium PVC Door"
     },
     {
-      src: "/lovable-uploads/96ec7b24-2d86-4ee9-abcd-65c8a4a06688.png",
-      alt: "Premium 4-Panel PVC Door with Teak Wood Finish"
+      src: "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png",
+      alt: "Mahogany Wood Finish - Premium PVC Door"
     },
     {
-      src: "/lovable-uploads/3b5e4d4d-acf4-49b8-ab34-0791c5eccd08.png",
-      alt: "Elegant 2-Panel PVC Door for Bathroom"
+      src: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png",
+      alt: "Cherry Wood Finish - Premium PVC Door"
     },
     {
-      src: "/lovable-uploads/18f66662-026a-4604-8344-362314f10cca.png",
-      alt: "Modern Panel PVC Door for Bathroom"
+      src: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png",
+      alt: "Golden Oak Wood Finish - Premium PVC Door"
     },
     {
-      src: "/lovable-uploads/e0be35b1-01f1-4b46-9985-a1f2c27a00aa.png",
-      alt: "Classic Arch-Design PVC Door"
+      src: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
+      alt: "Teak Wood Finish - Premium PVC Door"
+    },
+    {
+      src: "/lovable-uploads/1d602bf5-03bb-4ef6-9cac-57678def00f2.png",
+      alt: "Premium Hardwood Finish - PVC Door"
+    },
+    {
+      src: "/lovable-uploads/3af36dd7-ee22-4078-8b78-71eeacbe06c0.png",
+      alt: "Medium Brown Wood Finish - PVC Door"
+    },
+    {
+      src: "/lovable-uploads/5d26c1a0-7fb4-4de2-ba35-b69a044410d8.png",
+      alt: "Light Brown Wood Finish - PVC Door"
+    },
+    {
+      src: "/lovable-uploads/3dc7b1f2-8aaf-4d3a-9457-f796a1193481.png",
+      alt: "Natural Oak Wood Finish - PVC Door"
+    },
+    {
+      src: "/lovable-uploads/8a0f5c4e-7ea8-4fd7-bc4a-885c2ef10de3.png",
+      alt: "Rustic Wood Finish - PVC Door"
     }
   ];
 

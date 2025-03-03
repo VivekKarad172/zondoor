@@ -17,10 +17,11 @@ const Index = () => {
     
     // Preload hero images for better performance
     const preloadImages = [
-      "/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png",
-      "/lovable-uploads/96ec7b24-2d86-4ee9-abcd-65c8a4a06688.png",
-      "/lovable-uploads/3b5e4d4d-acf4-49b8-ab34-0791c5eccd08.png",
-      "/lovable-uploads/b3a0d53a-9d2a-4884-9c3b-7af3832ffff2.png"
+      "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png",
+      "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png",
+      "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png",
+      "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png",
+      "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png"
     ];
     
     preloadImages.forEach(src => {
