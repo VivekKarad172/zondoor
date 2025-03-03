@@ -11,24 +11,20 @@ const Hero = ({ doorImages, specifications }: HeroProps) => {
   
   const defaultDoorImages: DoorImage[] = [
     {
-      src: "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png",
-      alt: "Walnut Wood Finish - Premium PVC Door"
+      src: "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png",
+      alt: "Premium Embossed PVC Door"
     },
     {
-      src: "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png",
-      alt: "Mahogany Wood Finish - Premium PVC Door"
+      src: "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png",
+      alt: "3D Embossed Design Door"
     },
     {
-      src: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png",
-      alt: "Cherry Wood Finish - Premium PVC Door"
+      src: "/lovable-uploads/8416ee93-b407-4d4d-a95a-e088714269cf.png",
+      alt: "Z-ON DOOR Premium Collection"
     },
     {
-      src: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png",
-      alt: "Golden Oak Wood Finish - Premium PVC Door"
-    },
-    {
-      src: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
-      alt: "Teak Wood Finish - Premium PVC Door"
+      src: "/lovable-uploads/b3a0d53a-9d2a-4884-9c3b-7af3832ffff2.png",
+      alt: "Z-ON DOOR Manufacturing Technology"
     },
   ];
 
