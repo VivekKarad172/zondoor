@@ -34,6 +34,11 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
     setScale(prevScale => Math.max(prevScale - 0.5, 1));
   };
 
+  const handleReset = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     if (e.deltaY < 0) {
@@ -66,6 +71,26 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
     setIsDragging(false);
   };
 
+  // Handle keyboard events
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOpen) {
+        if (e.key === 'Escape') {
+          onClose();
+        } else if (e.key === '+' || e.key === '=') {
+          handleZoomIn();
+        } else if (e.key === '-') {
+          handleZoomOut();
+        } else if (e.key === '0') {
+          handleReset();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -81,18 +106,28 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
           <button 
             onClick={handleZoomIn}
             className="rounded-full p-2 bg-black/50 text-white hover:bg-black/70 transition-colors"
+            aria-label="Zoom in"
           >
             <ZoomIn className="h-6 w-6" />
           </button>
           <button 
             onClick={handleZoomOut}
             className="rounded-full p-2 bg-black/50 text-white hover:bg-black/70 transition-colors"
+            aria-label="Zoom out"
           >
             <ZoomOut className="h-6 w-6" />
           </button>
           <button 
+            onClick={handleReset}
+            className="rounded-full p-2 bg-black/50 text-white hover:bg-black/70 transition-colors"
+            aria-label="Reset zoom"
+          >
+            <span className="font-bold text-sm">1:1</span>
+          </button>
+          <button 
             onClick={onClose}
             className="rounded-full p-2 bg-black/50 text-white hover:bg-black/70 transition-colors"
+            aria-label="Close modal"
           >
             <X className="h-6 w-6" />
           </button>
@@ -117,6 +152,19 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
             }}
             draggable="false"
           />
+          
+          {/* Exit button in center when zoomed in */}
+          {scale > 1 && (
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+              <button
+                onClick={handleReset}
+                className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/30 transition-colors flex items-center gap-2 shadow-lg"
+              >
+                <X className="h-4 w-4" />
+                <span>Reset View</span>
+              </button>
+            </div>
+          )}
         </div>
         
         <div className="mt-4 text-center">
@@ -125,7 +173,7 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
             <p className="text-white/80 mt-2">{imageDescription}</p>
           )}
           <p className="text-white/60 text-sm mt-4">
-            Use mouse wheel to zoom, drag to move when zoomed in
+            Press ESC to close | Mouse wheel to zoom | Drag to move | Press 0 to reset view
           </p>
         </div>
       </div>
