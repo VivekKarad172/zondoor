@@ -1,3 +1,4 @@
+
 // Product data used by the Products component
 
 export const designOptions = [
@@ -26,6 +27,10 @@ export const colorOptions = [
   { id: 4, name: "Ash Grey", color: "#B2BEB5" },
   { id: 5, name: "Mahogany", color: "#C04000" },
   { id: 6, name: "Navy Blue", color: "#003366" },
+  { id: 7, name: "Teak", color: "#A67B5B" },
+  { id: 8, name: "Cherry", color: "#8B0000" },
+  { id: 9, name: "Golden Oak", color: "#B87333" },
+  { id: 10, name: "Maple", color: "#D9A76A" },
 ];
 
 export const cncOptions = [

@@ -72,20 +72,23 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
         {isColorCard && (
           <div className="h-full flex flex-col">
             <div
-              className="h-48 w-full"
+              className="h-60 w-full transition-all duration-300 hover:opacity-90"
               style={{ backgroundColor: color }}
             ></div>
-            <div className="p-4">
-              <h3 className="font-bold text-lg mb-2">{name}</h3>
-              <div className="flex items-center gap-2">
+            <div className="p-6">
+              <h3 className="font-bold text-lg mb-3">{name}</h3>
+              <div className="flex items-center gap-3">
                 <div
-                  className="h-5 w-5 rounded-full border border-gray-200"
+                  className="h-6 w-6 rounded-full border border-gray-200 shadow-sm"
                   style={{ backgroundColor: color }}
                 ></div>
-                <p className="text-foreground/70 text-sm">
+                <p className="text-foreground/70">
                   {color}
                 </p>
               </div>
+              <p className="mt-4 text-foreground/70 text-sm">
+                Premium foil finish with high durability
+              </p>
             </div>
           </div>
         )}

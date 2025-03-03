@@ -1,6 +1,7 @@
 
 import React from "react";
 import ProductCard from "./ProductCard";
+import { AnimateInView } from "../ui/motion";
 
 interface ColorsTabProps {
   colors: {
