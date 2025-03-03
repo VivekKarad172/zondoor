@@ -11,9 +11,10 @@ interface ProductCardProps {
   description?: string;
   index: number;
   type: "design" | "color" | "cnc";
+  onImageClick?: (image: string, name: string) => void;
 }
 
-const ProductCard = ({ id, name, image, color, description, index, type }: ProductCardProps) => {
+const ProductCard = ({ id, name, image, color, description, index, type, onImageClick }: ProductCardProps) => {
   const isColorCard = type === "color";
   const isDesignCard = type === "design";
   const isCncCard = type === "cnc";
@@ -48,12 +49,13 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
       )}>
         <div className="relative overflow-hidden">
           {image && (
-            <div className="relative h-full flex justify-center">
+            <div className="relative h-full flex justify-center group cursor-pointer" 
+                 onClick={() => onImageClick && image && onImageClick(image, name)}>
               <img
                 src={imageError ? "/placeholder.svg" : image}
                 alt={name}
                 className={cn(
-                  "w-auto max-w-full object-contain transition-transform duration-500",
+                  "w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-105",
                   "min-h-[350px] max-h-[350px]"
                 )}
                 loading="lazy"
@@ -67,6 +69,11 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                   <p className="text-white/90 text-sm mt-1">
                     {description || defaultDescription}
                   </p>
+                </div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="bg-black/30 px-3 py-2 rounded-full backdrop-blur-sm">
+                  <span className="text-white text-sm font-medium">Click to zoom</span>
                 </div>
               </div>
             </div>
