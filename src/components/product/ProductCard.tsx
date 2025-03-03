@@ -30,6 +30,12 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
     setImageError(true);
   };
 
+  // This component is now only used for design and CNC cards
+  // Color cards are directly rendered in ColorsTab.tsx
+  if (isColorCard) {
+    return null;
+  }
+
   return (
     <AnimateInView
       key={id}
@@ -38,60 +44,34 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
     >
       <div className={cn(
         "bg-white rounded-md overflow-hidden shadow-md transition-all duration-300 h-full",
-        !isColorCard && "group hover:shadow-lg"
+        "group hover:shadow-lg"
       )}>
-        {!isColorCard && (
-          <div className="relative overflow-hidden">
-            {image && (
-              <div className="relative h-full flex justify-center">
-                <img
-                  src={imageError ? "/placeholder.svg" : image}
-                  alt={name}
-                  className={cn(
-                    "w-auto max-w-full object-contain transition-transform duration-500",
-                    "min-h-[350px] max-h-[350px]"
-                  )}
-                  loading="lazy"
-                  onError={handleImageError}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100">
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-white text-lg font-bold">
-                      {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
-                    </p>
-                    <p className="text-white/90 text-sm mt-1">
-                      {isDesignCard ? "Premium quality PVC embossed door" : "Precision CNC grooves for unique styling"}
-                    </p>
-                  </div>
+        <div className="relative overflow-hidden">
+          {image && (
+            <div className="relative h-full flex justify-center">
+              <img
+                src={imageError ? "/placeholder.svg" : image}
+                alt={name}
+                className={cn(
+                  "w-auto max-w-full object-contain transition-transform duration-500",
+                  "min-h-[350px] max-h-[350px]"
+                )}
+                loading="lazy"
+                onError={handleImageError}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100">
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-white text-lg font-bold">
+                    {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
+                  </p>
+                  <p className="text-white/90 text-sm mt-1">
+                    {isDesignCard ? "Premium quality PVC embossed door" : "Precision CNC grooves for unique styling"}
+                  </p>
                 </div>
               </div>
-            )}
-          </div>
-        )}
-        
-        {isColorCard && (
-          <div className="h-full flex flex-col">
-            <div
-              className="h-60 w-full transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: color }}
-            ></div>
-            <div className="p-6">
-              <h3 className="font-bold text-lg mb-3">{name}</h3>
-              <div className="flex items-center gap-3">
-                <div
-                  className="h-6 w-6 rounded-full border border-gray-200 shadow-sm"
-                  style={{ backgroundColor: color }}
-                ></div>
-                <p className="text-foreground/70">
-                  {color}
-                </p>
-              </div>
-              <p className="mt-4 text-foreground/70 text-sm">
-                Premium foil finish with high durability
-              </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </AnimateInView>
   );
