@@ -1,9 +1,51 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
 
 const Hero = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  const doorImages = [
+    {
+      src: "/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png",
+      alt: "Z-on Door Premium PVC Doors Collection"
+    },
+    {
+      src: "/lovable-uploads/96ec7b24-2d86-4ee9-abcd-65c8a4a06688.png",
+      alt: "Premium 4-Panel PVC Door with Teak Wood Finish"
+    },
+    {
+      src: "/lovable-uploads/3b5e4d4d-acf4-49b8-ab34-0791c5eccd08.png",
+      alt: "Elegant 2-Panel PVC Door for Bathroom"
+    },
+    {
+      src: "/lovable-uploads/18f66662-026a-4604-8344-362314f10cca.png",
+      alt: "Modern Panel PVC Door for Bathroom"
+    },
+    {
+      src: "/lovable-uploads/e0be35b1-01f1-4b46-9985-a1f2c27a00aa.png",
+      alt: "Classic Arch-Design PVC Door"
+    }
+  ];
+
+  useEffect(() => {
+    // Auto-rotate images every 5 seconds
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === doorImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+    
+    // Preload all images for smoother transitions
+    doorImages.forEach(image => {
+      const img = new Image();
+      img.src = image.src;
+    });
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="home"
@@ -95,17 +137,44 @@ const Hero = () => {
           <div className="order-1 md:order-2 relative">
             <AnimateInView animation="fade-in" delay={200}>
               <div className="relative">
-                {/* Updated door image with new catalog image */}
-                <div className="rounded-lg overflow-hidden bg-gradient-to-b from-accent/50 to-primary/5 transform hover:scale-[1.02] transition-all duration-500 shadow-xl border border-primary/10">
-                  <img
-                    src="/lovable-uploads/46ac2b5d-eb4d-4dc9-b393-c9c07e5bc7bd.png"
-                    alt="Z-on Door Premium PVC Doors Collection"
-                    className="w-full h-auto object-cover rounded-lg"
-                    loading="lazy"
-                  />
+                {/* Image carousel with fade transition */}
+                <div className="relative h-[500px] md:h-[600px] w-full rounded-lg overflow-hidden">
+                  {doorImages.map((image, index) => (
+                    <div 
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ${
+                        index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                      }`}
+                    >
+                      <div className="h-full w-full rounded-lg overflow-hidden bg-gradient-to-b from-accent/50 to-primary/5 transform hover:scale-[1.02] transition-all duration-500 shadow-xl border border-primary/10">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-full object-cover rounded-lg"
+                          loading={index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 
-                {/* Updated floating badges to match the door catalog design */}
+                {/* Image navigation dots */}
+                <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {doorImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex 
+                          ? 'bg-primary scale-125' 
+                          : 'bg-gray-300 hover:bg-gray-400'
+                      }`}
+                      aria-label={`View image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Floating badges */}
                 <div className="absolute -bottom-6 -left-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px] border-l-4 border-primary">
                   <p className="text-xs font-medium mb-1">Featured Models</p>
                   <p className="text-xl font-bold">ZN Series</p>
@@ -113,7 +182,7 @@ const Hero = () => {
                 
                 <div className="absolute -top-6 -right-6 glass-effect rounded-lg p-4 shadow-lg max-w-[160px] border-r-4 border-secondary">
                   <p className="text-xs font-medium mb-1">Premium</p>
-                  <p className="text-xl font-bold">Emboss Series</p>
+                  <p className="text-xl font-bold">Teak Finish</p>
                 </div>
               </div>
             </AnimateInView>
