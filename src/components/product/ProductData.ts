@@ -21,11 +21,16 @@ export const designOptions = [
 ];
 
 export const colorOptions = [
-  { id: 1, name: "Walnut", color: "#5E4B3C", foil: true, image: "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png" },
-  { id: 2, name: "Mahogany", color: "#C04000", foil: true, image: "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png" },
-  { id: 3, name: "Teak", color: "#A67B5B", foil: true, image: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png" },
-  { id: 4, name: "Cherry", color: "#8B0000", foil: true, image: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png" },
-  { id: 5, name: "Golden Oak", color: "#B87333", foil: true, image: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png" },
+  { id: 1, name: "85bfd989-fc65-4184-8860-db7e1257926b.png", color: "#5E4B3C", foil: true, image: "/lovable-uploads/85bfd989-fc65-4184-8860-db7e1257926b.png" },
+  { id: 2, name: "55f9278e-1576-4385-98f6-2e87108cd362.png", color: "#8B0000", foil: true, image: "/lovable-uploads/55f9278e-1576-4385-98f6-2e87108cd362.png" },
+  { id: 3, name: "dc0c76fc-608f-464e-8a75-336172316d8a.png", color: "#A52A2A", foil: true, image: "/lovable-uploads/dc0c76fc-608f-464e-8a75-336172316d8a.png" },
+  { id: 4, name: "fd87ca76-2eb7-43ad-a679-0248e8135786.png", color: "#D2B48C", foil: true, image: "/lovable-uploads/fd87ca76-2eb7-43ad-a679-0248e8135786.png" },
+  { id: 5, name: "ae104cdd-9ff6-4df1-a54f-bc60bb0060cd.png", color: "#CD853F", foil: true, image: "/lovable-uploads/ae104cdd-9ff6-4df1-a54f-bc60bb0060cd.png" },
+  { id: 6, name: "a852cafc-4fab-41e7-845d-f6299622dfd0.png", color: "#8B4513", foil: true, image: "/lovable-uploads/a852cafc-4fab-41e7-845d-f6299622dfd0.png" },
+  { id: 7, name: "6abc9e49-0738-4a39-bdca-640786c6bcc8.png", color: "#A0522D", foil: true, image: "/lovable-uploads/6abc9e49-0738-4a39-bdca-640786c6bcc8.png" },
+  { id: 8, name: "c6d97805-e8d7-4416-8e02-8eba1f2f0d40.png", color: "#CD5C5C", foil: true, image: "/lovable-uploads/c6d97805-e8d7-4416-8e02-8eba1f2f0d40.png" },
+  { id: 9, name: "aed01b4f-64ac-4c7e-b00a-3a129a81bdcc.png", color: "#B87333", foil: true, image: "/lovable-uploads/aed01b4f-64ac-4c7e-b00a-3a129a81bdcc.png" },
+  { id: 10, name: "668fb226-615a-4ec9-b837-42778eb740b6.png", color: "#A67B5B", foil: true, image: "/lovable-uploads/668fb226-615a-4ec9-b837-42778eb740b6.png" },
 ];
 
 export const cncOptions = [

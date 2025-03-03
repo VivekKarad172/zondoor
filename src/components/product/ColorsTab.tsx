@@ -59,7 +59,7 @@ const ColorsTab = ({ colors }: ColorsTabProps) => {
                       style={{ backgroundColor: color.color }}
                     ></div>
                     <p className="text-gray-700 font-medium">
-                      Premium Foil Finish
+                      {color.name}
                     </p>
                   </div>
                   <p className="mt-4 text-gray-600 text-sm">
