@@ -1,6 +1,7 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { AnimateInView } from "../ui/motion";
+import ImageModal from "../ui/image-modal";
 
 interface ColorsTabProps {
   colors: {
@@ -13,6 +14,19 @@ interface ColorsTabProps {
 }
 
 const ColorsTab = ({ colors }: ColorsTabProps) => {
+  const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
+
+  const openImageModal = (imageSrc: string, imageAlt: string) => {
+    setSelectedImage({
+      src: imageSrc,
+      alt: imageAlt
+    });
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="space-y-12">
       <div className="space-y-6">
@@ -27,16 +41,22 @@ const ColorsTab = ({ colors }: ColorsTabProps) => {
             >
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
                 {color.image ? (
-                  <div className="h-60 w-full relative overflow-hidden">
+                  <div className="h-60 w-full relative overflow-hidden group">
                     <img 
                       src={color.image} 
-                      alt={`Color ${color.id}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      alt={`${color.name}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                      onClick={() => openImageModal(color.image!, color.name)}
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm p-3">
                       <p className="text-white font-medium text-sm">
                         Premium wood-textured foil finish
                       </p>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="bg-black/30 px-3 py-2 rounded-full backdrop-blur-sm">
+                        <span className="text-white text-sm font-medium">Click to zoom</span>
+                      </div>
                     </div>
                   </div>
                 ) : (
@@ -52,7 +72,7 @@ const ColorsTab = ({ colors }: ColorsTabProps) => {
                   </div>
                 )}
                 <div className="p-6">
-                  <h3 className="font-bold text-lg mb-3">Color {color.id}</h3>
+                  <h3 className="font-bold text-lg mb-3">{color.name}</h3>
                   <div className="flex items-center gap-3">
                     <div 
                       className="h-8 w-8 rounded-full border border-gray-200 shadow-sm" 
@@ -71,6 +91,17 @@ const ColorsTab = ({ colors }: ColorsTabProps) => {
           ))}
         </div>
       </div>
+
+      {/* Image Modal for Zoom Functionality */}
+      {selectedImage && (
+        <ImageModal
+          isOpen={!!selectedImage}
+          onClose={closeImageModal}
+          imageSrc={selectedImage.src}
+          imageAlt={selectedImage.alt}
+          imageDescription="Premium foil finish with wood-like texture and advanced UV protection"
+        />
+      )}
     </div>
   );
 };
