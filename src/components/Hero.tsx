@@ -28,26 +28,6 @@ const Hero = () => {
       src: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
       alt: "Teak Wood Finish - Premium PVC Door"
     },
-    {
-      src: "/lovable-uploads/1d602bf5-03bb-4ef6-9cac-57678def00f2.png",
-      alt: "Premium Hardwood Finish - PVC Door"
-    },
-    {
-      src: "/lovable-uploads/3af36dd7-ee22-4078-8b78-71eeacbe06c0.png",
-      alt: "Medium Brown Wood Finish - PVC Door"
-    },
-    {
-      src: "/lovable-uploads/5d26c1a0-7fb4-4de2-ba35-b69a044410d8.png",
-      alt: "Light Brown Wood Finish - PVC Door"
-    },
-    {
-      src: "/lovable-uploads/3dc7b1f2-8aaf-4d3a-9457-f796a1193481.png",
-      alt: "Natural Oak Wood Finish - PVC Door"
-    },
-    {
-      src: "/lovable-uploads/8a0f5c4e-7ea8-4fd7-bc4a-885c2ef10de3.png",
-      alt: "Rustic Wood Finish - PVC Door"
-    }
   ];
 
   const specifications = [
@@ -88,7 +68,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative h-screen w-full flex items-center justify-center bg-gray-50 overflow-hidden"
+      className="relative h-screen w-full flex items-center bg-gray-50 overflow-hidden"
     >
       {/* Full-screen slideshow background */}
       <div className="absolute inset-0 w-full h-full">
@@ -105,31 +85,31 @@ const Hero = () => {
               className="w-full h-full object-cover"
               loading={index === 0 ? "eager" : "lazy"}
             />
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-black/50 bg-gradient-to-r from-black/70 to-transparent"></div>
+            {/* Overlay gradient - reduced opacity for better visibility */}
+            <div className="absolute inset-0 bg-black/40 bg-gradient-to-r from-black/60 to-transparent"></div>
           </div>
         ))}
 
         {/* Slideshow navigation arrows */}
         <button 
           onClick={goToPrevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 rounded-full p-2 text-white transition-all"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 rounded-full p-2 text-white transition-all"
           aria-label="Previous slide"
         >
           <ChevronLeft size={28} />
         </button>
         <button 
           onClick={goToNextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 rounded-full p-2 text-white transition-all"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 rounded-full p-2 text-white transition-all"
           aria-label="Next slide"
         >
           <ChevronRight size={28} />
         </button>
       </div>
 
-      {/* Content overlay */}
-      <div className="wesmarc-container relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
+      {/* Content overlay - adjusted to improve layout */}
+      <div className="wesmarc-container relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-6 lg:col-start-1 lg:pr-8">
           <AnimateInView animation="fade-in" delay={300}>
             <span className="bg-primary/20 text-white text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
               Quality PVC Embossed Doors
@@ -137,26 +117,26 @@ const Hero = () => {
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={400}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-white">
               Premium PVC <span className="text-primary-foreground">Doors</span> <br />For Modern Interiors
             </h1>
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={600}>
-            <p className="text-white/90 text-lg mb-8 max-w-lg">
+            <p className="text-white/90 text-lg mb-8 max-w-md">
               At Z-ON DOOR, we specialize in manufacturing premium PVC embossed 
               doors using the latest technology and highest quality materials.
             </p>
           </AnimateInView>
 
           <AnimateInView animation="slide-in-up" delay={700}>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 mb-8">
-              <h3 className="text-xl font-semibold mb-4 text-white">Superior Materials</h3>
-              <ul className="space-y-3">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-5 border border-white/20 mb-8 max-w-md">
+              <h3 className="text-xl font-semibold mb-3 text-white">Superior Materials</h3>
+              <ul className="space-y-2">
                 {specifications.map((spec, index) => (
                   <li key={index} className="flex items-start">
-                    <Check className="h-5 w-5 text-primary-foreground mr-2 mt-1 flex-shrink-0" />
-                    <span className="text-white/90">{spec}</span>
+                    <Check className="h-4 w-4 text-primary-foreground mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-white/90 text-sm">{spec}</span>
                   </li>
                 ))}
               </ul>
@@ -169,7 +149,7 @@ const Hero = () => {
                 href="#products"
                 className={cn(
                   "bg-primary text-primary-foreground hover:bg-primary/90",
-                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
                   "transition-all duration-300 transform hover:translate-y-[-2px]",
                   "shadow-md"
                 )}
@@ -181,7 +161,7 @@ const Hero = () => {
                 download
                 className={cn(
                   "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",
-                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
                   "transition-all duration-300 transform hover:translate-y-[-2px]",
                   "shadow-sm"
                 )}

@@ -59,13 +59,13 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                 loading="lazy"
                 onError={handleImageError}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                 <div className="absolute bottom-4 left-4 right-4">
                   <p className="text-white text-lg font-bold">
                     {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
                   </p>
                   <p className="text-white/90 text-sm mt-1">
-                    {isDesignCard ? "Premium quality PVC embossed door" : "Precision CNC grooves for unique styling"}
+                    {description || defaultDescription}
                   </p>
                 </div>
               </div>
