@@ -7,7 +7,6 @@ import Products from "@/components/Products";
 import Process from "@/components/Process";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
-import BackgroundDoors from "@/components/BackgroundDoors";
 
 const Index = () => {
   useEffect(() => {
@@ -29,8 +28,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background relative">
-      <BackgroundDoors />
+    <div className="min-h-screen bg-white relative">
       <Navbar />
       <Hero />
       <About />

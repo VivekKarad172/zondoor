@@ -37,8 +37,8 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
       delay={index * 100}
     >
       <div className={cn(
-        "bg-white rounded-xl overflow-hidden border border-border shadow-sm transition-all duration-300 h-full",
-        !isColorCard && "group hover:shadow-xl"
+        "bg-white rounded-md overflow-hidden shadow-md transition-all duration-300 h-full",
+        !isColorCard && "group hover:shadow-lg"
       )}>
         {!isColorCard && (
           <div className="relative overflow-hidden">
@@ -48,14 +48,14 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
                   src={imageError ? "/placeholder.svg" : image}
                   alt={name}
                   className={cn(
-                    "w-auto h-auto max-w-full object-contain transition-transform duration-500",
-                    "min-h-[400px] max-h-[600px]" // Ensures proper height while preserving aspect ratio
+                    "w-auto max-w-full object-contain transition-transform duration-500",
+                    "min-h-[350px] max-h-[350px]"
                   )}
                   loading="lazy"
                   onError={handleImageError}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent opacity-100 transition-opacity duration-300">
-                  <div className="absolute top-4 left-4 right-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100">
+                  <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-white text-lg font-bold">
                       {isDesignCard ? `Design ${name}` : `CNC Pattern #${id}`}
                     </p>
@@ -75,11 +75,11 @@ const ProductCard = ({ id, name, image, color, description, index, type }: Produ
               className="h-48 w-full"
               style={{ backgroundColor: color }}
             ></div>
-            <div className="p-6">
+            <div className="p-4">
               <h3 className="font-bold text-lg mb-2">{name}</h3>
               <div className="flex items-center gap-2">
                 <div
-                  className="h-6 w-6 rounded-full border border-border/50"
+                  className="h-5 w-5 rounded-full border border-gray-200"
                   style={{ backgroundColor: color }}
                 ></div>
                 <p className="text-foreground/70 text-sm">

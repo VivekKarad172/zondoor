@@ -9,22 +9,22 @@ interface ProductTabsProps {
 
 const ProductTabs = ({ activeTab, setActiveTab }: ProductTabsProps) => {
   const tabs = [
-    { id: "designs", label: "Embossing Designs" },
-    { id: "colors", label: "Foil Colors" },
-    { id: "cnc", label: "CNC Grooves" }
+    { id: "designs", label: "Door Designs" },
+    { id: "colors", label: "Color Options" },
+    { id: "cnc", label: "CNC Patterns" }
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mb-8">
+    <div className="flex flex-wrap border-b border-gray-200 mb-6">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
           className={cn(
-            "px-6 py-3 rounded-full font-medium text-sm transition-all",
+            "px-4 py-2 font-medium text-sm transition-all border-b-2 mr-2",
             activeTab === tab.id
-              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-              : "bg-background hover:bg-background/80 border border-border"
+              ? "border-primary text-primary"
+              : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
           )}
         >
           {tab.label}

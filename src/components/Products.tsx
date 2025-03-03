@@ -20,29 +20,46 @@ const Products = () => {
   };
 
   return (
-    <section id="products" className="section-padding bg-secondary/30">
-      <div className="container px-4 md:px-8 mx-auto">
+    <section id="products" className="section-padding bg-gray-50">
+      <div className="wesmarc-container">
         <AnimateInView animation="fade-in">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-sm font-semibold uppercase tracking-wider text-foreground/60">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">
               Our Products
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mt-2 mb-6">
-              Customize Your Perfect <span className="text-gradient">Door</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-secondary">
+              Customize Your Perfect Door
             </h2>
             <p className="text-foreground/80">
               With 16 embossing designs, 6 foil color options, and custom CNC grooves,
               create a door that perfectly matches your interior style.
             </p>
-            <div className="mt-6">
+          </div>
+        </AnimateInView>
+
+        {/* Product Tabs */}
+        <ProductTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        <div className="bg-white rounded-md p-6 shadow-md border border-gray-100 mb-12">
+          {activeTab === "designs" && <DesignsTab designs={designOptions} />}
+          {activeTab === "colors" && <ColorsTab colors={colorOptions} />}
+          {activeTab === "cnc" && <CncTab cncPatterns={cncOptions} />}
+        </div>
+
+        <AnimateInView animation="fade-in" delay={300}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div className="bg-white p-6 rounded-md shadow-md border border-gray-100">
+              <h3 className="text-xl font-bold mb-4 text-secondary">Download Our Catalog</h3>
+              <p className="text-foreground/80 mb-6">
+                Get our complete catalog with all door designs, color options, and technical specifications.
+              </p>
               <a
                 href="/ZON DOOR CATALOG.pdf"
                 download
                 className={cn(
                   "bg-primary text-primary-foreground hover:bg-primary/90",
                   "px-6 py-3 rounded-md font-medium inline-flex items-center",
-                  "transition-all duration-300 transform hover:translate-y-[-2px]",
-                  "shadow-lg shadow-primary/20 mx-auto"
+                  "transition-all duration-300"
                 )}
               >
                 <svg 
@@ -61,96 +78,25 @@ const Products = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                Download Our Complete Catalog
+                Download Catalog
               </a>
             </div>
-            <div className="mt-4">
-              <Link
-                to="/gallery"
-                className={cn(
-                  "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
-                  "transition-all duration-300 transform hover:translate-y-[-2px]",
-                  "shadow-md shadow-secondary/10 mx-auto border border-border/50"
-                )}
-              >
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path 
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                  <path 
-                    d="M14 16l-4-4" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                  <rect x="3" y="6" width="18" height="12" rx="2" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Browse Door Gallery
-              </Link>
-            </div>
-          </div>
-        </AnimateInView>
-
-        {/* Category Dropdown */}
-        <CategoryDropdown 
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          categoryMenuOpen={categoryMenuOpen}
-          setCategoryMenuOpen={setCategoryMenuOpen}
-        />
-
-        <div className="mb-12">
-          {/* Product Tabs */}
-          <ProductTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-          <div className="bg-background rounded-2xl p-8 shadow-lg border border-border/50">
-            {activeTab === "designs" && <DesignsTab designs={designOptions} />}
-            {activeTab === "colors" && <ColorsTab colors={colorOptions} />}
-            {activeTab === "cnc" && <CncTab cncPatterns={cncOptions} />}
-          </div>
-        </div>
-
-        <AnimateInView animation="fade-in" delay={300}>
-          <div className="bg-primary text-primary-foreground rounded-2xl p-8 md:p-12 text-center">
-            <h3 className="text-2xl md:text-3xl font-display font-bold mb-6">
-              Find Your Perfect Door Combination
-            </h3>
-            <p className="max-w-2xl mx-auto mb-8 text-primary-foreground/90">
-              With our extensive range of designs, colors, and patterns, you can create a door
-              that perfectly complements your interior space.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            <div className="bg-primary text-white p-6 rounded-md shadow-md">
+              <h3 className="text-xl font-bold mb-4">Request a Quote</h3>
+              <p className="text-white/90 mb-6">
+                Interested in our doors? Fill out our contact form and we'll get back to you with pricing information.
+              </p>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] shadow-lg"
+                className={cn(
+                  "bg-white text-primary hover:bg-gray-100",
+                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "transition-all duration-300"
+                )}
               >
-                Request a Catalog
+                Contact Us
               </a>
-              <button
-                onClick={handleVisitMainWebsite}
-                className="inline-flex items-center justify-center bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] border border-primary-foreground/40"
-              >
-                Visit Our Main Website
-              </button>
             </div>
           </div>
         </AnimateInView>

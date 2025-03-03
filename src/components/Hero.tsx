@@ -58,158 +58,138 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-16 bg-gray-50"
     >
-      {/* Background with subtle patterns */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/5 -z-10"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzBoLTZWMGg2djMwem0wIDBoLTZ2MzBoNlYzMHoiLz48cGF0aCBkPSJNMzAgMzZWMEgwdjZoMjR2MjRoNnYtNnptMCAwVjYwaDMwdi02SDM2VjMwaC02eiIvPjwvZz48L2c+PC9zdmc+')] bg-repeat opacity-5 -z-10"></div>
+      <div className="wesmarc-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16">
+        <div className="order-2 lg:order-1">
+          <AnimateInView animation="fade-in" delay={300}>
+            <span className="bg-primary/10 text-primary text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
+              Quality PVC Embossed Doors
+            </span>
+          </AnimateInView>
 
-      <div className="container px-4 md:px-8 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 order-2 lg:order-1">
-            <AnimateInView animation="fade-in" delay={300}>
-              <span className="bg-primary/10 border border-primary/20 text-foreground/80 text-xs tracking-wider uppercase font-semibold px-3 py-1 rounded-full inline-block mb-6">
-                Premium PVC Embossed Doors
-              </span>
-            </AnimateInView>
+          <AnimateInView animation="slide-in-up" delay={400}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-secondary">
+              Premium PVC <span className="text-primary">Doors</span> <br />For Modern Interiors
+            </h1>
+          </AnimateInView>
 
-            <AnimateInView animation="slide-in-up" delay={400}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-                <span className="text-primary">Precision-Crafted</span> PVC Doors For <br /> Modern Interiors
-              </h1>
-            </AnimateInView>
+          <AnimateInView animation="slide-in-up" delay={600}>
+            <p className="text-foreground/80 text-lg mb-8 max-w-lg">
+              At Z-ON DOOR, we specialize in manufacturing premium PVC embossed 
+              doors using the latest technology and highest quality materials.
+            </p>
+          </AnimateInView>
 
-            <AnimateInView animation="slide-in-up" delay={600}>
-              <p className="text-foreground/80 text-lg mb-8 max-w-lg">
-                At Z-ON DOOR, we specialize in manufacturing premium PVC embossed 
-                doors using the latest technology and highest quality materials.
-              </p>
-            </AnimateInView>
+          <AnimateInView animation="slide-in-up" delay={700}>
+            <div className="bg-white rounded-lg p-6 border border-gray-200 mb-8 shadow-sm">
+              <h3 className="text-xl font-semibold mb-4 text-primary">Superior Materials</h3>
+              <ul className="space-y-3">
+                {specifications.map((spec, index) => (
+                  <li key={index} className="flex items-start">
+                    <Check className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
+                    <span className="text-foreground/80">{spec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </AnimateInView>
 
-            <AnimateInView animation="slide-in-up" delay={700}>
-              <div className="bg-secondary/5 rounded-lg p-6 border border-secondary/10 mb-8">
-                <h3 className="text-xl font-semibold mb-4 text-primary">Superior Materials</h3>
-                <ul className="space-y-3">
-                  {specifications.map((spec, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-foreground/80">{spec}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimateInView>
-
-            <AnimateInView animation="slide-in-up" delay={800}>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="#products"
-                  className={cn(
-                    "bg-primary text-primary-foreground hover:bg-primary/90",
-                    "px-6 py-3 rounded-md font-medium inline-flex items-center",
-                    "transition-all duration-300 transform hover:translate-y-[-2px]",
-                    "shadow-lg shadow-primary/20"
-                  )}
+          <AnimateInView animation="slide-in-up" delay={800}>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#products"
+                className={cn(
+                  "bg-primary text-primary-foreground hover:bg-primary/90",
+                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "transition-all duration-300 transform hover:translate-y-[-2px]",
+                  "shadow-md"
+                )}
+              >
+                Explore Products
+              </a>
+              <a
+                href="/ZON DOOR CATALOG.pdf"
+                download
+                className={cn(
+                  "bg-white text-secondary border border-gray-300 hover:bg-gray-50",
+                  "px-6 py-3 rounded-md font-medium inline-flex items-center",
+                  "transition-all duration-300 transform hover:translate-y-[-2px]",
+                  "shadow-sm"
+                )}
+              >
+                <svg 
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2"
                 >
-                  Explore Products
-                </a>
-                <a
-                  href="#process"
-                  className={cn(
-                    "bg-transparent border border-secondary/20 text-secondary",
-                    "hover:bg-secondary/5 px-6 py-3 rounded-md font-medium inline-flex items-center",
-                    "transition-all duration-300"
-                  )}
-                >
-                  Our Process
-                </a>
-                <a
-                  href="/ZON DOOR CATALOG.pdf"
-                  download
-                  className={cn(
-                    "bg-secondary text-secondary-foreground hover:bg-secondary/90",
-                    "px-6 py-3 rounded-md font-medium inline-flex items-center",
-                    "transition-all duration-300 transform hover:translate-y-[-2px]",
-                    "shadow-lg shadow-secondary/20"
-                  )}
-                >
-                  <svg 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="mr-2"
-                  >
-                    <path 
-                      d="M12 15V3M12 15L8 11M12 15L16 11M3 15V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V15" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  Download Our Catalog
-                </a>
-              </div>
-            </AnimateInView>
-          </div>
-
-          <div className="lg:col-span-7 order-1 lg:order-2 relative">
-            <AnimateInView animation="fade-in" delay={200}>
-              <div className="relative">
-                {/* Image carousel with fade transition */}
-                <div className="relative h-[500px] md:h-[600px] w-full rounded-lg overflow-hidden">
-                  {doorImages.map((image, index) => (
-                    <div 
-                      key={index}
-                      className={`absolute inset-0 transition-opacity duration-1000 ${
-                        index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                      }`}
-                    >
-                      <div className="h-full w-full rounded-lg overflow-hidden bg-gradient-to-b from-accent/50 to-primary/5 transform hover:scale-[1.02] transition-all duration-500 shadow-xl border border-primary/10">
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="w-full h-full object-cover rounded-lg"
-                          loading={index === 0 ? "eager" : "lazy"}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Image showing door construction */}
-                <div className="absolute -bottom-6 -right-6 glass-effect rounded-lg overflow-hidden shadow-xl border border-primary/10 w-32 h-32 md:w-48 md:h-48">
-                  <img 
-                    src="/lovable-uploads/b3a0d53a-9d2a-4884-9c3b-7af3832ffff2.png" 
-                    alt="Door Construction" 
-                    className="w-full h-full object-cover" 
+                  <path 
+                    d="M12 15V3M12 15L8 11M12 15L16 11M3 15V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V15" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
                   />
-                  <div className="absolute inset-0 bg-primary/20"></div>
-                  <span className="absolute bottom-2 left-2 right-2 text-xs text-white font-medium bg-primary/70 px-2 py-1 rounded text-center">
-                    Superior Construction
-                  </span>
-                </div>
+                </svg>
+                Download Catalog
+              </a>
+            </div>
+          </AnimateInView>
+        </div>
+
+        <div className="order-1 lg:order-2">
+          <AnimateInView animation="fade-in" delay={200}>
+            <div className="relative">
+              {/* Image carousel with fade transition */}
+              <div className="relative h-[400px] md:h-[500px] w-full rounded-lg overflow-hidden shadow-xl">
+                {doorImages.map((image, index) => (
+                  <div 
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${
+                      index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`}
+                  >
+                    <div className="h-full w-full rounded-lg overflow-hidden">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover rounded-lg"
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                    </div>
+                  </div>
+                ))}
                 
-                {/* Image navigation dots */}
-                <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                  {doorImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex 
-                          ? 'bg-primary scale-125' 
-                          : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                      aria-label={`View image ${index + 1}`}
-                    />
-                  ))}
+                {/* Overlay with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                
+                {/* Text overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
+                  <h3 className="text-2xl font-bold mb-2">Quality PVC Doors</h3>
+                  <p className="text-white/90">Elegant designs for modern homes</p>
                 </div>
               </div>
-            </AnimateInView>
-          </div>
+              
+              {/* Image navigation dots */}
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {doorImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex 
+                        ? 'bg-primary scale-125' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`View image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </AnimateInView>
         </div>
       </div>
     </section>
