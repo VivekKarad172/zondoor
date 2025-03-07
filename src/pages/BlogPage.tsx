@@ -4,6 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogPosts from "@/components/blog/BlogPosts";
 import { AnimateInView } from "@/components/ui/motion";
+import { Button } from "@/components/ui/button";
+import { Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BlogPage = () => {
   useEffect(() => {
@@ -21,7 +24,15 @@ const BlogPage = () => {
       <div className="pt-24 md:pt-28">
         <AnimateInView animation="fade-in">
           <div className="wesmarc-container section-padding">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Our Blog</h1>
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Our Blog</h1>
+              <Button variant="outline" asChild>
+                <Link to="/blog-management" className="flex items-center gap-2">
+                  <Settings size={16} />
+                  Manage Blog
+                </Link>
+              </Button>
+            </div>
             <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
               Stay updated with the latest trends, door designs, and industry insights
             </p>

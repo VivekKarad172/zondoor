@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import GalleryPage from "./pages/GalleryPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import BlogManagementPage from "./pages/BlogManagementPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
@@ -34,6 +35,7 @@ const App = () => {
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:id" element={<BlogPostPage />} />
+              <Route path="/blog-management" element={<BlogManagementPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
