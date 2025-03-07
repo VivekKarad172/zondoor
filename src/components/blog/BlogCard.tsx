@@ -28,12 +28,13 @@ const BlogCard = ({ post }: BlogCardProps) => {
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-56 overflow-hidden group">
         <img
           src={post.image}
           alt={post.title}
-          className="w-full h-full object-cover transition-transform hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300"></div>
       </div>
       <div className="p-6">
         <div className="flex flex-wrap gap-2 mb-3">

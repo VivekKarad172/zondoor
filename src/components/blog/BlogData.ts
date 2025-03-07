@@ -1,3 +1,4 @@
+
 export interface BlogPost {
   id: number;
   title: string;
@@ -60,7 +61,7 @@ export const blogPosts: BlogPost[] = [
       <p>When selecting a <strong>PVC door</strong>, always check for <strong>water resistance, durability, design, and affordability</strong>. With <strong>Z-on Door</strong>, you can be sure of getting the <strong>best quality at the best price</strong>. Upgrade your home with a <strong>stylish and durable PVC door today!</strong></p>
     `,
     date: "2024-05-18",
-    image: "/lovable-uploads/78b8dec8-0caf-4cdc-8110-3fa851ee9bb1.png", 
+    image: "/lovable-uploads/3af36dd7-ee22-4078-8b78-71eeacbe06c0.png", 
     author: "Z-ON DOOR Team",
     category: "guide",
     readTime: 6
@@ -90,7 +91,7 @@ export const blogPosts: BlogPost[] = [
       <p>Ready to upgrade your space with premium PVC embossed doors? Contact Z-ON DOOR today for a consultation.</p>
     `,
     date: "2023-11-15",
-    image: "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png",
+    image: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
     author: "Z-ON DOOR Team",
     category: "product",
     readTime: 5
@@ -120,7 +121,7 @@ export const blogPosts: BlogPost[] = [
       <p>At Z-ON DOOR, we offer personalized consultations to help you find the perfect door design for your specific needs. Contact us today!</p>
     `,
     date: "2023-12-05",
-    image: "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
+    image: "/lovable-uploads/e0be35b1-01f1-4b46-9985-a1f2c27a00aa.png",
     author: "Interior Design Expert",
     category: "design",
     readTime: 7
@@ -150,9 +151,10 @@ export const blogPosts: BlogPost[] = [
       <p>With these simple maintenance tips, your Z-ON DOOR PVC embossed doors will continue to enhance your space for many years.</p>
     `,
     date: "2024-01-10",
-    image: "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png",
+    image: "/lovable-uploads/fd87ca76-2eb7-43ad-a679-0248e8135786.png",
     author: "Maintenance Specialist",
     category: "maintenance",
     readTime: 4
   }
 ];
+
