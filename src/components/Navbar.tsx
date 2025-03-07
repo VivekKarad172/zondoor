@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -31,6 +30,7 @@ const Navbar = () => {
     { name: "About", href: isHomePage ? "#about" : "/#about" },
     { name: "Products", href: isHomePage ? "#products" : "/#products" },
     { name: "Process", href: isHomePage ? "#process" : "/#process" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
   ];
 
@@ -62,20 +62,20 @@ const Navbar = () => {
                 delay={index * 100 + 300}
               >
                 <li>
-                  {isHomePage ? (
-                    <a
-                      href={link.href}
-                      className="text-sm font-medium text-secondary hover:text-primary transition-colors px-4 py-2"
-                    >
-                      {link.name.toUpperCase()}
-                    </a>
-                  ) : (
+                  {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
                       className="text-sm font-medium text-secondary hover:text-primary transition-colors px-4 py-2"
                     >
                       {link.name.toUpperCase()}
                     </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-sm font-medium text-secondary hover:text-primary transition-colors px-4 py-2"
+                    >
+                      {link.name.toUpperCase()}
+                    </a>
                   )}
                 </li>
               </AnimateInView>
@@ -121,15 +121,7 @@ const Navbar = () => {
             <ul className="flex flex-col items-center space-y-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  {isHomePage ? (
-                    <a
-                      href={link.href}
-                      className="text-lg font-medium text-secondary"
-                      onClick={toggleMenu}
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
+                  {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
                       className="text-lg font-medium text-secondary"
@@ -137,6 +129,14 @@ const Navbar = () => {
                     >
                       {link.name}
                     </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-lg font-medium text-secondary"
+                      onClick={toggleMenu}
+                    >
+                      {link.name}
+                    </a>
                   )}
                 </li>
               ))}
