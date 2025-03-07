@@ -7,8 +7,11 @@ import { AnimateInView } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const BlogPage = () => {
+  const { user } = useAuth();
+  
   useEffect(() => {
     // Update document title
     document.title = "Z-ON DOOR | Blog";
@@ -29,7 +32,7 @@ const BlogPage = () => {
               <Button variant="outline" asChild>
                 <Link to="/blog-management" className="flex items-center gap-2">
                   <Settings size={16} />
-                  Manage Blog
+                  {user ? "Manage Blog" : "Login to Manage"}
                 </Link>
               </Button>
             </div>

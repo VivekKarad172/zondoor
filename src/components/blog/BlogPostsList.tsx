@@ -19,6 +19,8 @@ import {
   Eye,
   CalendarDays,
   Clock,
+  User,
+  Lock,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -33,13 +35,28 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Link } from "react-router-dom";
 
+type User = {
+  id: string;
+  email: string;
+  name: string;
+  role: "admin" | "editor" | "user";
+};
+
 interface BlogPostsListProps {
   posts: BlogPost[];
   onEdit: (post: BlogPost) => void;
   onDelete: (id: number) => void;
+  currentUser?: User | null;
+  isAdmin?: boolean;
 }
 
-const BlogPostsList = ({ posts, onEdit, onDelete }: BlogPostsListProps) => {
+const BlogPostsList = ({ 
+  posts, 
+  onEdit, 
+  onDelete, 
+  currentUser, 
+  isAdmin = false 
+}: BlogPostsListProps) => {
   const [search, setSearch] = useState("");
   const [postToDelete, setPostToDelete] = useState<number | null>(null);
 
@@ -63,6 +80,13 @@ const BlogPostsList = ({ posts, onEdit, onDelete }: BlogPostsListProps) => {
       onDelete(postToDelete);
       setPostToDelete(null);
     }
+  };
+
+  // Check if the current user has permission to edit/delete a post
+  const canModifyPost = (post: BlogPost) => {
+    if (!currentUser) return false;
+    if (isAdmin) return true;
+    return post.authorId === currentUser.id;
   };
 
   const getCategoryColor = (category: string) => {
@@ -134,7 +158,11 @@ const BlogPostsList = ({ posts, onEdit, onDelete }: BlogPostsListProps) => {
                     </div>
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
-                    {post.author}
+                    <div className="flex items-center gap-1">
+                      <User size={14} /> 
+                      {post.author}
+                      {!canModifyPost(post) && <Lock size={12} className="text-muted-foreground ml-1" />}
+                    </div>
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
@@ -149,46 +177,52 @@ const BlogPostsList = ({ posts, onEdit, onDelete }: BlogPostsListProps) => {
                           <Eye size={14} />
                         </Link>
                       </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => onEdit(post)}
-                        className="h-8 w-8 p-0"
-                      >
-                        <span className="sr-only">Edit</span>
-                        <Edit size={14} />
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
+                      
+                      {canModifyPost(post) && (
+                        <>
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-8 w-8 p-0 text-red-500 hover:text-red-600"
-                            onClick={() => confirmDelete(post.id)}
+                            onClick={() => onEdit(post)}
+                            className="h-8 w-8 p-0"
                           >
-                            <span className="sr-only">Delete</span>
-                            <Trash2 size={14} />
+                            <span className="sr-only">Edit</span>
+                            <Edit size={14} />
                           </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the
-                              blog post "{post.title}" and remove it from the system.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction 
-                              onClick={handleDelete}
-                              className="bg-red-500 hover:bg-red-600"
-                            >
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-8 w-8 p-0 text-red-500 hover:text-red-600"
+                                onClick={() => confirmDelete(post.id)}
+                              >
+                                <span className="sr-only">Delete</span>
+                                <Trash2 size={14} />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This action cannot be undone. This will permanently delete the
+                                  blog post "{post.title}" and remove it from the system.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction 
+                                  onClick={handleDelete}
+                                  className="bg-red-500 hover:bg-red-600"
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>

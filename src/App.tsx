@@ -12,6 +12,7 @@ import BlogManagementPage from "./pages/BlogManagementPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -21,26 +22,28 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        
-        {isLoading && (
-          <LoadingScreen onFinishLoading={() => setIsLoading(false)} />
-        )}
-        
-        <div className={isLoading ? "hidden" : "block"}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:id" element={<BlogPostPage />} />
-              <Route path="/blog-management" element={<BlogManagementPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          
+          {isLoading && (
+            <LoadingScreen onFinishLoading={() => setIsLoading(false)} />
+          )}
+          
+          <div className={isLoading ? "hidden" : "block"}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:id" element={<BlogPostPage />} />
+                <Route path="/blog-management" element={<BlogManagementPage />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

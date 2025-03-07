@@ -7,10 +7,12 @@ export interface BlogPost {
   date: string;
   image: string;
   author: string;
-  category: string;
+  authorId?: string; // Add authorId for permission checking
+  category: "product" | "design" | "maintenance" | "guide";
   readTime: number;
 }
 
+// Export blog posts array
 export const blogPosts: BlogPost[] = [
   {
     id: 4,
@@ -158,3 +160,9 @@ export const blogPosts: BlogPost[] = [
   }
 ];
 
+// For each post in blogPosts, add an authorId of "admin-1" if it doesn't already have one
+for (const post of blogPosts) {
+  if (!post.authorId) {
+    post.authorId = "admin-1";
+  }
+}
