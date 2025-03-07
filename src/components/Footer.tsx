@@ -152,7 +152,7 @@ const Footer = () => {
                     </svg>
                   </span>
                   <span className="text-primary-foreground/80">
-                    info@zondoor.com
+                    zondoor1@gmail.com
                   </span>
                 </li>
               </ul>
