@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,7 +47,7 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
     setEditedPost({ ...editedPost, [name]: value });
   };
 
-  const handleCategoryChange = (value: string) => {
+  const handleCategoryChange = (value: "product" | "design" | "maintenance" | "guide") => {
     setEditedPost({ ...editedPost, category: value });
   };
 
@@ -136,18 +135,14 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
   };
 
   const calculateReadTime = () => {
-    // Remove HTML tags and count words
     const text = editedPost.content.replace(/<[^>]*>/g, "");
     const words = text.split(/\s+/).filter(Boolean).length;
-    // Average reading speed: 200 words per minute
     const readingTime = Math.max(1, Math.ceil(words / 200));
     setEditedPost({ ...editedPost, readTime: readingTime });
   };
 
   const handleSave = () => {
-    // Calculate read time before saving
     calculateReadTime();
-    // Set current date for new posts
     if (isNew) {
       editedPost.date = new Date().toISOString().split("T")[0];
     }
