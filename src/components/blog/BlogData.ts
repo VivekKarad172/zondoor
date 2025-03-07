@@ -1,4 +1,3 @@
-
 export interface BlogPost {
   id: number;
   title: string;
@@ -12,6 +11,60 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: 4,
+    title: "How to Choose the Best PVC Door for Your Home – A Complete Guide",
+    excerpt: "Looking for the best PVC doors? Discover how to choose durable, waterproof, and stylish 3D PVC doors for bathrooms, toilets, and balconies. Explore Z-on Door's premium collection today!",
+    content: `
+      <h3>Why Choose PVC Doors?</h3>
+      <p>When it comes to selecting doors for <strong>bathrooms, toilets, and balconies</strong>, <strong>PVC doors</strong> are the best choice due to their <strong>waterproof, termite-proof, and long-lasting</strong> properties. Unlike wooden doors, PVC doors require <strong>minimal maintenance</strong> and are <strong>highly affordable</strong>, making them a great option for homeowners and businesses.</p>
+      
+      <h3>Key Features to Look for in a PVC Door</h3>
+      <p>Before buying a PVC door, consider these important factors:</p>
+      
+      <h4>1️⃣ Water Resistance</h4>
+      <p>PVC doors are <strong>100% waterproof</strong>, making them ideal for <strong>toilets and bathrooms</strong> where moisture exposure is high. Ensure that the door you choose has <strong>high-quality PVC sheets</strong> to prevent swelling or damage.</p>
+      
+      <h4>2️⃣ Durability & Strength</h4>
+      <p>A high-quality PVC door should have:</p>
+      <ul>
+        <li><strong>5mm thick PVC sheet on both sides</strong></li>
+        <li><strong>0.15mm PVC decorative film for an attractive finish</strong></li>
+        <li><strong>M.S. pipe framing inside to prevent bending</strong></li>
+        <li><strong>Rigid PVC sheet inside for extra strength</strong></li>
+      </ul>
+      <p>Z-on Door ensures all doors meet these standards for maximum durability.</p>
+      
+      <h4>3️⃣ Design & Style</h4>
+      <p>Choose a <strong>design that fits your home's aesthetics</strong>. <strong>3D embossed PVC doors</strong> offer stylish patterns while maintaining a modern look. Avoid overly luxurious styles if you want a <strong>practical, budget-friendly option</strong>.</p>
+      
+      <h4>4️⃣ Termite & Maintenance-Free</h4>
+      <p>Unlike wood, <strong>PVC doors are termite-proof</strong> and <strong>do not require painting or polishing</strong>. Simply wipe them with a damp cloth for easy cleaning.</p>
+      
+      <h4>5️⃣ Affordable & Value for Money</h4>
+      <p>PVC doors are more affordable than <strong>wooden or metal doors</strong>, and their <strong>long lifespan</strong> makes them a great investment. With Z-on Door, you get <strong>high-quality doors at competitive prices</strong>.</p>
+      
+      <h3>Why Buy from Z-on Door?</h3>
+      <p>At <strong>Z-on Door</strong>, we provide <strong>high-quality, budget-friendly PVC doors</strong> for <strong>bathrooms, toilets, and balconies</strong>. Our doors are:</p>
+      <ul>
+        <li><strong>Waterproof & termite-proof</strong></li>
+        <li><strong>Made with premium materials</strong></li>
+        <li><strong>Available in multiple designs & colors</strong></li>
+        <li><strong>Durable and long-lasting</strong></li>
+      </ul>
+      
+      <p><strong>Explore our collection today and choose the perfect door for your home!</strong></p>
+      <p>Visit our website to browse our latest designs.</p>
+      
+      <h3>Conclusion</h3>
+      <p>When selecting a <strong>PVC door</strong>, always check for <strong>water resistance, durability, design, and affordability</strong>. With <strong>Z-on Door</strong>, you can be sure of getting the <strong>best quality at the best price</strong>. Upgrade your home with a <strong>stylish and durable PVC door today!</strong></p>
+    `,
+    date: "2024-05-18",
+    image: "/lovable-uploads/78b8dec8-0caf-4cdc-8110-3fa851ee9bb1.png", 
+    author: "Z-ON DOOR Team",
+    category: "guide",
+    readTime: 6
+  },
   {
     id: 1,
     title: "The Advantage of PVC Embossed Doors Over Traditional Wooden Doors",

@@ -10,6 +10,22 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
+  // Function to determine category color
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "product":
+        return "bg-primary/10 text-primary";
+      case "design":
+        return "bg-purple-100 text-purple-600";
+      case "maintenance":
+        return "bg-blue-100 text-blue-600";
+      case "guide":
+        return "bg-green-100 text-green-600";
+      default:
+        return "bg-primary/10 text-primary";
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="relative h-48 overflow-hidden">
@@ -21,8 +37,8 @@ const BlogCard = ({ post }: BlogCardProps) => {
       </div>
       <div className="p-6">
         <div className="flex flex-wrap gap-2 mb-3">
-          <span className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
-            {post.category}
+          <span className={`${getCategoryColor(post.category)} text-xs px-3 py-1 rounded-full`}>
+            {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
           </span>
         </div>
         <h3 className="text-xl font-bold mb-3 line-clamp-2 h-14">{post.title}</h3>
