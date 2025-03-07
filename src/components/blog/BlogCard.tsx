@@ -1,6 +1,7 @@
 
 import React from "react";
 import { CalendarDays, Clock, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import { BlogPost } from "./BlogData";
 import { formatDate } from "./blogUtils";
 
@@ -45,12 +46,12 @@ const BlogCard = ({ post }: BlogCardProps) => {
             </div>
             <span className="text-sm font-medium">{post.author}</span>
           </div>
-          <a 
-            href={`#blog/${post.id}`} 
+          <Link 
+            to={`/blog/${post.id}`} 
             className="text-primary font-medium text-sm hover:underline"
           >
             Read More
-          </a>
+          </Link>
         </div>
       </div>
     </div>
