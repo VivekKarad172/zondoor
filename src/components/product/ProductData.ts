@@ -60,4 +60,6 @@ export const websiteInfo = {
   mainWebsite: "https://zondoor.com/",
   companyName: "Z-ON DOOR",
   contactEmail: "info@zondoor.com",
+  address: "Plot No-4, Dhoran Pardi, NH-48, Kamrej, Surat - 394150, Gujarat, India",
+  phone: "+91 96017 48998"
 };

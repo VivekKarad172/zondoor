@@ -1,3 +1,4 @@
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
@@ -98,8 +99,9 @@ const Footer = () => {
                   </span>
                   <span className="text-primary-foreground/80">
                     Z-ON DOOR Manufacturing Facility<br />
-                    123 Industrial Ave, Business Park<br />
-                    Mumbai, Maharashtra, India
+                    Plot No-4, Dhoran Pardi, NH-48<br />
+                    Kamrej, Surat - 394150<br />
+                    Gujarat, India
                   </span>
                 </li>
                 <li className="flex">
@@ -121,7 +123,7 @@ const Footer = () => {
                     </svg>
                   </span>
                   <span className="text-primary-foreground/80">
-                    +91 98765 43210
+                    +91 96017 48998
                   </span>
                 </li>
                 <li className="flex">
