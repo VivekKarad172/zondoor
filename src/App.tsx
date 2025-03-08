@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import LoadingScreen from "./components/LoadingScreen";
 import { AuthProvider } from "./contexts/AuthContext";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,14 @@ const App = () => {
               </Routes>
             </BrowserRouter>
           </div>
+          
+          {/* WhatsApp Button (visible on all pages when not loading) */}
+          {!isLoading && (
+            <WhatsAppButton 
+              phoneNumber="+919601748998" 
+              message="Hello, I'm interested in your PVC doors!" 
+            />
+          )}
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
