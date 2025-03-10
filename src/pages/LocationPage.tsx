@@ -1,11 +1,14 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackgroundDoors from "@/components/BackgroundDoors";
 import { AnimateInView } from "@/components/ui/motion";
 
 const LocationPage = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const fallbackMapRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Update document title
     document.title = "Our Location | Z-ON DOOR";
@@ -17,17 +20,33 @@ const LocationPage = () => {
     const script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&callback=initMap&libraries=maps,marker&v=beta";
     script.async = true;
+    script.defer = true;
     
     // Define the callback function
     window.initMap = function() {
       console.log("Google Maps API loaded");
+      
+      // If the fallback map is showing, hide it when the API loads successfully
+      if (fallbackMapRef.current) {
+        fallbackMapRef.current.style.display = 'none';
+      }
+    };
+
+    // Handle script load error by showing the fallback map
+    script.onerror = () => {
+      console.error("Failed to load Google Maps API");
+      if (fallbackMapRef.current) {
+        fallbackMapRef.current.style.display = 'block';
+      }
     };
 
     document.head.appendChild(script);
 
     return () => {
       // Clean up
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
       delete window.initMap;
     };
   }, []);
@@ -133,14 +152,15 @@ const LocationPage = () => {
           <AnimateInView animation="fade-in" delay={300}>
             <div className="rounded-lg overflow-hidden shadow-lg">
               <div style={{ height: "400px", width: "100%" }} className="relative">
-                <div id="map-container" style={{ height: "100%", width: "100%" }}>
+                <div ref={mapRef} id="map-container" style={{ height: "100%", width: "100%" }}>
+                  {/* Map will be rendered as HTML, not as JSX elements */}
                   <gmp-map center="21.31777572631836,72.95558166503906" zoom="14" map-id="DEMO_MAP_ID" style={{ height: "100%", width: "100%" }}>
                     <gmp-advanced-marker position="21.31777572631836,72.95558166503906" title="Z-ON DOOR"></gmp-advanced-marker>
                   </gmp-map>
                 </div>
                 
                 {/* Fallback iframe in case the new Maps API doesn't load */}
-                <div id="fallback-map" className="absolute top-0 left-0 w-full h-full" style={{ display: "none" }}>
+                <div ref={fallbackMapRef} id="fallback-map" className="absolute top-0 left-0 w-full h-full" style={{ display: "none" }}>
                   <iframe 
                     width="100%" 
                     height="100%" 
