@@ -9,6 +9,9 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/Testimonials";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { AnimateInView } from "@/components/ui/motion";
 
 const Index = () => {
   useEffect(() => {
@@ -43,6 +46,26 @@ const Index = () => {
       <WhyChooseUs />
       <Testimonials />
       <Gallery />
+      
+      {/* Location Section with Link to Map */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AnimateInView animation="fade-in">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold mb-4 text-secondary">Find Us</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+                Visit our manufacturing facility and showroom to see our premium PVC doors in person.
+              </p>
+              <Link to="/location">
+                <Button variant="default" size="lg" className="rounded-full px-8">
+                  View Our Location
+                </Button>
+              </Link>
+            </div>
+          </AnimateInView>
+        </div>
+      </section>
+      
       <div id="contact">
         <Footer />
       </div>
