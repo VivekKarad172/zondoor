@@ -12,6 +12,24 @@ const LocationPage = () => {
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
+
+    // Load Google Maps API script with callback
+    const script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&callback=initMap&libraries=maps,marker&v=beta";
+    script.async = true;
+    
+    // Define the callback function
+    window.initMap = function() {
+      console.log("Google Maps API loaded");
+    };
+
+    document.head.appendChild(script);
+
+    return () => {
+      // Clean up
+      document.head.removeChild(script);
+      delete window.initMap;
+    };
   }, []);
 
   return (
@@ -114,16 +132,25 @@ const LocationPage = () => {
           
           <AnimateInView animation="fade-in" delay={300}>
             <div className="rounded-lg overflow-hidden shadow-lg">
-              <div style={{ height: "400px", width: "100%" }}>
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  frameBorder="0" 
-                  style={{ border: 0 }} 
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&q=21.317760467529297,72.95557403564453&zoom=14" 
-                  allowFullScreen
-                  title="Z-ON DOOR Location"
-                ></iframe>
+              <div style={{ height: "400px", width: "100%" }} className="relative">
+                <div id="map-container" style={{ height: "100%", width: "100%" }}>
+                  <gmp-map center="21.31777572631836,72.95558166503906" zoom="14" map-id="DEMO_MAP_ID" style={{ height: "100%", width: "100%" }}>
+                    <gmp-advanced-marker position="21.31777572631836,72.95558166503906" title="Z-ON DOOR"></gmp-advanced-marker>
+                  </gmp-map>
+                </div>
+                
+                {/* Fallback iframe in case the new Maps API doesn't load */}
+                <div id="fallback-map" className="absolute top-0 left-0 w-full h-full" style={{ display: "none" }}>
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    frameBorder="0" 
+                    style={{ border: 0 }} 
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&q=21.317760467529297,72.95557403564453&zoom=14" 
+                    allowFullScreen
+                    title="Z-ON DOOR Location"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </AnimateInView>
