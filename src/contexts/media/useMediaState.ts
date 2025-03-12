@@ -1,9 +1,9 @@
 
 import { useState, useEffect } from "react";
-import { MediaContextState } from "./types";
+import { MediaContextInternalState } from "./types";
 import { initialMediaItems, initialFolders } from "./initialData";
 
-export const useMediaState = (): MediaContextState => {
+export const useMediaState = (): MediaContextInternalState => {
   const [mediaItems, setMediaItems] = useState(initialMediaItems);
   const [folders, setFolders] = useState(initialFolders);
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);

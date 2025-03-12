@@ -2,9 +2,9 @@
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
 import { MediaItem, MediaFolder } from "@/components/media/types";
-import { MediaContextActions } from "./types";
+import { MediaContextActions, MediaContextInternalState } from "./types";
 
-export const useMediaActions = (state: any): MediaContextActions => {
+export const useMediaActions = (state: MediaContextInternalState): MediaContextActions => {
   const {
     mediaItems,
     folders,
