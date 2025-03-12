@@ -1,25 +1,21 @@
 
 import React from "react";
+import ImageSelector from "@/components/media/ImageSelector";
 
 interface ImagePreviewProps {
   imageUrl: string;
+  onImageChange: (url: string) => void;
 }
 
-const ImagePreview = ({ imageUrl }: ImagePreviewProps) => {
+const ImagePreview = ({ imageUrl, onImageChange }: ImagePreviewProps) => {
   return (
-    <div className="rounded-lg overflow-hidden border border-gray-200 h-48 flex items-center justify-center">
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="Preview"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="text-gray-400 text-center p-4">
-          Image preview will appear here
-        </div>
-      )}
-    </div>
+    <ImageSelector
+      value={imageUrl}
+      onChange={onImageChange}
+      aspectRatio={16/9}
+      placeholder="Choose a featured image for your post"
+      className="h-full"
+    />
   );
 };
 

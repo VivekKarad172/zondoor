@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ImageSelector from "@/components/media/ImageSelector";
 
 interface PostMetadataProps {
   title: string;
@@ -16,7 +17,7 @@ interface PostMetadataProps {
   image: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCategoryChange: (value: "product" | "design" | "maintenance" | "guide") => void;
-  onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onImageChange: (url: string) => void;
 }
 
 const PostMetadata = ({
@@ -28,6 +29,10 @@ const PostMetadata = ({
   onCategoryChange,
   onImageChange,
 }: PostMetadataProps) => {
+  const handleImageChange = (url: string) => {
+    onImageChange({ target: { name: "image", value: url } } as React.ChangeEvent<HTMLInputElement>);
+  };
+
   return (
     <div className="space-y-4">
       <div>
@@ -72,13 +77,12 @@ const PostMetadata = ({
       </div>
       
       <div>
-        <label className="block text-sm font-medium mb-1">Featured Image URL</label>
-        <Input
-          name="image"
+        <label className="block text-sm font-medium mb-1">Featured Image</label>
+        <ImageSelector 
           value={image}
-          onChange={onImageChange}
-          placeholder="Enter image URL"
-          className="mb-2"
+          onChange={handleImageChange}
+          aspectRatio={16/9}
+          placeholder="Select a featured image for the post"
         />
       </div>
     </div>

@@ -17,7 +17,6 @@ interface BlogPostEditorProps {
 
 const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEditorProps) => {
   const [editedPost, setEditedPost] = useState<BlogPost>({ ...post });
-  const [previewImage, setPreviewImage] = useState<string>(post.image);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -97,10 +96,8 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
     }
   };
 
-  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const imageUrl = e.target.value;
+  const handleImageChange = (imageUrl: string) => {
     setEditedPost({ ...editedPost, image: imageUrl });
-    setPreviewImage(imageUrl);
   };
 
   const calculateReadTime = () => {
@@ -133,12 +130,15 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
             image={editedPost.image}
             onInputChange={handleChange}
             onCategoryChange={handleCategoryChange}
-            onImageChange={handleImageUrlChange}
+            onImageChange={handleChange}
           />
         </div>
         
         <div className="md:w-1/3">
-          <ImagePreview imageUrl={previewImage} />
+          <ImagePreview 
+            imageUrl={editedPost.image} 
+            onImageChange={handleImageChange}
+          />
         </div>
       </div>
 
