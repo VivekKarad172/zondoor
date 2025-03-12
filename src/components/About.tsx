@@ -1,9 +1,12 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
+import ImageSelector from "@/components/media/ImageSelector";
 
 const About = () => {
+  const [manufacturingImage, setManufacturingImage] = useState("/lovable-uploads/a6de2626-1574-4275-9f61-5dd55d3eaf67.jpg");
+  
   const features = [{
     letter: "Z",
     title: "Zero Compromise",
@@ -82,7 +85,12 @@ const About = () => {
               </div>
               <div className="relative">
                 <div className="rounded-lg overflow-hidden bg-white shadow-xl">
-                  <img alt="Door Manufacturing Process" loading="lazy" src="/lovable-uploads/a6de2626-1574-4275-9f61-5dd55d3eaf67.jpg" className="w-full h-full aspect-video rounded-lg object-scale-down" />
+                  <ImageSelector
+                    value={manufacturingImage}
+                    onChange={setManufacturingImage}
+                    aspectRatio={4/3}
+                    className="w-full"
+                  />
                 </div>
                 <div className="absolute -bottom-6 -right-6 glass-effect rounded-lg p-4 shadow-lg">
                   <p className="text-sm font-medium">Superior Materials</p>

@@ -55,7 +55,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
             <img
               src={value}
               alt="Selected image"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-scale-down" // Changed from object-cover to object-scale-down
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "/placeholder.svg";
               }}

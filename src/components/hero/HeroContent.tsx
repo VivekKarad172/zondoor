@@ -3,12 +3,14 @@ import React from "react";
 import { Check } from "lucide-react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
+import ImageSelector from "@/components/media/ImageSelector";
 
 interface HeroContentProps {
   specifications: string[];
+  catalogPdfUrl?: string;
 }
 
-const HeroContent = ({ specifications }: HeroContentProps) => {
+const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }: HeroContentProps) => {
   return (
     <div className="lg:col-span-6 lg:col-start-1 lg:pr-8 max-w-2xl">
       <AnimateInView animation="fade-in" delay={300}>
@@ -58,7 +60,7 @@ const HeroContent = ({ specifications }: HeroContentProps) => {
             Explore Products
           </a>
           <a
-            href="/ZON DOOR CATALOG.pdf"
+            href={catalogPdfUrl}
             download
             className={cn(
               "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",

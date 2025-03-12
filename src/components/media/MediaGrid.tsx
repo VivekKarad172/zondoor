@@ -38,7 +38,7 @@ const MediaGrid: React.FC<MediaGridProps> = ({
           <img 
             src={item.url} 
             alt={item.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-scale-down" // Changed to scale-down
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/placeholder.svg";
             }}
