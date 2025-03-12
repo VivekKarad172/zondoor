@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -39,8 +40,8 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled 
-          ? "bg-white shadow-md py-2" 
-          : "bg-transparent py-4"
+          ? "bg-white/95 backdrop-blur-md shadow-md py-2" 
+          : "bg-black/20 backdrop-blur-sm py-4"
       )}
     >
       <div className="wesmarc-container">
@@ -65,14 +66,20 @@ const Navbar = () => {
                   {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
-                      className="text-sm font-medium text-secondary hover:text-primary transition-colors px-4 py-2"
+                      className={cn(
+                        "text-sm font-medium transition-colors px-4 py-2",
+                        scrolled ? "text-gray-800 hover:text-primary" : "text-white hover:text-white/80"
+                      )}
                     >
                       {link.name.toUpperCase()}
                     </Link>
                   ) : (
                     <a
                       href={link.href}
-                      className="text-sm font-medium text-secondary hover:text-primary transition-colors px-4 py-2"
+                      className={cn(
+                        "text-sm font-medium transition-colors px-4 py-2",
+                        scrolled ? "text-gray-800 hover:text-primary" : "text-white hover:text-white/80"
+                      )}
                     >
                       {link.name.toUpperCase()}
                     </a>
@@ -83,7 +90,12 @@ const Navbar = () => {
             <li>
               <a
                 href="#contact"
-                className="bg-primary text-white px-4 py-2 rounded text-sm ml-2 hover:bg-primary/90 transition-colors"
+                className={cn(
+                  "px-4 py-2 rounded text-sm ml-2 transition-colors",
+                  scrolled 
+                    ? "bg-primary text-white hover:bg-primary/90"
+                    : "bg-white text-gray-800 hover:bg-white/90"
+                )}
               >
                 GET A QUOTE
               </a>
@@ -96,7 +108,11 @@ const Navbar = () => {
             className="md:hidden flex items-center"
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={24} className="text-secondary" /> : <Menu size={24} className="text-secondary" />}
+            {isOpen ? (
+              <X size={24} className={scrolled ? "text-gray-800" : "text-white"} />
+            ) : (
+              <Menu size={24} className={scrolled ? "text-gray-800" : "text-white"} />
+            )}
           </button>
         </nav>
 

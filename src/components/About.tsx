@@ -1,50 +1,61 @@
+
 import React from "react";
 import { cn } from "@/lib/utils";
-import { AnimateInView, StaggerContainer } from "./ui/motion";
+import { AnimateInView } from "./ui/motion";
+
 const About = () => {
   const features = [{
     letter: "Z",
     title: "Zero Compromise",
-    description: "We never compromise on the quality of materials or manufacturing processes, ensuring every door meets our rigorous standards."
+    description: "We never compromise on quality, ensuring every door meets our rigorous standards."
   }, {
     letter: "O",
     title: "Outstanding Design",
-    description: "Our doors feature 17 unique embossing designs and 10 color options, providing endless possibilities for your interior spaces."
+    description: "Our doors feature unique embossing designs and multiple color options for your interior spaces."
   }, {
     letter: "N",
     title: "Notable Quality",
-    description: "From 5mm PVC foam board to 0.15mm decorative film, every component is selected for durability and aesthetic appeal."
+    description: "Premium materials selected for both durability and aesthetic appeal."
   }];
-  return <section id="about" className="section-padding bg-white">
+
+  return (
+    <section id="about" className="section-padding bg-gray-50">
       <div className="container px-4 md:px-8 mx-auto">
         <AnimateInView animation="fade-in">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-sm font-semibold uppercase tracking-wider text-foreground/60">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">
               About Us
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mt-2 mb-6">
-              The Meaning Behind <span className="text-gradient">Z-ON DOOR</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mt-2 mb-4 text-secondary">
+              The Story of <span className="text-primary">Z-ON DOOR</span>
             </h2>
-            <p className="text-foreground/80">
-              Our name encapsulates our core values and the excellence we bring to every door we manufacture.
+            <p className="text-gray-600 text-lg">
+              Our name represents our commitment to excellence in door manufacturing.
             </p>
           </div>
         </AnimateInView>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => <AnimateInView key={feature.letter} animation="slide-in-up" delay={index * 200}>
-              <div className={cn("rounded-xl p-8 h-full", "border border-border/50 bg-background/50", "transition-all duration-300 hover:shadow-xl hover:scale-[1.02]", "flex flex-col")}>
+          {features.map((feature, index) => (
+            <AnimateInView key={feature.letter} animation="slide-in-up" delay={index * 200}>
+              <div className={cn(
+                "rounded-xl p-8 h-full bg-white",
+                "border border-gray-100 shadow-sm",
+                "transition-all duration-300 hover:shadow-lg hover:scale-[1.02]",
+                "flex flex-col"
+              )}>
                 <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                   <span className="text-xl font-bold text-primary">
                     {feature.letter}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-foreground/70 flex-grow">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
+                <p className="text-gray-600">
                   {feature.description}
                 </p>
               </div>
-            </AnimateInView>)}
+            </AnimateInView>
+          ))}
         </div>
 
         <AnimateInView animation="fade-in" delay={600} className="mt-24">
@@ -81,6 +92,8 @@ const About = () => {
           </div>
         </AnimateInView>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default About;
