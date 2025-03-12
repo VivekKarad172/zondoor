@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Index"; // Fixed import path
 import Products from "./components/Products";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
+import Contact from "./pages/LocationPage"; // Fixed import path
+import About from "./components/About"; // Fixed import path
 import Gallery from "./components/Gallery";
 import BlogPostPage from "./pages/BlogPostPage";
 import BlogPage from "./pages/BlogPage";
@@ -17,11 +18,7 @@ import { MediaProvider } from "./contexts/MediaContext";
 
 function App() {
   const location = useLocation();
-  const { checkAuth } = useAuth();
-
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  const { user } = useAuth(); // Remove the checkAuth that doesn't exist
 
   return (
     <div className="App">
@@ -41,7 +38,11 @@ function App() {
             </Routes>
           </AnimatePresence>
         </div>
-        <WhatsAppButton />
+        {/* Add required props to WhatsAppButton */}
+        <WhatsAppButton 
+          phoneNumber="+919876543210" 
+          message="Hello, I'd like to enquire about your products."
+        />
         <Toaster position="top-right" />
       </MediaProvider>
     </div>

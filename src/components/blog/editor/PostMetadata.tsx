@@ -29,10 +29,8 @@ const PostMetadata = ({
   onCategoryChange,
   onImageChange,
 }: PostMetadataProps) => {
-  const handleImageChange = (url: string) => {
-    onImageChange({ target: { name: "image", value: url } } as React.ChangeEvent<HTMLInputElement>);
-  };
-
+  // Fix: Remove the wrapper that tries to convert the string to an event
+  // and directly pass the URL to the handler
   return (
     <div className="space-y-4">
       <div>
@@ -80,7 +78,7 @@ const PostMetadata = ({
         <label className="block text-sm font-medium mb-1">Featured Image</label>
         <ImageSelector 
           value={image}
-          onChange={handleImageChange}
+          onChange={onImageChange} // Directly pass the handler
           aspectRatio={16/9}
           placeholder="Select a featured image for the post"
         />

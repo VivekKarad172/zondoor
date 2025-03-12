@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { BlogPost } from "./BlogData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -130,7 +129,7 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
             image={editedPost.image}
             onInputChange={handleChange}
             onCategoryChange={handleCategoryChange}
-            onImageChange={handleChange}
+            onImageChange={handleImageChange}
           />
         </div>
         
