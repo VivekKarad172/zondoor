@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./pages/Index"; // Fixed import path
+import Home from "./pages/Index";
 import Products from "./components/Products";
-import Contact from "./pages/LocationPage"; // Fixed import path
-import About from "./components/About"; // Fixed import path
+import Contact from "./pages/LocationPage";
+import About from "./components/About";
 import Gallery from "./components/Gallery";
 import BlogPostPage from "./pages/BlogPostPage";
 import BlogPage from "./pages/BlogPage";
@@ -14,11 +14,11 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import { Toaster } from "sonner";
 import { AnimatePresence } from "framer-motion";
 import { useAuth } from "./contexts/AuthContext";
-import { MediaProvider } from "./contexts/MediaContext";
+import { MediaProvider } from "./contexts/media";
 
 function App() {
   const location = useLocation();
-  const { user } = useAuth(); // Remove the checkAuth that doesn't exist
+  const { user } = useAuth();
 
   return (
     <div className="App">
@@ -38,7 +38,6 @@ function App() {
             </Routes>
           </AnimatePresence>
         </div>
-        {/* Add required props to WhatsAppButton */}
         <WhatsAppButton 
           phoneNumber="+919876543210" 
           message="Hello, I'd like to enquire about your products."

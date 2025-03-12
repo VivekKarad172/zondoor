@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import MediaUploader from "./MediaUploader";
-import { useMedia } from "@/contexts/MediaContext";
+import { useMedia } from "@/contexts/media";
 import MediaToolbar from "./library/MediaToolbar";
 import MediaContent from "./library/MediaContent";
 import MediaActions from "./library/MediaActions";

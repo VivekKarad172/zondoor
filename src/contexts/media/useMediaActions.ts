@@ -1,85 +1,19 @@
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { MediaItem, MediaFolder, MediaLibraryContextType } from "@/components/media/types";
-import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "sonner";
+import { MediaItem, MediaFolder } from "@/components/media/types";
+import { MediaContextActions } from "./types";
 
-// Initial dummy data
-const initialMediaItems: MediaItem[] = [
-  {
-    id: "1",
-    url: "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png",
-    name: "Door Design Classic",
-    type: "image",
-    size: 245000,
-    createdAt: new Date().toISOString(),
-    tags: ["door", "design", "product"],
-    description: "Classic door design showcase"
-  },
-  {
-    id: "2",
-    url: "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png",
-    name: "Embossed Door",
-    type: "image",
-    size: 325000,
-    createdAt: new Date().toISOString(),
-    tags: ["door", "embossed", "product"],
-    description: "3D embossed door design"
-  },
-  {
-    id: "3",
-    url: "/lovable-uploads/8416ee93-b407-4d4d-a95a-e088714269cf.png",
-    name: "Z-ON Brand",
-    type: "image",
-    size: 185000,
-    createdAt: new Date().toISOString(),
-    tags: ["brand", "logo"],
-    description: "Z-ON DOOR branding image"
-  }
-];
-
-const initialFolders: MediaFolder[] = [
-  {
-    id: "products",
-    name: "Products",
-    items: [],
-  },
-  {
-    id: "blog",
-    name: "Blog Images",
-    items: [],
-  }
-];
-
-const MediaContext = createContext<MediaLibraryContextType | undefined>(undefined);
-
-export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mediaItems, setMediaItems] = useState<MediaItem[]>(initialMediaItems);
-  const [folders, setFolders] = useState<MediaFolder[]>(initialFolders);
-  const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Load media items from localStorage if available
-  useEffect(() => {
-    const savedMediaItems = localStorage.getItem("mediaItems");
-    const savedFolders = localStorage.getItem("mediaFolders");
-    
-    if (savedMediaItems) {
-      setMediaItems(JSON.parse(savedMediaItems));
-    }
-    
-    if (savedFolders) {
-      setFolders(JSON.parse(savedFolders));
-    }
-  }, []);
-
-  // Save to localStorage whenever media items or folders change
-  useEffect(() => {
-    localStorage.setItem("mediaItems", JSON.stringify(mediaItems));
-    localStorage.setItem("mediaFolders", JSON.stringify(folders));
-  }, [mediaItems, folders]);
+export const useMediaActions = (state: any): MediaContextActions => {
+  const {
+    mediaItems,
+    folders,
+    setMediaItems,
+    setFolders,
+    setSelectedFolder,
+    setSelectedItems,
+    setIsLoading
+  } = state;
 
   const addMedia = async (files: File[]): Promise<MediaItem[]> => {
     setIsLoading(true);
@@ -111,7 +45,7 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         })
       );
       
-      setMediaItems((prev) => [...prev, ...newItems]);
+      setMediaItems((prev: MediaItem[]) => [...prev, ...newItems]);
       toast.success(`Successfully added ${newItems.length} file(s)`);
       return newItems;
     } catch (error) {
@@ -128,10 +62,10 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     
     try {
       // Remove from main list
-      setMediaItems((prev) => prev.filter((item) => !ids.includes(item.id)));
+      setMediaItems((prev: MediaItem[]) => prev.filter((item) => !ids.includes(item.id)));
       
       // Remove from folders
-      setFolders((prev) => 
+      setFolders((prev: MediaFolder[]) => 
         prev.map((folder) => ({
           ...folder,
           items: folder.items.filter((item) => !ids.includes(item.id))
@@ -139,7 +73,7 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       );
       
       // Clear selection if needed
-      setSelectedItems((prev) => prev.filter((id) => !ids.includes(id)));
+      setSelectedItems((prev: string[]) => prev.filter((id) => !ids.includes(id)));
       
       toast.success(`Deleted ${ids.length} item(s)`);
     } catch (error) {
@@ -154,15 +88,15 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setIsLoading(true);
     
     try {
-      const updatedItems = mediaItems.map((item) => 
+      const updatedItems = mediaItems.map((item: MediaItem) => 
         item.id === id ? { ...item, ...data } : item
       );
       
       setMediaItems(updatedItems);
-      const updatedItem = updatedItems.find((item) => item.id === id)!;
+      const updatedItem = updatedItems.find((item: MediaItem) => item.id === id)!;
       
       // Update in folders if present
-      setFolders((prev) => 
+      setFolders((prev: MediaFolder[]) => 
         prev.map((folder) => ({
           ...folder,
           items: folder.items.map((item) => 
@@ -188,13 +122,13 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const selectItem = (id: string) => {
-    setSelectedItems((prev) => 
+    setSelectedItems((prev: string[]) => 
       prev.includes(id) ? prev : [...prev, id]
     );
   };
 
   const deselectItem = (id: string) => {
-    setSelectedItems((prev) => prev.filter((itemId) => itemId !== id));
+    setSelectedItems((prev: string[]) => prev.filter((itemId) => itemId !== id));
   };
 
   const clearSelection = () => {
@@ -208,26 +142,26 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       items: []
     };
     
-    setFolders((prev) => [...prev, newFolder]);
+    setFolders((prev: MediaFolder[]) => [...prev, newFolder]);
     toast.success(`Created folder "${name}"`);
     return newFolder;
   };
 
   const deleteFolder = async (id: string): Promise<void> => {
-    setFolders((prev) => prev.filter((folder) => folder.id !== id));
-    if (selectedFolder === id) {
+    setFolders((prev: MediaFolder[]) => prev.filter((folder) => folder.id !== id));
+    if (state.selectedFolder === id) {
       setSelectedFolder(null);
     }
     toast.success("Folder deleted");
   };
 
   const addToFolder = async (itemIds: string[], folderId: string): Promise<void> => {
-    const folder = folders.find((f) => f.id === folderId);
+    const folder = folders.find((f: MediaFolder) => f.id === folderId);
     if (!folder) return;
     
-    const itemsToAdd = mediaItems.filter((item) => itemIds.includes(item.id));
+    const itemsToAdd = mediaItems.filter((item: MediaItem) => itemIds.includes(item.id));
     
-    setFolders((prev) => 
+    setFolders((prev: MediaFolder[]) => 
       prev.map((f) => 
         f.id === folderId ? {
           ...f,
@@ -242,7 +176,7 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const removeFromFolder = async (itemIds: string[], folderId: string): Promise<void> => {
-    setFolders((prev) => 
+    setFolders((prev: MediaFolder[]) => 
       prev.map((f) => 
         f.id === folderId ? {
           ...f,
@@ -251,17 +185,11 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       )
     );
     
-    const folderName = folders.find((f) => f.id === folderId)?.name;
+    const folderName = folders.find((f: MediaFolder) => f.id === folderId)?.name;
     toast.success(`Removed ${itemIds.length} item(s) from folder "${folderName}"`);
   };
 
-  const contextValue: MediaLibraryContextType = {
-    mediaItems,
-    folders,
-    selectedFolder,
-    selectedItems,
-    isLoading,
-    searchQuery,
+  return {
     addMedia,
     deleteMedia,
     updateMedia,
@@ -269,24 +197,10 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     selectItem,
     deselectItem,
     clearSelection,
-    setSearchQuery,
+    setSearchQuery: state.setSearchQuery,
     createFolder,
     deleteFolder,
     addToFolder,
     removeFromFolder
   };
-
-  return (
-    <MediaContext.Provider value={contextValue}>
-      {children}
-    </MediaContext.Provider>
-  );
-};
-
-export const useMedia = (): MediaLibraryContextType => {
-  const context = useContext(MediaContext);
-  if (!context) {
-    throw new Error("useMedia must be used within a MediaProvider");
-  }
-  return context;
 };

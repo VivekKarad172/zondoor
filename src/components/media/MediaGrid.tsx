@@ -1,7 +1,6 @@
-
 import React from "react";
 import { MediaItem } from "./types";
-import { useMedia } from "@/contexts/MediaContext";
+import { useMedia } from "@/contexts/media";
 import { cn } from "@/lib/utils";
 import { Check, AlertCircle, FileText, Video } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -38,7 +37,7 @@ const MediaGrid: React.FC<MediaGridProps> = ({
           <img 
             src={item.url} 
             alt={item.name}
-            className="w-full h-full object-scale-down" // Changed to scale-down
+            className="w-full h-full object-scale-down"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/placeholder.svg";
             }}

@@ -1,10 +1,9 @@
-
 import React from "react";
 import { MediaFolder } from "./types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Folder, FolderOpen, Image, Trash2 } from "lucide-react";
-import { useMedia } from "@/contexts/MediaContext";
+import { useMedia } from "@/contexts/media";
 import {
   AlertDialog,
   AlertDialogAction,

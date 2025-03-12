@@ -1,8 +1,7 @@
-
 import React, { useState, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useMedia } from "@/contexts/MediaContext";
+import { useMedia } from "@/contexts/media";
 import { cn } from "@/lib/utils";
 import { Upload, X, Image, File, Check, Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
