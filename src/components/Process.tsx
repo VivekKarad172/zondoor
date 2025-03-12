@@ -12,7 +12,7 @@ const Process = () => {
       description:
         "We use 5mm sheets with a smooth surface for the best film application. Any low-quality materials are rejected to ensure customers receive only the highest quality doors.",
       icon: <Check className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/2c463714-b7b4-4e2f-b451-9d128a134df8.png", // Step 1 image
     },
     {
       number: "02",
@@ -20,7 +20,7 @@ const Process = () => {
       description:
         "The PVC decorative film is carefully applied as per customer demand, ensuring strong bonding and accuracy.",
       icon: <Layers className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1584213905697-cbb47a3ea0ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/5da71123-a8fa-4434-b635-e7459ed52958.png", // Step 2 image
     },
     {
       number: "03",
@@ -28,7 +28,7 @@ const Process = () => {
       description:
         "The door design is embossed using the latest technology machines, ensuring perfect details.",
       icon: <Stamp className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/04d37422-1c78-46f5-b01d-c357288a66dd.png", // Step 3 image
     },
     {
       number: "04",
@@ -36,7 +36,7 @@ const Process = () => {
       description:
         "The door frame includes PVC, M.S. pipe, and a rigid PVC sheet, cut to customer-specified sizes for a strong and durable structure.",
       icon: <LayoutGrid className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1505798577933-1c0eb82e0ea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/b16e8deb-56f8-4d41-ae28-556a876aff31.png", // Step 4 image
     },
     {
       number: "05",
@@ -44,7 +44,7 @@ const Process = () => {
       description:
         "After pressing, the doors undergo precise trimming and final touch-ups for a perfect finish.",
       icon: <Scissors className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1587162146766-e06b1189b907?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/049084c0-6b88-404a-b927-a76917427ca1.png", // Step 5 image
     },
     {
       number: "06",
@@ -52,7 +52,7 @@ const Process = () => {
       description:
         "Every door is thoroughly checked before packaging, ensuring top-tier quality and protection during delivery.",
       icon: <PackageCheck className="w-6 h-6" />,
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/17784498-bca2-4a4d-9dad-afda6fbd7308.png", // Step 6 image
     },
   ];
 
@@ -106,7 +106,7 @@ const Process = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 transform -rotate-3 rounded-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:rotate-0"></div>
                     <img
                       src={step.image}
-                      alt={step.title}
+                      alt={`Step ${step.number}: ${step.title}`}
                       className="relative rounded-lg w-full object-cover shadow-lg border border-border/50 aspect-video md:aspect-[4/3] transition-all duration-300 group-hover:scale-[1.02]"
                       loading="lazy"
                     />
