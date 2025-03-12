@@ -1,3 +1,4 @@
+
 import { MediaItem, MediaFolder } from "@/components/media/types";
 
 export interface MediaContextState {
@@ -13,7 +14,7 @@ export interface MediaContextInternalState extends MediaContextState {
   setMediaItems: (items: MediaItem[] | ((prev: MediaItem[]) => MediaItem[])) => void;
   setFolders: (folders: MediaFolder[] | ((prev: MediaFolder[]) => MediaFolder[])) => void;
   setSelectedFolder: (folderId: string | null) => void;
-  setSelectedItems: (ids: string[]) => void;
+  setSelectedItems: (ids: string[] | ((prev: string[]) => string[])) => void;
   setIsLoading: (loading: boolean) => void;
   setSearchQuery: (query: string) => void;
 }
