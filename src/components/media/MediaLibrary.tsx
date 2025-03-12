@@ -1,14 +1,11 @@
 
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import MediaGrid from "./MediaGrid";
 import MediaUploader from "./MediaUploader";
-import MediaFolderList from "./MediaFolderList";
 import { useMedia } from "@/contexts/MediaContext";
-import { Search, Upload, FolderPlus, Trash2 } from "lucide-react";
+import MediaToolbar from "./library/MediaToolbar";
+import MediaContent from "./library/MediaContent";
+import MediaActions from "./library/MediaActions";
 
 interface MediaLibraryProps {
   isOpen: boolean;
@@ -39,19 +36,13 @@ const MediaLibrary: React.FC<MediaLibraryProps> = ({
   } = useMedia();
   
   const [isUploaderOpen, setIsUploaderOpen] = useState(false);
-  const [newFolderName, setNewFolderName] = useState("");
-  const [isCreatingFolder, setIsCreatingFolder] = useState(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleCreateFolder = async () => {
-    if (newFolderName.trim()) {
-      await createFolder(newFolderName);
-      setNewFolderName("");
-      setIsCreatingFolder(false);
-    }
+  const handleCreateFolder = async (name: string) => {
+    await createFolder(name);
   };
 
   const handleSelectMedia = (id: string) => {
@@ -90,130 +81,28 @@ const MediaLibrary: React.FC<MediaLibraryProps> = ({
         </DialogHeader>
         
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="px-6 py-3 bg-muted/20 border-b flex flex-wrap gap-2 items-center justify-between">
-            <div className="flex items-center gap-2 flex-grow">
-              <div className="relative flex-grow max-w-md">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search images..."
-                  value={searchQuery}
-                  onChange={handleSearch}
-                  className="pl-8"
-                />
-              </div>
-              
-              <Button 
-                variant="outline" 
-                onClick={() => setIsUploaderOpen(true)}
-                className="gap-1"
-              >
-                <Upload className="h-4 w-4" />
-                Upload
-              </Button>
-              
-              {isCreatingFolder ? (
-                <div className="flex items-center gap-2">
-                  <Input
-                    placeholder="Folder name"
-                    value={newFolderName}
-                    onChange={(e) => setNewFolderName(e.target.value)}
-                    className="w-40"
-                  />
-                  <Button onClick={handleCreateFolder} size="sm">
-                    Create
-                  </Button>
-                  <Button 
-                    onClick={() => setIsCreatingFolder(false)} 
-                    variant="ghost" 
-                    size="sm"
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              ) : (
-                <Button 
-                  variant="outline"
-                  onClick={() => setIsCreatingFolder(true)}
-                  className="gap-1"
-                >
-                  <FolderPlus className="h-4 w-4" />
-                  New Folder
-                </Button>
-              )}
-            </div>
-            
-            {selectedItems.length > 0 && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  {selectedItems.length} selected
-                </span>
-                <Button 
-                  variant="destructive"
-                  size="sm"
-                  onClick={handleDeleteSelected}
-                  className="gap-1"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Delete
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={clearSelection}
-                >
-                  Cancel
-                </Button>
-              </div>
-            )}
-          </div>
+          <MediaToolbar 
+            searchQuery={searchQuery}
+            onSearchChange={handleSearch}
+            onUploadClick={() => setIsUploaderOpen(true)}
+            onCreateFolder={handleCreateFolder}
+            selectedItems={selectedItems}
+            onDeleteSelected={handleDeleteSelected}
+            onClearSelection={clearSelection}
+          />
           
           <div className="flex-1 overflow-hidden flex">
-            <Tabs defaultValue="all" className="flex-1 flex flex-col h-full">
-              <div className="px-6 pt-4 flex gap-4">
-                <div className="w-56 shrink-0">
-                  <TabsList className="w-full mb-4">
-                    <TabsTrigger value="all" className="flex-1">All Media</TabsTrigger>
-                    <TabsTrigger value="folders" className="flex-1">Folders</TabsTrigger>
-                  </TabsList>
-                </div>
-              </div>
-              
-              <div className="flex-1 overflow-hidden flex px-6 pb-6 gap-4">
-                <TabsContent value="all" className="flex-1 h-full m-0 overflow-hidden">
-                  <MediaGrid 
-                    items={filteredItems}
-                    onSelect={handleSelectMedia}
-                    selectable
-                  />
-                </TabsContent>
-                
-                <TabsContent value="folders" className="flex gap-4 flex-1 h-full m-0 overflow-hidden">
-                  <div className="w-56 shrink-0 overflow-y-auto border rounded-md">
-                    <MediaFolderList
-                      folders={folders}
-                      selectedFolder={selectedFolder}
-                      onSelectFolder={selectFolder}
-                    />
-                  </div>
-                  
-                  <div className="flex-1 overflow-hidden">
-                    <MediaGrid 
-                      items={filteredItems}
-                      onSelect={handleSelectMedia}
-                      selectable
-                    />
-                  </div>
-                </TabsContent>
-              </div>
-            </Tabs>
+            <MediaContent 
+              folders={folders}
+              filteredItems={filteredItems}
+              selectedFolder={selectedFolder}
+              onSelectFolder={selectFolder}
+              onSelectMedia={handleSelectMedia}
+            />
           </div>
         </div>
         
-        <div className="px-6 py-3 border-t flex justify-end gap-2">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-        </div>
+        <MediaActions onCancel={onClose} />
       </DialogContent>
       
       <MediaUploader 
