@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
 import { Check, Layers, Stamp, LayoutGrid, Scissors, PackageCheck } from "lucide-react";
-import ProcessHeader from "./process/ProcessHeader";
-import ProcessStep from "./process/ProcessStep";
-import ProcessMaterials from "./process/ProcessMaterials";
-import { processSteps, processMaterials } from "./process/processData";
+import ProcessHeader from "@/components/process/ProcessHeader";
+import ProcessStep from "@/components/process/ProcessStep";
+import ProcessMaterials from "@/components/process/ProcessMaterials";
+import { processSteps, processMaterials } from "@/components/process/processData";
 
 const Process = () => {
   // Disabled editing mode completely
