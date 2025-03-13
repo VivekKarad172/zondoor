@@ -1,0 +1,20 @@
+name: Auto Update Images
+on:
+  push:
+    paths:
+      - "public/lovable-uploads/**"
+
+jobs:
+  update-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Auto Image Updater"
+          git add .
+          git commit -m "Auto update image"
+          git push
