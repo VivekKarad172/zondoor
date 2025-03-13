@@ -203,7 +203,7 @@ const ContactPage = () => {
               <h2 className="text-3xl font-bold text-center mb-8">Find Us on the Map</h2>
               <div className="border-2 border-gray-200 rounded-lg overflow-hidden shadow-md h-[400px]">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.4383240551996!2d72.95302471493925!3d21.31779198578983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0456d67074e01%3A0x74c7a2335d27c8f3!2sKamrej%2C%20Surat%2C%20Gujarat%20394150!5e0!3m2!1sen!2sin!4v1686743476075!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d929.611056613842!2d72.9553399!3d21.3176724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0456d7c8bdb0b%3A0x910bc1eb0a0c4ef5!2sDhoran%20Pardi%2C%20Kamrej%2C%20Surat%2C%20Gujarat%20394150!5e0!3m2!1sen!2sin!4v1715588445830!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 

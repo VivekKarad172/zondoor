@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -154,8 +153,8 @@ const LocationPage = () => {
               <div style={{ height: "400px", width: "100%" }} className="relative">
                 <div ref={mapRef} id="map-container" style={{ height: "100%", width: "100%" }}>
                   {/* Map will be rendered as HTML, not as JSX elements */}
-                  <gmp-map center="21.31777572631836,72.95558166503906" zoom="14" map-id="DEMO_MAP_ID" style={{ height: "100%", width: "100%" }}>
-                    <gmp-advanced-marker position="21.31777572631836,72.95558166503906" title="Z-ON DOOR"></gmp-advanced-marker>
+                  <gmp-map center="21.3176724,72.9553399" zoom="17" map-id="DEMO_MAP_ID" style={{ height: "100%", width: "100%" }}>
+                    <gmp-advanced-marker position="21.3176724,72.9553399" title="Z-ON DOOR"></gmp-advanced-marker>
                   </gmp-map>
                 </div>
                 
@@ -166,7 +165,7 @@ const LocationPage = () => {
                     height="100%" 
                     frameBorder="0" 
                     style={{ border: 0 }} 
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&q=21.317760467529297,72.95557403564453&zoom=14" 
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAFDt0a1tkHP-w9Jeb4ST5QGwJfquDS78Q&q=21.3176724,72.9553399&zoom=17" 
                     allowFullScreen
                     title="Z-ON DOOR Location"
                   ></iframe>
