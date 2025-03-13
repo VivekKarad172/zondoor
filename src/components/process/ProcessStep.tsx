@@ -29,7 +29,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
       <AnimateInView animation={isEven ? "slide-in-left" : "slide-in-right"} className="w-full h-full min-h-[300px] relative rounded-xl overflow-hidden">
         <img src={imageUrl} alt={step.title} style={{
         objectFit: objectFitSetting
-      }} className="w-full h-full object-cover" />
+      }} className="w-full h-full object-scale-down" />
       </AnimateInView>
 
       <AnimateInView animation={isEven ? "slide-in-right" : "slide-in-left"} className={`flex flex-col ${isEven ? 'lg:items-end lg:text-right' : ''}`}>
