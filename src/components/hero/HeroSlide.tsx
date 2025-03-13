@@ -6,9 +6,16 @@ interface HeroSlideProps {
   alt: string;
   isActive: boolean;
   index: number;
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
 }
 
-const HeroSlide = ({ src, alt, isActive, index }: HeroSlideProps) => {
+const HeroSlide = ({ 
+  src, 
+  alt, 
+  isActive, 
+  index,
+  objectFit = "cover" 
+}: HeroSlideProps) => {
   return (
     <div 
       className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
@@ -18,7 +25,7 @@ const HeroSlide = ({ src, alt, isActive, index }: HeroSlideProps) => {
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-${objectFit}`}
         loading={index === 0 ? "eager" : "lazy"}
       />
       {/* Overlay gradient - reduced opacity for better visibility */}

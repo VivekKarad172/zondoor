@@ -12,6 +12,7 @@ interface ImageSelectorProps {
   aspectRatio?: number;
   placeholder?: string;
   maxHeight?: number;
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 }
 
 const ImageSelector: React.FC<ImageSelectorProps> = ({
@@ -21,6 +22,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   aspectRatio = 16 / 9,
   placeholder = "Select an image",
   maxHeight,
+  objectFit = "contain",
 }) => {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
 
@@ -55,7 +57,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
             <img
               src={value}
               alt="Selected image"
-              className="w-full h-auto object-contain" 
+              className={`w-full h-auto object-${objectFit}`}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "/placeholder.svg";
               }}

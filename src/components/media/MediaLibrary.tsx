@@ -58,7 +58,6 @@ const MediaLibrary: React.FC<MediaLibraryProps> = ({
     }
   };
 
-  // Filter items based on search and selected folder
   const filteredItems = mediaItems.filter(item => {
     const matchesSearch = searchQuery === "" || 
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 

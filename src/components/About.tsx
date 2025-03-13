@@ -6,6 +6,7 @@ import ImageSelector from "@/components/media/ImageSelector";
 
 const About = () => {
   const [manufacturingImage, setManufacturingImage] = useState("/lovable-uploads/a6de2626-1574-4275-9f61-5dd55d3eaf67.jpg");
+  const [imageObjectFit, setImageObjectFit] = useState<"contain" | "cover" | "fill" | "none" | "scale-down">("contain");
   
   const features = [{
     letter: "Z",
@@ -20,6 +21,10 @@ const About = () => {
     title: "Notable Quality",
     description: "Premium materials selected for both durability and aesthetic appeal."
   }];
+
+  const handleObjectFitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setImageObjectFit(e.target.value as "contain" | "cover" | "fill" | "none" | "scale-down");
+  };
 
   return (
     <section id="about" className="section-padding bg-gray-50">
@@ -85,12 +90,25 @@ const About = () => {
               </div>
               <div className="relative">
                 <div className="rounded-lg overflow-hidden bg-white shadow-xl">
+                  <div className="mb-2 p-2 bg-gray-50 border-b flex justify-end">
+                    <select 
+                      value={imageObjectFit}
+                      onChange={handleObjectFitChange}
+                      className="text-xs px-2 py-1 rounded border"
+                    >
+                      <option value="contain">Contain</option>
+                      <option value="cover">Cover</option>
+                      <option value="fill">Fill</option>
+                      <option value="scale-down">Scale Down</option>
+                    </select>
+                  </div>
                   <ImageSelector
                     value={manufacturingImage}
                     onChange={setManufacturingImage}
                     aspectRatio={4/3}
                     className="w-full h-auto"
                     maxHeight={400}
+                    objectFit={imageObjectFit}
                   />
                 </div>
                 <div className="absolute -bottom-6 -right-6 glass-effect rounded-lg p-4 shadow-lg">
