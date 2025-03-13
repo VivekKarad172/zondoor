@@ -40,7 +40,6 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
           value={imageUrl}
           onChange={(newImage) => onImageChange(step.number, newImage)}
           objectFit={objectFitSetting}
-          onObjectFitChange={(value) => onObjectFitChange(step.number, value)}
           aspectRatio={16/9}
           className="w-full h-full"
           readOnly={!isEditing}

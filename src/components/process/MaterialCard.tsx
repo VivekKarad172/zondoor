@@ -32,13 +32,12 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
   const imageUrl = materialLocalImage || material.image;
   
   return (
-    <AnimateInView animation="fade-in-up" className="flex flex-col">
+    <AnimateInView animation="slide-in-up" className="flex flex-col">
       <div className="relative h-52 mb-4 rounded-lg overflow-hidden">
         <ImageSelector
           value={imageUrl}
           onChange={(newImage) => onMaterialImageChange(material.id, newImage)}
           objectFit={materialObjectFitSetting}
-          onObjectFitChange={(value) => onMaterialObjectFitChange(material.id, value)}
           aspectRatio={16/9}
           readOnly={!isEditing}
         />
