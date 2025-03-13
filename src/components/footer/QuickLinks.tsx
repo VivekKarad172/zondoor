@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const QuickLinks = () => {
   return (
@@ -7,19 +8,21 @@ const QuickLinks = () => {
       <h3 className="text-lg font-bold mb-6">Quick Links</h3>
       <ul className="space-y-3">
         {[
-          { name: "Home", href: "#home" },
-          { name: "About", href: "#about" },
-          { name: "Products", href: "#products" },
-          { name: "Process", href: "#process" },
-          { name: "Contact", href: "#contact" },
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+          { name: "Products", href: "/products" },
+          { name: "Process", href: "/process" },
+          { name: "Gallery", href: "/gallery" },
+          { name: "Blog", href: "/blog" },
+          { name: "Contact", href: "/contact" },
         ].map((link) => (
           <li key={link.name}>
-            <a
-              href={link.href}
+            <Link
+              to={link.href}
               className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

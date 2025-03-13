@@ -2,10 +2,11 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Index";
-import Products from "./components/Products";
-import Contact from "./pages/LocationPage";
-import About from "./components/About";
-import Gallery from "./components/Gallery";
+import Products from "./pages/ProductsPage";
+import ProcessPage from "./pages/ProcessPage";
+import About from "./pages/AboutPage";
+import Gallery from "./pages/GalleryPage";
+import Contact from "./pages/ContactPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import BlogPage from "./pages/BlogPage";
 import BlogManagementPage from "./pages/BlogManagementPage";
@@ -27,10 +28,11 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/process" element={<ProcessPage />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/blog/:id" element={<BlogPostPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog-management" element={<BlogManagementPage />} />
@@ -40,7 +42,7 @@ function App() {
         </div>
         <WhatsAppButton 
           phoneNumber="+919876543210" 
-          message="Hello, I'd like to enquire about your products."
+          message="Hello, I'd like to enquire about your doors."
         />
         <Toaster position="top-right" />
       </MediaProvider>

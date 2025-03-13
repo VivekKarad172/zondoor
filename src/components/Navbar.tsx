@@ -1,14 +1,17 @@
+
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { AnimateInView } from "./ui/motion";
 import { Link, useLocation } from "react-router-dom";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  
   const toggleMenu = () => setIsOpen(!isOpen);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -20,26 +23,19 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const navLinks = [{
-    name: "Home",
-    href: isHomePage ? "#home" : "/"
-  }, {
-    name: "About",
-    href: isHomePage ? "#about" : "/#about"
-  }, {
-    name: "Products",
-    href: isHomePage ? "#products" : "/#products"
-  }, {
-    name: "Process",
-    href: isHomePage ? "#process" : "/#process"
-  }, {
-    name: "Blog",
-    href: "/blog"
-  }, {
-    name: "Contact",
-    href: isHomePage ? "#contact" : "/#contact"
-  }];
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : "bg-black/20 backdrop-blur-sm py-4")}>
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Products", href: "/products" },
+    { name: "Process", href: "/process" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" }
+  ];
+
+  return (
+    <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : "bg-black/20 backdrop-blur-sm py-4")}>
       <div className="wesmarc-container">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
@@ -48,17 +44,32 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link, index) => <AnimateInView key={link.name} animation="fade-in" delay={index * 100 + 300}>
+            {navLinks.map((link, index) => (
+              <AnimateInView key={link.name} animation="fade-in" delay={index * 100 + 300}>
                 <li>
-                  {link.href.startsWith("/") ? <Link to={link.href} className={cn("text-sm font-medium transition-colors px-4 py-2", scrolled ? "text-gray-800 hover:text-primary" : "text-white hover:text-white/80")}>
-                      {link.name.toUpperCase()}
-                    </Link> : <a href={link.href} className={cn("text-sm font-medium transition-colors px-4 py-2", scrolled ? "text-gray-800 hover:text-primary" : "text-white hover:text-white/80")}>
-                      {link.name.toUpperCase()}
-                    </a>}
+                  <Link 
+                    to={link.href} 
+                    className={cn(
+                      "text-sm font-medium transition-colors px-4 py-2",
+                      scrolled ? "text-gray-800 hover:text-primary" : "text-white hover:text-white/80",
+                      location.pathname === link.href ? "font-bold" : ""
+                    )}
+                  >
+                    {link.name.toUpperCase()}
+                  </Link>
                 </li>
-              </AnimateInView>)}
+              </AnimateInView>
+            ))}
             <li>
-              <a href="#contact" className={cn("px-4 py-2 rounded text-sm ml-2 transition-colors", scrolled ? "bg-primary text-white hover:bg-primary/90" : "bg-white text-gray-800 hover:bg-white/90")}>
+              <a 
+                href="https://wa.me/919876543210?text=Hello,%20I'd%20like%20to%20enquire%20about%20your%20doors."
+                target="_blank"
+                rel="noopener noreferrer" 
+                className={cn(
+                  "px-4 py-2 rounded text-sm ml-2 transition-colors", 
+                  scrolled ? "bg-primary text-white hover:bg-primary/90" : "bg-white text-gray-800 hover:bg-white/90"
+                )}
+              >
                 GET A QUOTE
               </a>
             </li>
@@ -80,15 +91,25 @@ const Navbar = () => {
           <div className="flex flex-col items-center justify-center h-full">
             <img src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" alt="Z-ON DOOR Logo" className="h-16 mb-8" />
             <ul className="flex flex-col items-center space-y-6">
-              {navLinks.map(link => <li key={link.name}>
-                  {link.href.startsWith("/") ? <Link to={link.href} className="text-lg font-medium text-secondary" onClick={toggleMenu}>
-                      {link.name}
-                    </Link> : <a href={link.href} className="text-lg font-medium text-secondary" onClick={toggleMenu}>
-                      {link.name}
-                    </a>}
-                </li>)}
+              {navLinks.map(link => (
+                <li key={link.name}>
+                  <Link 
+                    to={link.href} 
+                    className="text-lg font-medium text-secondary" 
+                    onClick={toggleMenu}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <a href="#contact" className="bg-primary text-white px-6 py-2 rounded text-lg mt-4 hover:bg-primary/90 transition-colors" onClick={toggleMenu}>
+                <a 
+                  href="https://wa.me/919876543210?text=Hello,%20I'd%20like%20to%20enquire%20about%20your%20doors." 
+                  className="bg-primary text-white px-6 py-2 rounded text-lg mt-4 hover:bg-primary/90 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={toggleMenu}
+                >
                   GET A QUOTE
                 </a>
               </li>
@@ -96,6 +117,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Navbar;
