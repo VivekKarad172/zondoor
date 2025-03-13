@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AnimateInView } from "@/components/ui/motion";
 import ProductsSection from "@/components/product/ProductsSection";
-import ProcessVideoSection from "@/components/process/ProcessVideoSection";
 
 const Index = () => {
   useEffect(() => {
@@ -41,7 +40,6 @@ const Index = () => {
       <Hero />
       <About />
       <ProductsSection />
-      <ProcessVideoSection />
       <Process />
       <WhyChooseUs />
       <Testimonials />
