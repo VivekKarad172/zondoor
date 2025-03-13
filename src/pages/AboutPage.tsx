@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,18 +5,15 @@ import About from "@/components/About";
 import { AnimateInView } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const AboutPage = () => {
   useEffect(() => {
     // Update document title
     document.title = "About Us | Z-ON DOOR";
-    
+
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background relative">
+  return <div className="min-h-screen bg-background relative">
       <Navbar />
       <div className="pt-28 lg:pt-32">
         <About />
@@ -36,30 +32,18 @@ const AboutPage = () => {
                     deserves beautiful doors that last.
                   </p>
                   <ul className="space-y-3">
-                    {[
-                      "Quality - We never compromise on the materials we use",
-                      "Affordability - Premium products at reasonable prices",
-                      "Innovation - Continuously improving our designs and processes",
-                      "Customer Satisfaction - Your happiness is our priority",
-                      "Sustainability - Environmentally responsible manufacturing"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start">
+                    {["Quality - We never compromise on the materials we use", "Affordability - Premium products at reasonable prices", "Innovation - Continuously improving our designs and processes", "Customer Satisfaction - Your happiness is our priority", "Sustainability - Environmentally responsible manufacturing"].map((item, index) => <li key={index} className="flex items-start">
                         <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
                         <span className="text-foreground/80">{item}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
                 <div className="relative">
-                  <img 
-                    src="/lovable-uploads/a6de2626-1574-4275-9f61-5dd55d3eaf67.jpg" 
-                    alt="Our Factory" 
-                    className="rounded-lg shadow-lg object-cover w-full h-full"
-                  />
+                  <img alt="Our Factory" src="/lovable-uploads/91cea29e-0435-4504-af4b-6641a11e5180.jpg" className="rounded-lg shadow-lg w-full h-full object-contain" />
                 </div>
               </div>
             </AnimateInView>
@@ -78,27 +62,21 @@ const AboutPage = () => {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  {
-                    title: "Experienced Team",
-                    description: "Our skilled craftsmen have years of experience in door manufacturing"
-                  },
-                  {
-                    title: "Quality Materials",
-                    description: "We use only the finest PVC and WPC materials for our doors"
-                  },
-                  {
-                    title: "Customer Service",
-                    description: "Dedicated support team to address all your queries and requirements"
-                  }
-                ].map((item, index) => (
-                  <AnimateInView key={index} animation="slide-in-up" delay={index * 100}>
+                {[{
+                title: "Experienced Team",
+                description: "Our skilled craftsmen have years of experience in door manufacturing"
+              }, {
+                title: "Quality Materials",
+                description: "We use only the finest PVC and WPC materials for our doors"
+              }, {
+                title: "Customer Service",
+                description: "Dedicated support team to address all your queries and requirements"
+              }].map((item, index) => <AnimateInView key={index} animation="slide-in-up" delay={index * 100}>
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-border">
                       <h3 className="text-xl font-bold mb-3 text-secondary">{item.title}</h3>
                       <p className="text-foreground/70">{item.description}</p>
                     </div>
-                  </AnimateInView>
-                ))}
+                  </AnimateInView>)}
               </div>
               <div className="text-center mt-12">
                 <Button asChild>
@@ -110,8 +88,6 @@ const AboutPage = () => {
         </section>
       </div>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AboutPage;
