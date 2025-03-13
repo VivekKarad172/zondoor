@@ -118,9 +118,10 @@ const ContactPage = () => {
                         <div>
                           <h3 className="font-semibold text-lg">Our Location</h3>
                           <p className="text-muted-foreground">
-                            123 Industrial Area, Phase 1<br />
-                            Ahmedabad, Gujarat 380015<br />
-                            India
+                            Z-ON DOOR Manufacturing Facility<br />
+                            Plot No-4, Dhoran Pardi, NH-48<br />
+                            Kamrej, Surat - 394150<br />
+                            Gujarat, India
                           </p>
                         </div>
                       </div>
@@ -130,8 +131,7 @@ const ContactPage = () => {
                         <div>
                           <h3 className="font-semibold text-lg">Phone Number</h3>
                           <p className="text-muted-foreground">
-                            +91 98765 43210<br />
-                            +91 98765 43211
+                            +91 96017 48998
                           </p>
                         </div>
                       </div>
@@ -141,8 +141,7 @@ const ContactPage = () => {
                         <div>
                           <h3 className="font-semibold text-lg">Email Address</h3>
                           <p className="text-muted-foreground">
-                            info@zondoor.com<br />
-                            sales@zondoor.com
+                            zondoor1@gmail.com
                           </p>
                         </div>
                       </div>
@@ -164,7 +163,7 @@ const ContactPage = () => {
                     <h2 className="text-2xl font-bold mb-6">Connect With Us</h2>
                     <div className="space-y-4">
                       <a 
-                        href="https://wa.me/919876543210?text=Hello,%20I'd%20like%20to%20enquire%20about%20your%20doors."
+                        href="https://wa.me/919601748998?text=Hello,%20I'd%20like%20to%20enquire%20about%20your%20doors."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 p-3 bg-green-50 text-green-600 rounded-md hover:bg-green-100 transition-colors"
@@ -176,7 +175,7 @@ const ContactPage = () => {
                       </a>
                       
                       <a 
-                        href="tel:+919876543210"
+                        href="tel:+919601748998"
                         className="flex items-center gap-3 p-3 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors"
                       >
                         <Phone size={24} />
@@ -184,7 +183,7 @@ const ContactPage = () => {
                       </a>
                       
                       <a 
-                        href="mailto:info@zondoor.com"
+                        href="mailto:zondoor1@gmail.com"
                         className="flex items-center gap-3 p-3 bg-amber-50 text-amber-600 rounded-md hover:bg-amber-100 transition-colors"
                       >
                         <Mail size={24} />
@@ -204,7 +203,7 @@ const ContactPage = () => {
               <h2 className="text-3xl font-bold text-center mb-8">Find Us on the Map</h2>
               <div className="border-2 border-gray-200 rounded-lg overflow-hidden shadow-md h-[400px]">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.70717993925!2d72.43965536724813!3d23.02050764800764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1631865196244!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.4383240551996!2d72.95302471493925!3d21.31779198578983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0456d67074e01%3A0x74c7a2335d27c8f3!2sKamrej%2C%20Surat%2C%20Gujarat%20394150!5e0!3m2!1sen!2sin!4v1686743476075!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
