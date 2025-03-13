@@ -1,7 +1,6 @@
 
 import React from "react";
 import { AnimateInView } from "@/components/ui/motion";
-import ImageSelector from "@/components/media/ImageSelector";
 
 interface MaterialCardProps {
   material: {
@@ -34,12 +33,10 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
   return (
     <AnimateInView animation="slide-in-up" className="flex flex-col">
       <div className="relative h-52 mb-4 rounded-lg overflow-hidden">
-        <ImageSelector
-          value={imageUrl}
-          onChange={(newImage) => onMaterialImageChange(material.id, newImage)}
-          objectFit={materialObjectFitSetting}
-          aspectRatio={16/9}
-          readOnly={!isEditing}
+        <img 
+          src={imageUrl}
+          alt={material.title}
+          className="w-full h-full object-cover"
         />
       </div>
       

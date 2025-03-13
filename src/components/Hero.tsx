@@ -5,23 +5,16 @@ import SlideNavigation from "./hero/SlideNavigation";
 import SlideDots from "./hero/SlideDots";
 import HeroContent from "./hero/HeroContent";
 import { HeroProps } from "./hero/types";
-import EditToggleButton from "./hero/EditToggleButton";
-import HeroEditPanel from "./hero/HeroEditPanel";
 import { useHeroController } from "./hero/HeroController";
 
 const Hero = ({ doorImages, specifications }: HeroProps) => {
   const {
     currentImageIndex,
     setCurrentImageIndex,
-    isEditing,
     objectFit,
     localImages,
     goToNextSlide,
-    goToPrevSlide,
-    handleImageChange,
-    handleAltChange,
-    handleObjectFitChange,
-    toggleEditMode
+    goToPrevSlide
   } = useHeroController({ doorImages });
 
   const defaultSpecifications: string[] = [
@@ -33,9 +26,6 @@ const Hero = ({ doorImages, specifications }: HeroProps) => {
   ];
 
   const specs = specifications || defaultSpecifications;
-
-  // Disable edit mode
-  const actualIsEditing = false;
 
   return (
     <section

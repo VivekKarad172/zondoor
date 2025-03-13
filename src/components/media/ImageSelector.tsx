@@ -1,9 +1,6 @@
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import React from "react";
 import { cn } from "@/lib/utils";
-import { ImageIcon, Upload, X } from "lucide-react";
-import MediaLibrary from "./MediaLibrary";
 
 interface ImageSelectorProps {
   value: string;
@@ -26,27 +23,6 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   objectFit = "contain",
   readOnly = false
 }) => {
-  const [isLibraryOpen, setIsLibraryOpen] = useState(false);
-
-  const handleOpenLibrary = () => {
-    if (readOnly) return;
-    setIsLibraryOpen(true);
-  };
-
-  const handleCloseLibrary = () => {
-    setIsLibraryOpen(false);
-  };
-
-  const handleSelectImage = (url: string) => {
-    onChange(url);
-    setIsLibraryOpen(false);
-  };
-
-  const handleClearImage = () => {
-    if (readOnly) return;
-    onChange("");
-  };
-
   return (
     <div className={cn("space-y-3", className)}>
       <div 
@@ -57,52 +33,28 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
         style={maxHeight ? { maxHeight } : aspectRatio ? { aspectRatio } : undefined}
       >
         {value ? (
-          <>
-            <img
-              src={value}
-              alt="Selected image"
-              style={{ objectFit: objectFit }}
-              className="w-full h-full"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/placeholder.svg";
-              }}
-            />
-            {!readOnly && (
-              <Button
-                variant="secondary"
-                size="sm"
-                className="absolute top-2 right-2 h-8 w-8 p-0 bg-background/80 backdrop-blur-sm"
-                onClick={handleClearImage}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-          </>
+          <img
+            src={value}
+            alt="Selected image"
+            style={{ objectFit }}
+            className="w-full h-full"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "/placeholder.svg";
+            }}
+          />
         ) : (
           <div className="text-center p-4">
-            <ImageIcon className="h-10 w-10 mx-auto text-muted-foreground" />
+            <div className="h-10 w-10 mx-auto text-muted-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
             <p className="text-sm text-muted-foreground mt-2">{placeholder}</p>
           </div>
         )}
       </div>
-      
-      {!readOnly && (
-        <Button 
-          variant="outline" 
-          onClick={handleOpenLibrary}
-          className="w-full"
-        >
-          <Upload className="mr-2 h-4 w-4" />
-          {value ? "Change Image" : "Select Image"}
-        </Button>
-      )}
-      
-      <MediaLibrary
-        isOpen={isLibraryOpen}
-        onClose={handleCloseLibrary}
-        onSelect={handleSelectImage}
-        title="Select Image"
-      />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 
 import React from "react";
 import { AnimateInView } from "@/components/ui/motion";
-import ImageSelector from "@/components/media/ImageSelector";
 
 interface ProcessStepProps {
   step: {
@@ -36,13 +35,11 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
         animation={isEven ? "slide-in-left" : "slide-in-right"}
         className="w-full h-full min-h-[300px] relative rounded-xl overflow-hidden"
       >
-        <ImageSelector
-          value={imageUrl}
-          onChange={(newImage) => onImageChange(step.number, newImage)}
-          objectFit={objectFitSetting}
-          aspectRatio={16/9}
-          className="w-full h-full"
-          readOnly={!isEditing}
+        <img
+          src={imageUrl}
+          alt={step.title}
+          className="w-full h-full object-cover"
+          style={{ objectFit }}
         />
       </AnimateInView>
 
