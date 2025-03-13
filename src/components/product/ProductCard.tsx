@@ -15,6 +15,7 @@ interface ProductCardProps {
   onImageClick?: (image: string, name: string) => void;
   onImageChange?: (id: number, newImage: string) => void;
   isEditable?: boolean;
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 }
 
 const ProductCard = ({ 
@@ -27,13 +28,15 @@ const ProductCard = ({
   type, 
   onImageClick, 
   onImageChange,
-  isEditable = false
+  isEditable = false,
+  objectFit = "contain"
 }: ProductCardProps) => {
   const isColorCard = type === "color";
   const isDesignCard = type === "design";
   const isCncCard = type === "cnc";
   const [localImage, setLocalImage] = useState(image || "");
   const [imageError, setImageError] = useState(false);
+  const [localObjectFit, setLocalObjectFit] = useState<"contain" | "cover" | "fill" | "none" | "scale-down">(objectFit);
   
   const defaultDescription = 
     isDesignCard ? "Premium embossed pattern with precise detailing" :
@@ -51,6 +54,10 @@ const ProductCard = ({
     if (onImageChange) {
       onImageChange(id, newImage);
     }
+  };
+
+  const handleObjectFitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLocalObjectFit(e.target.value as "contain" | "cover" | "fill" | "none" | "scale-down");
   };
 
   // This component is now only used for design and CNC cards
@@ -71,12 +78,27 @@ const ProductCard = ({
       )}>
         <div className="relative overflow-hidden">
           {isEditable ? (
-            <ImageSelector
-              value={localImage}
-              onChange={handleImageChange}
-              aspectRatio={16/9}
-              placeholder={`Select image for ${isDesignCard ? 'Design' : 'CNC Pattern'} ${name}`}
-            />
+            <>
+              <div className="mb-2 p-2 bg-gray-50 border-b flex justify-end">
+                <select 
+                  value={localObjectFit}
+                  onChange={handleObjectFitChange}
+                  className="text-xs px-2 py-1 rounded border"
+                >
+                  <option value="contain">Contain</option>
+                  <option value="cover">Cover</option>
+                  <option value="fill">Fill</option>
+                  <option value="scale-down">Scale Down</option>
+                </select>
+              </div>
+              <ImageSelector
+                value={localImage}
+                onChange={handleImageChange}
+                aspectRatio={16/9}
+                placeholder={`Select image for ${isDesignCard ? 'Design' : 'CNC Pattern'} ${name}`}
+                objectFit={localObjectFit}
+              />
+            </>
           ) : (
             image && (
               <div className="relative h-full flex justify-center group cursor-pointer" 
@@ -85,7 +107,7 @@ const ProductCard = ({
                   src={imageError ? "/placeholder.svg" : image}
                   alt={name}
                   className={cn(
-                    "w-auto max-w-full object-scale-down transition-transform duration-500 group-hover:scale-105",
+                    `w-auto max-w-full object-${objectFit} transition-transform duration-500 group-hover:scale-105`,
                     "min-h-[350px] max-h-[350px]"
                   )}
                   loading="lazy"

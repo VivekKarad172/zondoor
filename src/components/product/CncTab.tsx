@@ -9,9 +9,11 @@ interface CncTabProps {
     name: string;
     image: string;
   }[];
+  isEditable?: boolean;
+  onImageChange?: (id: number, newImage: string) => void;
 }
 
-const CncTab = ({ cncPatterns }: CncTabProps) => {
+const CncTab = ({ cncPatterns, isEditable = false, onImageChange }: CncTabProps) => {
   const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
 
   const openImageModal = (imageSrc: string, imageAlt: string) => {
@@ -25,6 +27,12 @@ const CncTab = ({ cncPatterns }: CncTabProps) => {
     setSelectedImage(null);
   };
 
+  const handleImageChange = (id: number, newImage: string) => {
+    if (onImageChange) {
+      onImageChange(id, newImage);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {cncPatterns.map((pattern, index) => (
@@ -36,6 +44,8 @@ const CncTab = ({ cncPatterns }: CncTabProps) => {
           index={index}
           type="cnc"
           onImageClick={(image, name) => openImageModal(image, name)}
+          isEditable={isEditable}
+          onImageChange={handleImageChange}
         />
       ))}
 

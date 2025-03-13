@@ -9,9 +9,11 @@ interface DesignsTabProps {
     name: string;
     image: string;
   }[];
+  isEditable?: boolean;
+  onImageChange?: (id: number, newImage: string) => void;
 }
 
-const DesignsTab = ({ designs }: DesignsTabProps) => {
+const DesignsTab = ({ designs, isEditable = false, onImageChange }: DesignsTabProps) => {
   const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
 
   const openImageModal = (imageSrc: string, imageAlt: string) => {
@@ -25,6 +27,12 @@ const DesignsTab = ({ designs }: DesignsTabProps) => {
     setSelectedImage(null);
   };
 
+  const handleImageChange = (id: number, newImage: string) => {
+    if (onImageChange) {
+      onImageChange(id, newImage);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {designs.map((design, index) => (
@@ -36,6 +44,8 @@ const DesignsTab = ({ designs }: DesignsTabProps) => {
           index={index}
           type="design"
           onImageClick={(image, name) => openImageModal(image, name)}
+          isEditable={isEditable}
+          onImageChange={handleImageChange}
         />
       ))}
 

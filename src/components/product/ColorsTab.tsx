@@ -19,6 +19,7 @@ interface ColorsTabProps {
 const ColorsTab = ({ colors, isEditable = false, onImageChange }: ColorsTabProps) => {
   const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
   const [localImages, setLocalImages] = useState<Record<number, string>>({});
+  const [objectFitSettings, setObjectFitSettings] = useState<Record<number, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
 
   const openImageModal = (imageSrc: string, imageAlt: string) => {
     setSelectedImage({
@@ -42,6 +43,13 @@ const ColorsTab = ({ colors, isEditable = false, onImageChange }: ColorsTabProps
     }
   };
 
+  const handleObjectFitChange = (id: number, value: "contain" | "cover" | "fill" | "none" | "scale-down") => {
+    setObjectFitSettings(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
   return (
     <div className="space-y-12">
       <div className="space-y-6">
@@ -57,11 +65,24 @@ const ColorsTab = ({ colors, isEditable = false, onImageChange }: ColorsTabProps
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
                 {isEditable ? (
                   <div className="h-60">
+                    <div className="mb-2 p-2 bg-gray-50 border-b flex justify-end">
+                      <select 
+                        value={objectFitSettings[color.id] || "contain"}
+                        onChange={(e) => handleObjectFitChange(color.id, e.target.value as "contain" | "cover" | "fill" | "none" | "scale-down")}
+                        className="text-xs px-2 py-1 rounded border"
+                      >
+                        <option value="contain">Contain</option>
+                        <option value="cover">Cover</option>
+                        <option value="fill">Fill</option>
+                        <option value="scale-down">Scale Down</option>
+                      </select>
+                    </div>
                     <ImageSelector
                       value={localImages[color.id] || color.image || ""}
                       onChange={(url) => handleImageChange(color.id, url)}
                       aspectRatio={16/9}
                       placeholder={`Select image for ${color.name}`}
+                      objectFit={objectFitSettings[color.id] || "contain"}
                     />
                   </div>
                 ) : (
@@ -73,7 +94,7 @@ const ColorsTab = ({ colors, isEditable = false, onImageChange }: ColorsTabProps
                       <img 
                         src={color.image} 
                         alt={`${color.name}`}
-                        className="w-full h-full object-scale-down group-hover:scale-105 transition-transform duration-500"
+                        className={`w-full h-full object-${objectFitSettings[color.id] || "scale-down"} group-hover:scale-105 transition-transform duration-500`}
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm p-3">
                         <p className="text-white font-medium text-sm">
