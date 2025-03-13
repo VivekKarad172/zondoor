@@ -89,7 +89,8 @@ const About = () => {
                     value={manufacturingImage}
                     onChange={setManufacturingImage}
                     aspectRatio={4/3}
-                    className="w-full"
+                    className="w-full h-auto"
+                    maxHeight={400}
                   />
                 </div>
                 <div className="absolute -bottom-6 -right-6 glass-effect rounded-lg p-4 shadow-lg">
