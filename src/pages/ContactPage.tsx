@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { AnimateInView } from "@/components/ui/motion";
-import { ContactForm, ContactInfo, SocialConnect, LocationMap } from "@/components/contact";
+import { ContactForm, ContactInfo, SocialConnect, LocationMap, FAQ } from "@/components/contact";
 
 const ContactPage = () => {
   useEffect(() => {
@@ -51,6 +51,15 @@ const ContactPage = () => {
             <AnimateInView animation="fade-in">
               <h2 className="text-3xl font-bold text-center mb-8">Find Us on the Map</h2>
               <LocationMap />
+            </AnimateInView>
+          </div>
+        </section>
+        
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <AnimateInView animation="fade-in">
+              <h2 className="text-3xl font-bold text-center mb-8">Common Questions</h2>
+              <FAQ />
             </AnimateInView>
           </div>
         </section>
