@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
@@ -11,6 +10,11 @@ const Process = () => {
   const [objectFitSettings, setObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
   const [materialLocalImages, setMaterialLocalImages] = useState<Record<string, string>>({});
   const [materialObjectFitSettings, setMaterialObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
+  const [materialIconImages, setMaterialIconImages] = useState<Record<string, string>>({
+    pvc: "",
+    film: "",
+    structure: ""
+  });
 
   const steps = [
     {
@@ -68,35 +72,18 @@ const Process = () => {
       id: "pvc",
       title: "PVC Foam Board",
       description: "5mm thickness for door panels, 18mm width and 20mm thickness for framing",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      ),
       image: "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png"
     },
     {
       id: "film",
       title: "Decorative Film",
       description: "Premium 0.15mm PVC film available in 10 distinctive colors and finishes",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 7H20V17H4V7Z" stroke="currentColor" strokeWidth="2"/>
-          <path d="M7 7V17" stroke="currentColor" strokeWidth="2"/>
-          <path d="M17 7V17" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      ),
       image: "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png"
     },
     {
       id: "structure",
       title: "Internal Structure",
       description: "20x20mm MS pipe framework with PVC rigid sheet fillers for strength and stability",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 3V21M21 3V21M3 12H21" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      ),
       image: "/lovable-uploads/8416ee93-b407-4d4d-a95a-e088714269cf.png"
     }
   ];
@@ -130,6 +117,13 @@ const Process = () => {
     setMaterialObjectFitSettings(prev => ({
       ...prev,
       [materialId]: value
+    }));
+  };
+
+  const handleMaterialIconChange = (materialId: string, newImage: string) => {
+    setMaterialIconImages(prev => ({
+      ...prev,
+      [materialId]: newImage
     }));
   };
 
@@ -281,17 +275,39 @@ const Process = () => {
                           objectFit={materialObjectFitSettings[material.id] || "cover"}
                           maxHeight={100}
                         />
+                        
+                        <div className="mt-4">
+                          <label className="block text-sm font-medium mb-2">Icon Image (Optional)</label>
+                          <ImageSelector
+                            value={materialIconImages[material.id]}
+                            onChange={(url) => handleMaterialIconChange(material.id, url)}
+                            aspectRatio={1}
+                            placeholder={`Select icon for ${material.title}`}
+                            objectFit="cover"
+                            maxHeight={80}
+                          />
+                        </div>
                       </div>
                     ) : (
                       <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                        {materialLocalImages[material.id] ? (
+                        {materialIconImages[material.id] ? (
+                          <img 
+                            src={materialIconImages[material.id]} 
+                            alt={`${material.title} icon`}
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        ) : materialLocalImages[material.id] ? (
                           <img 
                             src={materialLocalImages[material.id]} 
                             alt={material.title}
                             className={`w-full h-full object-${materialObjectFitSettings[material.id] || "cover"} rounded-full`}
                           />
                         ) : (
-                          material.icon
+                          <img 
+                            src={material.image} 
+                            alt={material.title}
+                            className="w-8 h-8 object-cover rounded-full"
+                          />
                         )}
                       </div>
                     )}
