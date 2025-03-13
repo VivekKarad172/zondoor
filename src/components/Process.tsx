@@ -9,6 +9,8 @@ const Process = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [localImages, setLocalImages] = useState<Record<string, string>>({});
   const [objectFitSettings, setObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
+  const [materialLocalImages, setMaterialLocalImages] = useState<Record<string, string>>({});
+  const [materialObjectFitSettings, setMaterialObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
 
   const steps = [
     {
@@ -61,6 +63,44 @@ const Process = () => {
     },
   ];
 
+  const materials = [
+    {
+      id: "pvc",
+      title: "PVC Foam Board",
+      description: "5mm thickness for door panels, 18mm width and 20mm thickness for framing",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      ),
+      image: "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png"
+    },
+    {
+      id: "film",
+      title: "Decorative Film",
+      description: "Premium 0.15mm PVC film available in 10 distinctive colors and finishes",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 7H20V17H4V7Z" stroke="currentColor" strokeWidth="2"/>
+          <path d="M7 7V17" stroke="currentColor" strokeWidth="2"/>
+          <path d="M17 7V17" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      ),
+      image: "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png"
+    },
+    {
+      id: "structure",
+      title: "Internal Structure",
+      description: "20x20mm MS pipe framework with PVC rigid sheet fillers for strength and stability",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3V21M21 3V21M3 12H21" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      ),
+      image: "/lovable-uploads/8416ee93-b407-4d4d-a95a-e088714269cf.png"
+    }
+  ];
+
   const toggleEditMode = () => {
     setIsEditing(!isEditing);
   };
@@ -76,6 +116,20 @@ const Process = () => {
     setObjectFitSettings(prev => ({
       ...prev,
       [stepNumber]: value
+    }));
+  };
+
+  const handleMaterialImageChange = (materialId: string, newImage: string) => {
+    setMaterialLocalImages(prev => ({
+      ...prev,
+      [materialId]: newImage
+    }));
+  };
+
+  const handleMaterialObjectFitChange = (materialId: string, value: "contain" | "cover" | "fill" | "none" | "scale-down") => {
+    setMaterialObjectFitSettings(prev => ({
+      ...prev,
+      [materialId]: value
     }));
   };
 
@@ -198,46 +252,53 @@ const Process = () => {
                 </h3>
               </div>
               
-              {[
-                {
-                  title: "PVC Foam Board",
-                  description: "5mm thickness for door panels, 18mm width and 20mm thickness for framing",
-                  icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  )
-                },
-                {
-                  title: "Decorative Film",
-                  description: "Premium 0.15mm PVC film available in 10 distinctive colors and finishes",
-                  icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M4 7H20V17H4V7Z" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M7 7V17" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M17 7V17" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  )
-                },
-                {
-                  title: "Internal Structure",
-                  description: "20x20mm MS pipe framework with PVC rigid sheet fillers for strength and stability",
-                  icon: (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3 3V21M21 3V21M3 12H21" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                  )
-                }
-              ].map((material, index) => (
+              {materials.map((material, index) => (
                 <AnimateInView
-                  key={index}
+                  key={material.id}
                   animation="slide-in-up"
                   delay={index * 200}
                 >
                   <div className="bg-background rounded-xl p-6 border border-border/50 h-full hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                      {material.icon}
-                    </div>
+                    {isEditing ? (
+                      <div className="space-y-4">
+                        <div className="mb-2 p-2 bg-gray-50 border rounded-md flex justify-end">
+                          <select 
+                            value={materialObjectFitSettings[material.id] || "cover"}
+                            onChange={(e) => handleMaterialObjectFitChange(material.id, e.target.value as any)}
+                            className="text-xs px-2 py-1 rounded border"
+                          >
+                            <option value="contain">Contain</option>
+                            <option value="cover">Cover</option>
+                            <option value="fill">Fill</option>
+                            <option value="scale-down">Scale Down</option>
+                          </select>
+                        </div>
+                        <ImageSelector
+                          value={materialLocalImages[material.id] || material.image}
+                          onChange={(url) => handleMaterialImageChange(material.id, url)}
+                          aspectRatio={1}
+                          placeholder={`Select image for ${material.title}`}
+                          objectFit={materialObjectFitSettings[material.id] || "cover"}
+                          maxHeight={100}
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        {materialLocalImages[material.id] ? (
+                          <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 overflow-hidden mb-4">
+                            <img 
+                              src={materialLocalImages[material.id]} 
+                              alt={material.title}
+                              className={`w-full h-full object-${materialObjectFitSettings[material.id] || "cover"}`}
+                            />
+                          </div>
+                        ) : (
+                          <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                            {material.icon}
+                          </div>
+                        )}
+                      </>
+                    )}
                     <h4 className="text-lg font-bold mb-2">{material.title}</h4>
                     <p className="text-foreground/70 text-sm">
                       {material.description}
