@@ -16,10 +16,12 @@ import { Toaster } from "sonner";
 import { AnimatePresence } from "framer-motion";
 import { useAuth } from "./contexts/AuthContext";
 import { MediaProvider } from "./contexts/media";
+import { useIsMobile } from "./hooks/use-mobile";
 
 function App() {
   const location = useLocation();
   const { user } = useAuth();
+  const isMobile = useIsMobile();
 
   return (
     <div className="App">
@@ -42,7 +44,9 @@ function App() {
         </div>
         <WhatsAppButton 
           phoneNumber="+919876543210" 
-          message="Hello, I'd like to enquire about your doors."
+          message={isMobile 
+            ? "Hello, I'd like to enquire about your doors." 
+            : "Hello, I'm interested in Z-ON DOOR products and would like more information about your PVC embossed doors."}
         />
         <Toaster position="top-right" />
       </MediaProvider>

@@ -3,7 +3,6 @@ import React from "react";
 import { Check } from "lucide-react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
-import ImageSelector from "@/components/media/ImageSelector";
 
 interface HeroContentProps {
   specifications: string[];
@@ -20,26 +19,26 @@ const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }
       </AnimateInView>
 
       <AnimateInView animation="slide-in-up" delay={400}>
-        <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4 text-white">
+        <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4 text-white drop-shadow-md">
           Premium PVC <span className="text-primary-foreground">Doors</span> <br />For Modern Interiors
         </h1>
       </AnimateInView>
 
       <AnimateInView animation="slide-in-up" delay={600}>
-        <p className="text-white/90 text-base mb-6 max-w-md">
+        <p className="text-white text-base mb-6 max-w-md drop-shadow-md">
           At Z-ON DOOR, we specialize in manufacturing premium PVC embossed 
           doors using the latest technology and highest quality materials.
         </p>
       </AnimateInView>
 
       <AnimateInView animation="slide-in-up" delay={700}>
-        <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/20 mb-6 max-w-md">
+        <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4 border border-white/20 mb-6 max-w-md">
           <h3 className="text-lg font-semibold mb-2 text-white">Superior Materials</h3>
           <ul className="space-y-2">
             {specifications.map((spec, index) => (
               <li key={index} className="flex items-start">
                 <Check className="h-4 w-4 text-primary-foreground mr-2 mt-1 flex-shrink-0" />
-                <span className="text-white/90 text-sm">{spec}</span>
+                <span className="text-white text-sm">{spec}</span>
               </li>
             ))}
           </ul>
@@ -63,7 +62,7 @@ const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }
             href={catalogPdfUrl}
             download
             className={cn(
-              "bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20",
+              "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30",
               "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
               "transition-all duration-300 transform hover:translate-y-[-2px]",
               "shadow-sm"

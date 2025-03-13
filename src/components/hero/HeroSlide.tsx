@@ -28,8 +28,8 @@ const HeroSlide = ({
         className={`w-full h-full object-${objectFit}`}
         loading={index === 0 ? "eager" : "lazy"}
       />
-      {/* Overlay gradient - reduced opacity for better visibility */}
-      <div className="absolute inset-0 bg-black/40 bg-gradient-to-r from-black/60 to-transparent"></div>
+      {/* Enhanced overlay gradient for better text visibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -90,6 +91,16 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Improve image loading */
+  img {
+    @apply transition-opacity duration-300;
+    opacity: 0;
+  }
+  
+  img.loaded, img[src] {
+    opacity: 1;
+  }
 }
 
 @layer utilities {
@@ -116,8 +127,27 @@
   .section-subtitle {
     @apply text-lg text-foreground/70 mb-10 max-w-3xl mx-auto;
   }
+  
+  /* SEO-friendly classes */
+  .pvc-doors {
+    @apply text-primary;
+  }
+  
+  .affordable-doors {
+    @apply font-semibold;
+  }
+  
+  .best-doors-india {
+    @apply text-lg;
+  }
+  
+  /* Add sticky navigation for mobile */
+  .sticky-nav {
+    @apply sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm;
+  }
 }
 
+/* Improved scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -140,4 +170,14 @@
   padding: 0;
   width: 100%;
   max-width: 100%;
+}
+
+/* Optimize animation performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
