@@ -1,10 +1,15 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimateInView } from "./ui/motion";
-import { Check, Layers, Stamp, LayoutGrid, Scissors, PackageCheck } from "lucide-react";
+import { Check, Layers, Stamp, LayoutGrid, Scissors, PackageCheck, Edit, Save } from "lucide-react";
+import ImageSelector from "@/components/media/ImageSelector";
 
 const Process = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [localImages, setLocalImages] = useState<Record<string, string>>({});
+  const [objectFitSettings, setObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
+
   const steps = [
     {
       number: "01",
@@ -56,23 +61,60 @@ const Process = () => {
     },
   ];
 
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleImageChange = (stepNumber: string, newImage: string) => {
+    setLocalImages(prev => ({
+      ...prev,
+      [stepNumber]: newImage
+    }));
+  };
+
+  const handleObjectFitChange = (stepNumber: string, value: "contain" | "cover" | "fill" | "none" | "scale-down") => {
+    setObjectFitSettings(prev => ({
+      ...prev,
+      [stepNumber]: value
+    }));
+  };
+
   return (
     <section id="process" className="section-padding bg-background">
       <div className="container px-4 md:px-8 mx-auto">
-        <AnimateInView animation="fade-in">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-sm font-semibold uppercase tracking-wider text-foreground/60">
-              Manufacturing Process
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mt-2 mb-6">
-              How We Make <span className="text-gradient">Perfect Doors</span>
-            </h2>
-            <p className="text-foreground/80">
-              Our meticulous manufacturing process ensures every door meets our stringent
-              quality standards while delivering exceptional design and durability.
-            </p>
-          </div>
-        </AnimateInView>
+        <div className="flex justify-between items-center mb-8">
+          <AnimateInView animation="fade-in">
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-sm font-semibold uppercase tracking-wider text-foreground/60">
+                Manufacturing Process
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mt-2 mb-6">
+                How We Make <span className="text-gradient">Perfect Doors</span>
+              </h2>
+              <p className="text-foreground/80">
+                Our meticulous manufacturing process ensures every door meets our stringent
+                quality standards while delivering exceptional design and durability.
+              </p>
+            </div>
+          </AnimateInView>
+          
+          <button 
+            onClick={toggleEditMode}
+            className="flex items-center gap-2 px-4 py-2 bg-secondary/10 rounded-md text-secondary hover:bg-secondary/20 transition-colors"
+          >
+            {isEditing ? (
+              <>
+                <Save className="w-4 h-4" />
+                <span>Done Editing</span>
+              </>
+            ) : (
+              <>
+                <Edit className="w-4 h-4" />
+                <span>Edit Images</span>
+              </>
+            )}
+          </button>
+        </div>
 
         <div className="space-y-20 md:space-y-24">
           {steps.map((step, index) => (
@@ -102,18 +144,45 @@ const Process = () => {
                   </div>
                 </div>
                 <div className={index % 2 === 1 ? "md:col-start-1" : ""}>
-                  <div className="relative group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 transform -rotate-3 rounded-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:rotate-0"></div>
-                    <img
-                      src={step.image}
-                      alt={`Step ${step.number}: ${step.title}`}
-                      className="relative rounded-lg w-full object-cover shadow-lg border border-border/50 aspect-video md:aspect-[4/3] transition-all duration-300 group-hover:scale-[1.02]"
-                      loading="lazy"
-                    />
-                    <div className="absolute -bottom-4 -right-4 bg-background p-2 px-4 rounded-full shadow-lg border border-border/50 text-sm font-medium">
-                      {step.title}
+                  {isEditing ? (
+                    <div className="relative">
+                      <div className="mb-2 p-2 bg-gray-50 border rounded-md flex justify-end">
+                        <select 
+                          value={objectFitSettings[step.number] || "cover"}
+                          onChange={(e) => handleObjectFitChange(step.number, e.target.value as any)}
+                          className="text-xs px-2 py-1 rounded border"
+                        >
+                          <option value="contain">Contain</option>
+                          <option value="cover">Cover</option>
+                          <option value="fill">Fill</option>
+                          <option value="scale-down">Scale Down</option>
+                        </select>
+                      </div>
+                      <ImageSelector
+                        value={localImages[step.number] || step.image}
+                        onChange={(url) => handleImageChange(step.number, url)}
+                        aspectRatio={4/3}
+                        placeholder={`Select image for ${step.title}`}
+                        objectFit={objectFitSettings[step.number] || "cover"}
+                      />
+                      <div className="absolute -bottom-4 -right-4 bg-background p-2 px-4 rounded-full shadow-lg border border-border/50 text-sm font-medium">
+                        {step.title}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 transform -rotate-3 rounded-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:rotate-0"></div>
+                      <img
+                        src={localImages[step.number] || step.image}
+                        alt={`Step ${step.number}: ${step.title}`}
+                        className={`relative rounded-lg w-full object-${objectFitSettings[step.number] || "cover"} shadow-lg border border-border/50 aspect-video md:aspect-[4/3] transition-all duration-300 group-hover:scale-[1.02]`}
+                        loading="lazy"
+                      />
+                      <div className="absolute -bottom-4 -right-4 bg-background p-2 px-4 rounded-full shadow-lg border border-border/50 text-sm font-medium">
+                        {step.title}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </AnimateInView>
