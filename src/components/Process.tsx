@@ -283,21 +283,17 @@ const Process = () => {
                         />
                       </div>
                     ) : (
-                      <>
+                      <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
                         {materialLocalImages[material.id] ? (
-                          <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 overflow-hidden mb-4">
-                            <img 
-                              src={materialLocalImages[material.id]} 
-                              alt={material.title}
-                              className={`w-full h-full object-${materialObjectFitSettings[material.id] || "cover"}`}
-                            />
-                          </div>
+                          <img 
+                            src={materialLocalImages[material.id]} 
+                            alt={material.title}
+                            className={`w-full h-full object-${materialObjectFitSettings[material.id] || "cover"} rounded-full`}
+                          />
                         ) : (
-                          <div className="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
-                            {material.icon}
-                          </div>
+                          material.icon
                         )}
-                      </>
+                      </div>
                     )}
                     <h4 className="text-lg font-bold mb-2">{material.title}</h4>
                     <p className="text-foreground/70 text-sm">
