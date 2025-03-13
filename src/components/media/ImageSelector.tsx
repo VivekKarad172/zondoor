@@ -13,6 +13,7 @@ interface ImageSelectorProps {
   placeholder?: string;
   maxHeight?: number;
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
+  readOnly?: boolean;
 }
 
 const ImageSelector: React.FC<ImageSelectorProps> = ({
@@ -22,11 +23,13 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   aspectRatio = 16 / 9,
   placeholder = "Select an image",
   maxHeight,
-  objectFit = "contain"
+  objectFit = "contain",
+  readOnly = false
 }) => {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
 
   const handleOpenLibrary = () => {
+    if (readOnly) return;
     setIsLibraryOpen(true);
   };
 
@@ -40,6 +43,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   };
 
   const handleClearImage = () => {
+    if (readOnly) return;
     onChange("");
   };
 
@@ -63,14 +67,16 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
                 (e.target as HTMLImageElement).src = "/placeholder.svg";
               }}
             />
-            <Button
-              variant="secondary"
-              size="sm"
-              className="absolute top-2 right-2 h-8 w-8 p-0 bg-background/80 backdrop-blur-sm"
-              onClick={handleClearImage}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+            {!readOnly && (
+              <Button
+                variant="secondary"
+                size="sm"
+                className="absolute top-2 right-2 h-8 w-8 p-0 bg-background/80 backdrop-blur-sm"
+                onClick={handleClearImage}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
           </>
         ) : (
           <div className="text-center p-4">
@@ -80,14 +86,16 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
         )}
       </div>
       
-      <Button 
-        variant="outline" 
-        onClick={handleOpenLibrary}
-        className="w-full"
-      >
-        <Upload className="mr-2 h-4 w-4" />
-        {value ? "Change Image" : "Select Image"}
-      </Button>
+      {!readOnly && (
+        <Button 
+          variant="outline" 
+          onClick={handleOpenLibrary}
+          className="w-full"
+        >
+          <Upload className="mr-2 h-4 w-4" />
+          {value ? "Change Image" : "Select Image"}
+        </Button>
+      )}
       
       <MediaLibrary
         isOpen={isLibraryOpen}

@@ -7,6 +7,7 @@ import ProcessMaterials from "./process/ProcessMaterials";
 import { processSteps, processMaterials } from "./process/processData";
 
 const Process = () => {
+  // Disabled editing mode completely
   const [isEditing, setIsEditing] = useState(false);
   const [localImages, setLocalImages] = useState<Record<string, string>>({});
   const [objectFitSettings, setObjectFitSettings] = useState<Record<string, "contain" | "cover" | "fill" | "none" | "scale-down">>({});
@@ -37,49 +38,41 @@ const Process = () => {
   
   const materials = processMaterials;
   
+  // Disable edit mode toggle
   const toggleEditMode = () => {
-    setIsEditing(!isEditing);
+    // Editing is now disabled
+    console.log("Editing is disabled");
   };
   
   const handleImageChange = (stepNumber: string, newImage: string) => {
-    setLocalImages(prev => ({
-      ...prev,
-      [stepNumber]: newImage
-    }));
+    // Disabled
+    console.log("Image editing is disabled");
   };
   
   const handleObjectFitChange = (stepNumber: string, value: "contain" | "cover" | "fill" | "none" | "scale-down") => {
-    setObjectFitSettings(prev => ({
-      ...prev,
-      [stepNumber]: value
-    }));
+    // Disabled
+    console.log("Object fit editing is disabled");
   };
   
   const handleMaterialImageChange = (materialId: string, newImage: string) => {
-    setMaterialLocalImages(prev => ({
-      ...prev,
-      [materialId]: newImage
-    }));
+    // Disabled
+    console.log("Material image editing is disabled");
   };
   
   const handleMaterialObjectFitChange = (materialId: string, value: "contain" | "cover" | "fill" | "none" | "scale-down") => {
-    setMaterialObjectFitSettings(prev => ({
-      ...prev,
-      [materialId]: value
-    }));
+    // Disabled
+    console.log("Material object fit editing is disabled");
   };
   
   const handleMaterialIconChange = (materialId: string, newImage: string) => {
-    setMaterialIconImages(prev => ({
-      ...prev,
-      [materialId]: newImage
-    }));
+    // Disabled
+    console.log("Material icon editing is disabled");
   };
   
   return (
     <section id="process" className="section-padding bg-background">
       <div className="container px-4 md:px-8 mx-auto">
-        <ProcessHeader isEditing={isEditing} onToggleEditMode={toggleEditMode} />
+        <ProcessHeader isEditing={false} onToggleEditMode={toggleEditMode} />
 
         <div className="space-y-20 md:space-y-24">
           {steps.map((step, index) => (
@@ -87,7 +80,7 @@ const Process = () => {
               key={step.number}
               step={step}
               isEven={index % 2 === 1}
-              isEditing={isEditing}
+              isEditing={false}
               localImage={localImages[step.number] || ""}
               objectFitSetting={objectFitSettings[step.number] || "cover"}
               onImageChange={handleImageChange}
@@ -98,7 +91,7 @@ const Process = () => {
 
         <ProcessMaterials
           materials={materials}
-          isEditing={isEditing}
+          isEditing={false}
           materialLocalImages={materialLocalImages}
           materialObjectFitSettings={materialObjectFitSettings}
           materialIconImages={materialIconImages}

@@ -77,7 +77,7 @@ const ProductCard = ({
         "group hover:shadow-lg"
       )}>
         <div className="relative overflow-hidden">
-          {isEditable ? (
+          {false && isEditable ? ( /* Disabled editing by setting to false */
             <>
               <div className="mb-2 p-2 bg-gray-50 border-b flex justify-end">
                 <select 
@@ -97,6 +97,7 @@ const ProductCard = ({
                 aspectRatio={16/9}
                 placeholder={`Select image for ${isDesignCard ? 'Design' : 'CNC Pattern'} ${name}`}
                 objectFit={localObjectFit}
+                readOnly={true}
               />
             </>
           ) : (

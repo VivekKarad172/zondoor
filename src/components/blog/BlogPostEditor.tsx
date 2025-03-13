@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { BlogPost } from "./BlogData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -130,6 +131,7 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
             onInputChange={handleChange}
             onCategoryChange={handleCategoryChange}
             onImageChange={handleImageChange}
+            readOnly={false} // Blog editor should still be able to change images
           />
         </div>
         
@@ -137,6 +139,7 @@ const BlogPostEditor = ({ post, onSave, onCancel, isNew = false }: BlogPostEdito
           <ImagePreview 
             imageUrl={editedPost.image} 
             onImageChange={handleImageChange}
+            readOnly={false} // Blog editor should still be able to change images
           />
         </div>
       </div>

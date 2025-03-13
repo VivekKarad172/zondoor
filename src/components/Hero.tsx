@@ -34,50 +34,32 @@ const Hero = ({ doorImages, specifications }: HeroProps) => {
 
   const specs = specifications || defaultSpecifications;
 
+  // Disable edit mode
+  const actualIsEditing = false;
+
   return (
     <section
       id="home"
       className="relative h-screen w-full flex items-center bg-gray-50 overflow-hidden"
     >
-      {/* Edit Mode Controls */}
-      <div className="absolute top-4 right-4 z-30">
-        <EditToggleButton isEditing={isEditing} toggleEditMode={toggleEditMode} />
-        
-        {isEditing && (
-          <HeroEditPanel
-            currentImageIndex={currentImageIndex}
-            localImages={localImages}
-            objectFit={objectFit}
-            handleObjectFitChange={handleObjectFitChange}
-            handleAltChange={handleAltChange}
-            handleImageChange={handleImageChange}
-            setCurrentImageIndex={setCurrentImageIndex}
-          />
-        )}
-      </div>
-
       {/* Full-screen slideshow background */}
       <div className="absolute inset-0 w-full h-full">
-        {!isEditing && (
-          <>
-            {localImages.map((image, index) => (
-              <HeroSlide
-                key={index}
-                src={image.src}
-                alt={image.alt}
-                isActive={index === currentImageIndex}
-                index={index}
-                objectFit={objectFit}
-              />
-            ))}
+        {localImages.map((image, index) => (
+          <HeroSlide
+            key={index}
+            src={image.src}
+            alt={image.alt}
+            isActive={index === currentImageIndex}
+            index={index}
+            objectFit={objectFit}
+          />
+        ))}
 
-            {/* Slideshow navigation arrows */}
-            <SlideNavigation
-              goToPrevSlide={goToPrevSlide}
-              goToNextSlide={goToNextSlide}
-            />
-          </>
-        )}
+        {/* Slideshow navigation arrows */}
+        <SlideNavigation
+          goToPrevSlide={goToPrevSlide}
+          goToNextSlide={goToNextSlide}
+        />
       </div>
 
       {/* Content overlay */}
@@ -86,13 +68,11 @@ const Hero = ({ doorImages, specifications }: HeroProps) => {
       </div>
 
       {/* Slideshow indicator dots */}
-      {!isEditing && (
-        <SlideDots
-          totalSlides={localImages.length}
-          currentIndex={currentImageIndex}
-          onDotClick={setCurrentImageIndex}
-        />
-      )}
+      <SlideDots
+        totalSlides={localImages.length}
+        currentIndex={currentImageIndex}
+        onDotClick={setCurrentImageIndex}
+      />
     </section>
   );
 };

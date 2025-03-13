@@ -54,7 +54,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
           </div>
         </div>
         <div className={isEven ? "md:col-start-1" : ""}>
-          {isEditing ? (
+          {false && isEditing ? ( /* Disabled editing by setting to false */
             <div className="relative">
               <div className="mb-2 p-2 bg-gray-50 border rounded-md flex justify-end">
                 <select 
@@ -74,6 +74,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
                 aspectRatio={4 / 3} 
                 placeholder={`Select image for ${step.title}`} 
                 objectFit={objectFitSetting} 
+                readOnly={true}
               />
               <div className="absolute -bottom-4 -right-4 bg-background p-2 px-4 rounded-full shadow-lg border border-border/50 text-sm font-medium">
                 {step.title}

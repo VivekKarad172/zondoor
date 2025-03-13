@@ -18,6 +18,7 @@ interface PostMetadataProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCategoryChange: (value: "product" | "design" | "maintenance" | "guide") => void;
   onImageChange: (url: string) => void;
+  readOnly?: boolean;
 }
 
 const PostMetadata = ({
@@ -28,9 +29,8 @@ const PostMetadata = ({
   onInputChange,
   onCategoryChange,
   onImageChange,
+  readOnly = true
 }: PostMetadataProps) => {
-  // Fix: Remove the wrapper that tries to convert the string to an event
-  // and directly pass the URL to the handler
   return (
     <div className="space-y-4">
       <div>
@@ -78,9 +78,10 @@ const PostMetadata = ({
         <label className="block text-sm font-medium mb-1">Featured Image</label>
         <ImageSelector 
           value={image}
-          onChange={onImageChange} // Directly pass the handler
+          onChange={onImageChange}
           aspectRatio={16/9}
           placeholder="Select a featured image for the post"
+          readOnly={readOnly}
         />
       </div>
     </div>

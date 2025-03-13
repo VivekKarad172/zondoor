@@ -22,6 +22,7 @@ const HeroEditPanel = ({
   handleImageChange,
   setCurrentImageIndex
 }: HeroEditPanelProps) => {
+  // Disable editing by making ImageSelector readOnly
   return (
     <>
       {/* Edit Mode Controls */}
@@ -59,7 +60,7 @@ const HeroEditPanel = ({
       <div className="absolute inset-0 z-20 flex items-center justify-center p-16 bg-black/70">
         <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl overflow-hidden">
           <div className="p-4 border-b">
-            <h3 className="font-medium">Edit Slide {currentImageIndex + 1}</h3>
+            <h3 className="font-medium">View Slide {currentImageIndex + 1}</h3>
           </div>
           <div className="p-6">
             <div className="mb-4">
@@ -69,14 +70,16 @@ const HeroEditPanel = ({
                 value={localImages[currentImageIndex].alt}
                 onChange={(e) => handleAltChange(currentImageIndex, e.target.value)}
                 className="w-full px-3 py-2 border rounded-md"
+                readOnly
               />
             </div>
             <ImageSelector
               value={localImages[currentImageIndex].src}
               onChange={(url) => handleImageChange(currentImageIndex, url)}
               aspectRatio={16/9}
-              placeholder="Select hero image"
+              placeholder="View hero image"
               objectFit={objectFit}
+              readOnly={true}
             />
           </div>
         </div>

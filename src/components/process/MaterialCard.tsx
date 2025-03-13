@@ -32,7 +32,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
   return (
     <AnimateInView animation="slide-in-up">
       <div className="bg-background rounded-xl p-6 border border-border/50 h-full hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-        {isEditing ? (
+        {false && isEditing ? ( /* Disabled editing by setting to false */
           <div className="space-y-4">
             <div className="mb-2 p-2 bg-gray-50 border rounded-md flex justify-end">
               <select 
@@ -53,6 +53,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
               placeholder={`Select image for ${material.title}`} 
               objectFit={materialObjectFitSetting} 
               maxHeight={100} 
+              readOnly={true}
             />
             
             <div className="mt-4">
@@ -64,6 +65,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({
                 placeholder={`Select icon for ${material.title}`} 
                 objectFit="cover" 
                 maxHeight={80} 
+                readOnly={true}
               />
             </div>
           </div>

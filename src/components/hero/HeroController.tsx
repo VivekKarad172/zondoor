@@ -61,16 +61,15 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
     }
   }, [isEditing, localImages]);
 
+  // This function is now just for display, not editing
   const handleImageChange = (index: number, newSrc: string) => {
-    const newImages = [...localImages];
-    newImages[index] = { ...newImages[index], src: newSrc };
-    setLocalImages(newImages);
+    // Disabled editing functionality
+    console.log("Image editing is disabled");
   };
 
   const handleAltChange = (index: number, newAlt: string) => {
-    const newImages = [...localImages];
-    newImages[index] = { ...newImages[index], alt: newAlt };
-    setLocalImages(newImages);
+    // Disabled editing functionality
+    console.log("Alt text editing is disabled");
   };
 
   const handleObjectFitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
