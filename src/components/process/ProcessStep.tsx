@@ -38,8 +38,8 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
         <img
           src={imageUrl}
           alt={step.title}
-          className="w-full h-full object-cover"
-          style={{ objectFit }}
+          className="w-full h-full"
+          style={{ objectFit: objectFitSetting }}
         />
       </AnimateInView>
 
