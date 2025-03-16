@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 
 interface HeroSlideProps {
   src: string;
@@ -16,18 +16,27 @@ const HeroSlide = ({
   index,
   objectFit = "cover" 
 }: HeroSlideProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <div 
       className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
         isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
       }`}
     >
+      {/* Show placeholder while loading */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-gray-100 animate-pulse"></div>
+      )}
+      
       <img
         src={src}
         alt={alt}
-        className={`w-full h-full object-${objectFit}`}
+        className={`w-full h-full object-${objectFit} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         loading={index === 0 ? "eager" : "lazy"}
+        onLoad={() => setIsLoaded(true)}
       />
+      
       {/* Enhanced overlay gradient for better text visibility */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
     </div>
