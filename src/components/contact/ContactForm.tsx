@@ -8,10 +8,11 @@ import emailjs from 'emailjs-com';
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-// EmailJS service configuration
+// EmailJS service configuration - UPDATED
+// Note: These values should be checked against your EmailJS dashboard
 const EMAILJS_SERVICE_ID = "service_grvn8sq";
 const EMAILJS_TEMPLATE_ID = "template_f28jf5d";
-const EMAILJS_USER_ID = "SXtXi96gVUXshjjQv";
+const EMAILJS_PUBLIC_KEY = "SXtXi96gVUXshjjQv"; // This should be your EmailJS public key
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -23,9 +24,9 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // Initialize EmailJS
   useEffect(() => {
-    emailjs.init(EMAILJS_USER_ID);
+    // Initialize EmailJS with your public key
+    emailjs.init(EMAILJS_PUBLIC_KEY);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -48,7 +49,9 @@ const ContactForm = () => {
         message: formData.message
       };
 
-      // Send the email using EmailJS
+      console.log("Sending email with params:", templateParams);
+
+      // Send the email using EmailJS - make sure to NOT include the user ID here as it's already initialized
       const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
