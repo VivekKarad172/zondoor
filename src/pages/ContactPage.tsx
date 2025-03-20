@@ -1,8 +1,10 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { AnimateInView } from "@/components/ui/motion";
 import { ContactForm, ContactInfo, SocialConnect, LocationMap, FAQ } from "@/components/contact";
+import { Helmet } from "react-helmet";
 
 const ContactPage = () => {
   useEffect(() => {
@@ -15,6 +17,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
+      <Helmet>
+        <title>Contact Us | Z-on Door - 3D PVC Doors Manufacturer</title>
+        <meta name="description" content="Contact Z-on Door for premium 3D PVC doors in Surat, Gujarat. Reach out for quotes on bathroom doors, balcony doors, bedroom doors, WPC doors and PVC screens." />
+      </Helmet>
       <Navbar />
       <div className="pt-28 lg:pt-32">
         <section className="py-10 bg-white">

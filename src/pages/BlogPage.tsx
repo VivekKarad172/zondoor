@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { Helmet } from "react-helmet";
 
 const BlogPage = () => {
   const { user } = useAuth();
@@ -20,6 +22,10 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-white relative">
+      <Helmet>
+        <title>Blog | Z-on Door - 3D PVC Doors Manufacturer</title>
+        <meta name="description" content="Read the latest blogs about 3D PVC doors, door designs, and industry trends. Z-on Door offers expert insights on door selection and maintenance in Surat, Gujarat." />
+      </Helmet>
       <div className="fixed top-0 left-0 w-full z-50">
         <Navbar />
       </div>

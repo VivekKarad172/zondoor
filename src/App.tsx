@@ -17,6 +17,7 @@ import { AnimatePresence } from "framer-motion";
 import { useAuth } from "./contexts/AuthContext";
 import { MediaProvider } from "./contexts/media";
 import { useIsMobile } from "./hooks/use-mobile";
+import { Helmet } from "react-helmet";
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,11 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Helmet>
       <MediaProvider>
         <div className="relative">
           <AnimatePresence mode="wait">

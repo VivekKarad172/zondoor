@@ -18,6 +18,18 @@ const HeroSlide = ({
 }: HeroSlideProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Get the Tailwind class based on objectFit prop
+  const getObjectFitClass = () => {
+    switch(objectFit) {
+      case "cover": return "object-cover";
+      case "contain": return "object-contain";
+      case "fill": return "object-fill";
+      case "none": return "object-none";
+      case "scale-down": return "object-scale-down";
+      default: return "object-cover";
+    }
+  };
+
   return (
     <div 
       className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
@@ -32,7 +44,7 @@ const HeroSlide = ({
       <img
         src={src}
         alt={alt}
-        className={`w-full h-full object-${objectFit} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
+        className={`w-full h-full ${getObjectFitClass()} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         loading={index === 0 ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
         width="1920"

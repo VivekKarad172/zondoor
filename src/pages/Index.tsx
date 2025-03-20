@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -12,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { AnimateInView } from "@/components/ui/motion";
 import ProductsSection from "@/components/product/ProductsSection";
 import LoadingScreen from "@/components/LoadingScreen";
+import { Helmet } from "react-helmet";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -67,6 +69,35 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white relative">
+      <Helmet>
+        <title>Z-on Door | Best 3D PVC Doors Manufacturer in India</title>
+        <meta name="description" content="Discover premium-quality 3D PVC doors for bathrooms, balconies, and bedrooms. Z-on Door offers durable and stylish WPC and PVC screen doors in Surat, Gujarat." />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Z-on Door",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Surat",
+                "addressRegion": "Gujarat",
+                "addressCountry": "India"
+              },
+              "description": "Manufacturer of premium 3D PVC Doors, WPC Doors, and PVC Screens",
+              "url": "https://www.zondoor.com",
+              "telephone": "+919601748998",
+              "openingHours": "Mo-Sa 09:00-18:00",
+              "priceRange": "₹₹₹",
+              "image": "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png",
+              "sameAs": [
+                "https://www.facebook.com/zondoor",
+                "https://www.instagram.com/zondoor"
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
       <Navbar />
       <Hero />
       <About />
