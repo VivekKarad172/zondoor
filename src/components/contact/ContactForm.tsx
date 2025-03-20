@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +8,12 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { CheckCircle2 } from "lucide-react";
+import emailjs from 'emailjs-com';
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = 'service_n19c0yj';
+const EMAILJS_TEMPLATE_ID = 'template_jflhahd';
+const EMAILJS_PUBLIC_KEY = 'dSybDxdIZG6Dq0lZl';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +26,11 @@ const ContactForm = () => {
   const [submitError, setSubmitError] = useState("");
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -31,21 +42,23 @@ const ContactForm = () => {
     setSubmitError("");
     
     try {
-      const response = await fetch("https://formspree.io/f/mjvnbqnj", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          _subject: `New contact from ${formData.name} via Z-on Door website`
-        }),
-      });
+      // Use EmailJS to send the email
+      const templateParams = {
+        to_email: 'zondoor1@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        reply_to: formData.email
+      };
 
-      if (!response.ok) {
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+
+      if (response.status !== 200) {
         throw new Error("Failed to submit the form");
       }
 
