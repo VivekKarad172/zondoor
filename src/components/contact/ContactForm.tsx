@@ -38,7 +38,8 @@ const ContactForm = () => {
         from_email: formData.email,
         phone: formData.phone,
         message: formData.message,
-        reply_to: formData.email
+        reply_to: formData.email,
+        to_email: 'vivekkarad77@gmail.com' // Updated recipient email
       };
 
       await emailjs.send(
