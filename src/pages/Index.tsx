@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -13,6 +14,7 @@ import { AnimateInView } from "@/components/ui/motion";
 import ProductsSection from "@/components/product/ProductsSection";
 import LoadingScreen from "@/components/LoadingScreen";
 import { Helmet } from "react-helmet";
+import { Download } from "lucide-react";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -109,11 +111,22 @@ const Index = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                 Have questions or need more information? Visit our contact page for details or to send us a message.
               </p>
-              <Link to="/contact">
-                <Button variant="default" size="lg" className="rounded-full px-8">
-                  Contact Us
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/contact">
+                  <Button variant="default" size="lg" className="rounded-full px-8">
+                    Contact Us
+                  </Button>
+                </Link>
+                <a 
+                  href="https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-full font-medium transition-all duration-300"
+                >
+                  <Download size={20} className="mr-2" />
+                  Download Catalog
+                </a>
+              </div>
             </div>
           </AnimateInView>
         </div>

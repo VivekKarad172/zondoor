@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Check } from "lucide-react";
+import { Check, Download } from "lucide-react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +9,7 @@ interface HeroContentProps {
   catalogPdfUrl?: string;
 }
 
-const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }: HeroContentProps) => {
+const HeroContent = ({ specifications, catalogPdfUrl = "https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing" }: HeroContentProps) => {
   return (
     <div className="lg:col-span-6 lg:col-start-1 lg:pr-8 max-w-2xl">
       <AnimateInView animation="fade-in" delay={300}>
@@ -60,7 +60,8 @@ const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }
           </a>
           <a
             href={catalogPdfUrl}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30",
               "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
@@ -68,22 +69,7 @@ const HeroContent = ({ specifications, catalogPdfUrl = "/ZON DOOR CATALOG.pdf" }
               "shadow-sm"
             )}
           >
-            <svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-2"
-            >
-              <path 
-                d="M12 15V3M12 15L8 11M12 15L16 11M3 15V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V15" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
+            <Download size={20} className="mr-2" />
             Download Catalog
           </a>
         </div>

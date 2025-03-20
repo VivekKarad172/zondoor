@@ -2,6 +2,7 @@
 import React from "react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
+import { Download } from "lucide-react";
 
 const ProductActions = () => {
   return (
@@ -13,30 +14,16 @@ const ProductActions = () => {
             Get our complete catalog with all door designs, color options, and technical specifications.
           </p>
           <a
-            href="/ZON DOOR CATALOG.pdf"
-            download
+            href="https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               "bg-primary text-primary-foreground hover:bg-primary/90",
               "px-6 py-3 rounded-md font-medium inline-flex items-center",
               "transition-all duration-300"
             )}
           >
-            <svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-2"
-            >
-              <path 
-                d="M12 15V3M12 15L8 11M12 15L16 11M3 15V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V15" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
+            <Download size={20} className="mr-2" />
             Download Catalog
           </a>
         </div>
