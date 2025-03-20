@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,6 +23,11 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_USER_ID);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -44,12 +49,13 @@ const ContactForm = () => {
       };
 
       // Send the email using EmailJS
-      await emailjs.send(
+      const response = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_USER_ID
+        templateParams
       );
+
+      console.log("Email sent successfully:", response);
 
       // Show success message
       toast.success("Thank you for contacting us! We will get back to you soon.");
