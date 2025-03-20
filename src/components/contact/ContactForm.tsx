@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { CheckCircle2 } from "lucide-react";
 import emailjs from '@emailjs/browser';
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +27,29 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const saveToSupabase = async () => {
+    try {
+      // Try to insert into contacts table if it exists
+      const { error } = await supabase.from('contacts').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          created_at: new Date().toISOString()
+        }
+      ]);
+      
+      if (error) {
+        console.log('Supabase storage error (table may not exist yet):', error);
+        // This is expected if the table doesn't exist yet
+      }
+    } catch (err) {
+      // Just log the error, don't fail the form submission
+      console.log('Error saving to Supabase:', err);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -39,7 +63,7 @@ const ContactForm = () => {
         phone: formData.phone,
         message: formData.message,
         reply_to: formData.email,
-        to_email: 'vivekkarad77@gmail.com' // Updated recipient email
+        to_email: 'vivekkarad77@gmail.com'
       };
 
       await emailjs.send(
@@ -48,6 +72,9 @@ const ContactForm = () => {
         templateParams,
         'Dhi_nSPjB8lIwWJRa'
       );
+
+      // Also try to save to Supabase if available
+      await saveToSupabase();
 
       // Show success toast
       toast.success("Thank you for reaching out! We will respond soon.");
