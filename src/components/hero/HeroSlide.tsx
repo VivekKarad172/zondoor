@@ -37,7 +37,7 @@ const HeroSlide = ({
         onLoad={() => setIsLoaded(true)}
         width="1920"
         height="1080"
-        fetchpriority={index === 0 ? "high" : "auto"}
+        fetchPriority={index === 0 ? "high" : "auto"}
       />
       
       {/* Enhanced overlay gradient for better text visibility */}
