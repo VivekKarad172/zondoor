@@ -31,7 +31,6 @@ const ContactForm = () => {
     setSubmitError("");
     
     try {
-      // Using Formspree to handle form submission
       const response = await fetch("https://formspree.io/f/mjvnbqnj", {
         method: "POST",
         headers: {
@@ -50,7 +49,7 @@ const ContactForm = () => {
         throw new Error("Failed to submit the form");
       }
 
-      // Show success message
+      // Show success toast
       toast.success("Thank you for reaching out! We will respond soon.");
       setShowSuccessDialog(true);
       

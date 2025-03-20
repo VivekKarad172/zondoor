@@ -11,13 +11,13 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ 
   onFinishLoading, 
-  duration = 1500 
+  duration = 1000 // Reduced from 1500
 }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Optimize progress calculation
+    // More efficient progress calculation
     const interval = setInterval(() => {
       setProgress(prev => {
         const increment = 100 / (duration / 50);
@@ -29,10 +29,10 @@ const LoadingScreen = ({
     // Set timer for fade-out
     const timer = setTimeout(() => {
       setIsVisible(false);
-      // Reduce delay for exit animation
+      // Reduced delay for exit animation to improve speed
       setTimeout(() => {
         onFinishLoading();
-      }, 300);
+      }, 200); // Reduced from 300
     }, duration);
 
     return () => {
@@ -44,12 +44,12 @@ const LoadingScreen = ({
   return (
     <div 
       className={cn(
-        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-300",
+        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-200",
         isVisible ? "opacity-100" : "opacity-0"
       )}
     >
       <div className="text-center">
-        <AnimateInView animation="fade-in" delay={50}>
+        <AnimateInView animation="fade-in" delay={0}> {/* Reduced from 50 */}
           <img 
             src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
             alt="Z-ON DOOR Logo" 
@@ -59,11 +59,11 @@ const LoadingScreen = ({
           />
         </AnimateInView>
         
-        <AnimateInView animation="fade-in" delay={100}>
+        <AnimateInView animation="fade-in" delay={50}> {/* Reduced from 100 */}
           <Loader className="w-10 h-10 text-primary animate-spin mx-auto mb-3" />
         </AnimateInView>
         
-        <AnimateInView animation="fade-in" delay={150}>
+        <AnimateInView animation="fade-in" delay={75}> {/* Reduced from 150 */}
           <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden mb-3">
             <div 
               className="h-full bg-primary transition-all duration-150 rounded-full"
