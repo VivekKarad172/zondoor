@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Index";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -22,15 +22,12 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogManagementPage = lazy(() => import("./pages/BlogManagementPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Loading fallback
+// Simpler loading fallback for better performance
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="w-full max-w-md p-8">
       <Skeleton className="h-8 w-3/4 mb-4" />
       <Skeleton className="h-64 w-full mb-4" />
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-4 w-5/6 mb-2" />
-      <Skeleton className="h-4 w-4/6" />
     </div>
   </div>
 );
@@ -40,6 +37,19 @@ function App() {
   const { user } = useAuth();
   const isMobile = useIsMobile();
 
+  // Preload critical assets
+  useEffect(() => {
+    const preloadImages = [
+      "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png", // Logo
+      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png"  // Hero image
+    ];
+    
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <div className="App">
       <Helmet>
@@ -48,6 +58,8 @@ function App() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* Add font display swap for better loading performance */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap&display=swap" />
       </Helmet>
       <MediaProvider>
         <div className="relative">

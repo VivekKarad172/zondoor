@@ -11,7 +11,7 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ 
   onFinishLoading, 
-  duration = 1000 // Reduced from 1500
+  duration = 800 // Further reduced from 1000 to 800
 }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
@@ -32,7 +32,7 @@ const LoadingScreen = ({
       // Reduced delay for exit animation to improve speed
       setTimeout(() => {
         onFinishLoading();
-      }, 200); // Reduced from 300
+      }, 150); // Reduced from 200
     }, duration);
 
     return () => {
@@ -44,12 +44,12 @@ const LoadingScreen = ({
   return (
     <div 
       className={cn(
-        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-200",
+        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-150",
         isVisible ? "opacity-100" : "opacity-0"
       )}
     >
       <div className="text-center">
-        <AnimateInView animation="fade-in" delay={0}> {/* Reduced from 50 */}
+        <AnimateInView animation="fade-in" delay={0}>
           <img 
             src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
             alt="Z-ON DOOR Logo" 
@@ -59,14 +59,14 @@ const LoadingScreen = ({
           />
         </AnimateInView>
         
-        <AnimateInView animation="fade-in" delay={50}> {/* Reduced from 100 */}
+        <AnimateInView animation="fade-in" delay={30}>
           <Loader className="w-10 h-10 text-primary animate-spin mx-auto mb-3" />
         </AnimateInView>
         
-        <AnimateInView animation="fade-in" delay={75}> {/* Reduced from 150 */}
+        <AnimateInView animation="fade-in" delay={50}>
           <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden mb-3">
             <div 
-              className="h-full bg-primary transition-all duration-150 rounded-full"
+              className="h-full bg-primary transition-all duration-100 rounded-full"
               style={{ width: `${progress}%` }}
             ></div>
           </div>

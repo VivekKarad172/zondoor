@@ -63,7 +63,7 @@ const ContactForm = () => {
         phone: formData.phone,
         message: formData.message,
         reply_to: formData.email,
-        to_email: 'vivekkarad77@gmail.com'
+        to_email: 'zondoor1@gmail.com'
       };
 
       await emailjs.send(

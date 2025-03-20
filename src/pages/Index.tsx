@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -19,48 +19,18 @@ import { Download } from "lucide-react";
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   
-  useEffect(() => {
-    // Update document title
-    document.title = "Z-on Door | Best 3D PVC Doors Manufacturer in India";
-    
-    // Only preload the critical images
-    const preloadImages = [
-      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png", // First hero image
-      "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" // Logo
-    ];
-    
-    // Track how many images have loaded
-    let loadedCount = 0;
-    const totalImages = preloadImages.length;
-    
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === totalImages) {
-          setTimeout(() => setIsLoading(false), 500);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        console.error(`Failed to preload image: ${src}`);
-        if (loadedCount === totalImages) {
-          setTimeout(() => setIsLoading(false), 500);
-        }
-      };
-      img.src = src;
-    });
-    
-    // Shorter fallback timeout
+  // Simpler loading logic with shorter duration
+  React.useEffect(() => {
+    // Set a shorter timeout for the loading screen
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Max 2 seconds of loading
+    }, 800); // Reduced from 1500ms to 800ms
     
     return () => clearTimeout(timeout);
   }, []);
 
   if (isLoading) {
-    return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={1500} />;
+    return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={800} />; // Reduced duration
   }
 
   return (
@@ -68,31 +38,9 @@ const Index = () => {
       <Helmet>
         <title>Z-on Door | Best 3D PVC Doors Manufacturer in India</title>
         <meta name="description" content="Discover premium-quality 3D PVC doors for bathrooms, balconies, and bedrooms. Z-on Door offers durable and stylish WPC and PVC screen doors in Surat, Gujarat." />
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Z-on Door",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Surat",
-                "addressRegion": "Gujarat",
-                "addressCountry": "India"
-              },
-              "description": "Manufacturer of premium 3D PVC Doors, WPC Doors, and PVC Screens",
-              "url": "https://www.zondoor.com",
-              "telephone": "+919601748998",
-              "openingHours": "Mo-Sa 09:00-18:00",
-              "priceRange": "₹₹₹",
-              "image": "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png",
-              "sameAs": [
-                "https://www.facebook.com/zondoor",
-                "https://www.instagram.com/zondoor"
-              ]
-            }
-          `}
-        </script>
+        {/* Preload critical assets */}
+        <link rel="preload" href="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" as="image" />
+        <link rel="preload" href="/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png" as="image" />
       </Helmet>
       <Navbar />
       <Hero />
