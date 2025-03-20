@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { DoorImage, HeroProps } from "./types";
 
 interface UseHeroControllerProps {
@@ -10,6 +10,7 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [objectFit, setObjectFit] = useState<"cover" | "contain" | "fill" | "none" | "scale-down">("cover");
+  const intervalRef = useRef<number | null>(null);
   
   const defaultDoorImages: DoorImage[] = [
     {
@@ -43,22 +44,42 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
       prevIndex === 0 ? localImages.length - 1 : prevIndex - 1
     );
   };
+  
+  // Stop slideshow when tab is not visible to save resources
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    } else if (!isEditing) {
+      // Restart slideshow when tab becomes visible again
+      intervalRef.current = window.setInterval(goToNextSlide, 5000);
+    }
+  };
 
   useEffect(() => {
     // Auto-rotate images every 5 seconds when not editing
     if (!isEditing) {
-      const interval = setInterval(() => {
-        goToNextSlide();
-      }, 5000);
+      // Add visibility change listener
+      document.addEventListener('visibilitychange', handleVisibilityChange);
       
-      // Preload all images for smoother transitions
-      localImages.forEach(image => {
+      // Only preload first two images for faster initial load
+      for (let i = 0; i < Math.min(2, localImages.length); i++) {
         const img = new Image();
-        img.src = image.src;
-      });
+        img.src = localImages[i].src;
+      }
       
-      return () => clearInterval(interval);
+      // Set slide show interval
+      intervalRef.current = window.setInterval(goToNextSlide, 5000);
     }
+    
+    return () => {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [isEditing, localImages]);
 
   // This function is now just for display, not editing

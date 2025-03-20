@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -22,13 +21,9 @@ const Index = () => {
     // Update document title
     document.title = "Z-on Door | Best 3D PVC Doors Manufacturer in India";
     
-    // Create image objects to preload
+    // Only preload the critical images
     const preloadImages = [
-      "/lovable-uploads/dbff8393-7a6e-4aa3-a4aa-a985f7a0c5f6.png",
-      "/lovable-uploads/e7524959-84c6-4617-999c-5b8e0e5e2f7b.png",
-      "/lovable-uploads/b3e205a9-276d-4260-ad24-c55cd2df0659.png",
-      "/lovable-uploads/d6ecdb63-a48c-4023-9661-21a657af870e.png",
-      "/lovable-uploads/ac445c52-9c9c-4a4b-bb03-dba4483c9fd1.png",
+      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png", // First hero image
       "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" // Logo
     ];
     
@@ -41,30 +36,29 @@ const Index = () => {
       img.onload = () => {
         loadedCount++;
         if (loadedCount === totalImages) {
-          // All critical images loaded, allow a small timeout to ensure UI readiness
-          setTimeout(() => setIsLoading(false), 800);
+          setTimeout(() => setIsLoading(false), 500);
         }
       };
       img.onerror = () => {
         loadedCount++;
         console.error(`Failed to preload image: ${src}`);
         if (loadedCount === totalImages) {
-          setTimeout(() => setIsLoading(false), 800);
+          setTimeout(() => setIsLoading(false), 500);
         }
       };
       img.src = src;
     });
     
-    // Fallback in case images take too long
+    // Shorter fallback timeout
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // Max 3 seconds of loading
+    }, 2000); // Max 2 seconds of loading
     
     return () => clearTimeout(timeout);
   }, []);
 
   if (isLoading) {
-    return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={2000} />;
+    return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={1500} />;
   }
 
   return (

@@ -1,16 +1,7 @@
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Index";
-import Products from "./pages/ProductsPage";
-import ProcessPage from "./pages/ProcessPage";
-import About from "./pages/AboutPage";
-import Gallery from "./pages/GalleryPage";
-import Contact from "./pages/ContactPage";
-import BlogPostPage from "./pages/BlogPostPage";
-import BlogPage from "./pages/BlogPage";
-import BlogManagementPage from "./pages/BlogManagementPage";
-import NotFound from "./pages/NotFound";
 import WhatsAppButton from "./components/WhatsAppButton";
 import { Toaster } from "sonner";
 import { AnimatePresence } from "framer-motion";
@@ -18,6 +9,31 @@ import { useAuth } from "./contexts/AuthContext";
 import { MediaProvider } from "./contexts/media";
 import { useIsMobile } from "./hooks/use-mobile";
 import { Helmet } from "react-helmet";
+import { Skeleton } from "./components/ui/skeleton";
+
+// Lazy load non-home pages to improve initial load performance
+const Products = lazy(() => import("./pages/ProductsPage"));
+const ProcessPage = lazy(() => import("./pages/ProcessPage"));
+const About = lazy(() => import("./pages/AboutPage"));
+const Gallery = lazy(() => import("./pages/GalleryPage"));
+const Contact = lazy(() => import("./pages/ContactPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogManagementPage = lazy(() => import("./pages/BlogManagementPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Loading fallback
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-full max-w-md p-8">
+      <Skeleton className="h-8 w-3/4 mb-4" />
+      <Skeleton className="h-64 w-full mb-4" />
+      <Skeleton className="h-4 w-full mb-2" />
+      <Skeleton className="h-4 w-5/6 mb-2" />
+      <Skeleton className="h-4 w-4/6" />
+    </div>
+  </div>
+);
 
 function App() {
   const location = useLocation();
@@ -30,21 +46,59 @@ function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </Helmet>
       <MediaProvider>
         <div className="relative">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/process" element={<ProcessPage />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog/:id" element={<BlogPostPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog-management" element={<BlogManagementPage />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/about" element={
+                <Suspense fallback={<PageLoader />}>
+                  <About />
+                </Suspense>
+              } />
+              <Route path="/products" element={
+                <Suspense fallback={<PageLoader />}>
+                  <Products />
+                </Suspense>
+              } />
+              <Route path="/process" element={
+                <Suspense fallback={<PageLoader />}>
+                  <ProcessPage />
+                </Suspense>
+              } />
+              <Route path="/gallery" element={
+                <Suspense fallback={<PageLoader />}>
+                  <Gallery />
+                </Suspense>
+              } />
+              <Route path="/contact" element={
+                <Suspense fallback={<PageLoader />}>
+                  <Contact />
+                </Suspense>
+              } />
+              <Route path="/blog/:id" element={
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPostPage />
+                </Suspense>
+              } />
+              <Route path="/blog" element={
+                <Suspense fallback={<PageLoader />}>
+                  <BlogPage />
+                </Suspense>
+              } />
+              <Route path="/blog-management" element={
+                <Suspense fallback={<PageLoader />}>
+                  <BlogManagementPage />
+                </Suspense>
+              } />
+              <Route path="*" element={
+                <Suspense fallback={<PageLoader />}>
+                  <NotFound />
+                </Suspense>
+              } />
             </Routes>
           </AnimatePresence>
         </div>

@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface HeroSlideProps {
   src: string;
@@ -36,20 +37,23 @@ const HeroSlide = ({
         isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
       }`}
     >
-      {/* Show placeholder while loading */}
+      {/* Show skeleton placeholder while loading */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-100 animate-pulse"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Skeleton className="w-full h-full" />
+        </div>
       )}
       
       <img
         src={src}
         alt={alt}
         className={`w-full h-full ${getObjectFitClass()} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
-        loading={index === 0 ? "eager" : "lazy"}
+        loading={index <= 1 ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
         width="1920"
         height="1080"
         fetchPriority={index === 0 ? "high" : "auto"}
+        decoding="async"
       />
       
       {/* Enhanced overlay gradient for better text visibility */}
