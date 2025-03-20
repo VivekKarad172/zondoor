@@ -29,7 +29,6 @@ const ContactForm = () => {
 
   const saveToSupabase = async () => {
     try {
-      // Try to insert into contacts table if it exists
       const { error } = await supabase.from('contacts').insert([
         {
           name: formData.name,
@@ -41,12 +40,13 @@ const ContactForm = () => {
       ]);
       
       if (error) {
-        console.log('Supabase storage error (table may not exist yet):', error);
-        // This is expected if the table doesn't exist yet
+        console.log('Supabase storage error:', error);
+        return false;
       }
+      return true;
     } catch (err) {
-      // Just log the error, don't fail the form submission
       console.log('Error saving to Supabase:', err);
+      return false;
     }
   };
 
@@ -56,41 +56,50 @@ const ContactForm = () => {
     setSubmitError("");
     
     try {
-      // Use EmailJS to send the email
+      // Configure EmailJS with the correct service ID, template ID, and public key
+      emailjs.init("Dhi_nSPjB8lIwWJRa");
+      
+      // Create a template parameters object
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
         message: formData.message,
-        reply_to: formData.email,
-        to_email: 'zondoor1@gmail.com'
+        to_name: "Z-on Door",
+        reply_to: formData.email
       };
 
-      await emailjs.send(
-        'service_d12z5pf',
-        'template_41f2o47',
-        templateParams,
-        'Dhi_nSPjB8lIwWJRa'
+      // Use the correct service and template IDs
+      const emailResponse = await emailjs.send(
+        "service_d12z5pf",  // Your EmailJS service ID
+        "template_41f2o47", // Your EmailJS template ID
+        templateParams
       );
 
-      // Also try to save to Supabase if available
-      await saveToSupabase();
+      console.log("EmailJS Response:", emailResponse);
 
-      // Show success toast
-      toast.success("Thank you for reaching out! We will respond soon.");
-      setShowSuccessDialog(true);
-      
-      // Reset the form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
+      // If email was sent successfully, save to Supabase as well
+      if (emailResponse.status === 200) {
+        await saveToSupabase();
+        
+        // Show success toast and dialog
+        toast.success("Thank you for reaching out! We will respond soon.");
+        setShowSuccessDialog(true);
+        
+        // Reset the form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+      } else {
+        throw new Error("Failed to send email. Status: " + emailResponse.status);
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitError("There was a problem sending your message. Please try again later.");
-      toast.error("Failed to send your message. Please try again.");
+      setSubmitError("There was a problem sending your message. Please try again later or contact us directly at zondoor1@gmail.com");
+      toast.error("Failed to send your message. Please try again or email us directly.");
     } finally {
       setIsSubmitting(false);
     }
