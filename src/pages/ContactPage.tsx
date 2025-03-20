@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,7 +7,7 @@ import { ContactForm, ContactInfo, SocialConnect, LocationMap, FAQ } from "@/com
 const ContactPage = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Contact Us | Z-ON DOOR";
+    document.title = "Contact Us | Z-on Door - 3D PVC Doors Manufacturer";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);

@@ -8,7 +8,7 @@ import BackgroundDoors from "@/components/BackgroundDoors";
 const GalleryPage = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Door Gallery | Z-ON DOOR";
+    document.title = "Door Gallery | Z-on Door - 3D PVC Doors Manufacturer";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -19,7 +18,7 @@ const Index = () => {
   
   useEffect(() => {
     // Update document title
-    document.title = "Z-ON DOOR | Premium PVC Embossed Doors";
+    document.title = "Z-on Door | Best 3D PVC Doors Manufacturer in India";
     
     // Create image objects to preload
     const preloadImages = [

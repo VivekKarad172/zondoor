@@ -5,14 +5,16 @@ import About from "@/components/About";
 import { AnimateInView } from "@/components/ui/motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+
 const AboutPage = () => {
   useEffect(() => {
     // Update document title
-    document.title = "About Us | Z-ON DOOR";
+    document.title = "About Us | Z-on Door - 3D PVC Doors Manufacturer";
 
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
+  
   return <div className="min-h-screen bg-background relative">
       <Navbar />
       <div className="pt-28 lg:pt-32">
@@ -90,4 +92,5 @@ const AboutPage = () => {
       <Footer />
     </div>;
 };
+
 export default AboutPage;

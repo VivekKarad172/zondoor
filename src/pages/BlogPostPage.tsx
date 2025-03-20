@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -20,7 +19,13 @@ const BlogPostPage = () => {
     
     if (blogPost) {
       setPost(blogPost);
-      document.title = `Z-ON DOOR | ${blogPost.title}`;
+      document.title = `${blogPost.title} | Z-on Door - 3D PVC Doors Manufacturer`;
+      
+      // Add meta description dynamically
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', blogPost.excerpt || 'Discover premium-quality 3D PVC doors for bathrooms, balconies, and bedrooms. Z-on Door offers durable and stylish WPC and PVC screen doors in Surat, Gujarat.');
+      }
     } else {
       // Redirect to blog page if post not found
       navigate("/blog");

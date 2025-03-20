@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,7 +7,7 @@ import { AnimateInView } from "@/components/ui/motion";
 const ProcessPage = () => {
   useEffect(() => {
     // Update document title
-    document.title = "Our Process | Z-ON DOOR";
+    document.title = "Our Process | Z-on Door - 3D PVC Doors Manufacturer";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);

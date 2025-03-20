@@ -10,7 +10,7 @@ const LocationPage = () => {
 
   useEffect(() => {
     // Update document title
-    document.title = "Our Location | Z-ON DOOR";
+    document.title = "Our Location | Z-on Door - 3D PVC Doors Manufacturer";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);

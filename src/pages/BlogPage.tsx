@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,7 +13,7 @@ const BlogPage = () => {
   
   useEffect(() => {
     // Update document title
-    document.title = "Z-ON DOOR | Blog";
+    document.title = "Blog | Z-on Door - 3D PVC Doors Manufacturer";
     
     window.scrollTo(0, 0);
   }, []);

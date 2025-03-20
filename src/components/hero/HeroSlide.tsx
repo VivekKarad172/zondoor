@@ -35,6 +35,9 @@ const HeroSlide = ({
         className={`w-full h-full object-${objectFit} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         loading={index === 0 ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
+        width="1920"
+        height="1080"
+        fetchpriority={index === 0 ? "high" : "auto"}
       />
       
       {/* Enhanced overlay gradient for better text visibility */}
