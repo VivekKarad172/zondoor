@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { SMTPClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
+import { SmtpClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -43,8 +43,8 @@ serve(async (req) => {
     });
 
     try {
-      // Initialize SMTP client with the new credentials
-      const client = new SMTPClient({
+      // Initialize SMTP client with the new credentials - using SmtpClient (lowercase 's') instead of SMTPClient
+      const client = new SmtpClient({
         connection: {
           hostname: "smtp-relay.brevo.com",
           port: 587,
