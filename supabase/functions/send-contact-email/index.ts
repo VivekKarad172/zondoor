@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { SMTPClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
+import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -43,20 +43,16 @@ serve(async (req) => {
     });
 
     // Initialize SMTP client
-    const client = new SMTPClient({
-      connection: {
-        hostname: "smtp-relay.sendinblue.com",
-        port: 587,
-        tls: true,
-        auth: {
-          username: "VIVEKKARAD77@GMAIL.COM", 
-          password: Deno.env.get("BREVO_SMTP_PASSWORD") || "",
-        },
-      },
-    });
+    const client = new SmtpClient();
 
-    // Connect to SMTP server
-    await client.connect();
+    // Connect to SMTP server with your credentials
+    await client.connectTLS({
+      hostname: "smtp-relay.sendinblue.com",
+      port: 587,
+      username: "VIVEKKARAD77@GMAIL.COM",
+      password: Deno.env.get("BREVO_SMTP_PASSWORD") || "",
+    });
+    
     console.log("Connected to SMTP server");
 
     // Prepare email content
@@ -92,15 +88,13 @@ serve(async (req) => {
       from: "info@zondoor.com",
       to: "zondoor1@gmail.com",
       subject: `Z-on Door: New Contact Form Submission from ${contactData.name}`,
+      content: emailContent,
       html: emailContent,
-      headers: {
-        "Reply-To": contactData.email,
-      },
     });
     
     console.log("Email sent successfully");
     
-    // Disconnect from SMTP server
+    // Close the connection
     await client.close();
 
     return new Response(
