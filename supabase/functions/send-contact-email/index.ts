@@ -50,8 +50,8 @@ serve(async (req) => {
       await client.connectTLS({
         hostname: "smtp-relay.sendinblue.com",
         port: 587,
-        username: "VIVEKKARAD77@GMAIL.COM",
-        password: Deno.env.get("BREVO_SMTP_PASSWORD") || "",
+        username: "887c5c001@smtp-brevo.com",
+        password: "tfTnhSdZ6NPsx8Dr",
       });
       
       console.log("Connected to SMTP server");
@@ -88,7 +88,7 @@ serve(async (req) => {
       await client.send({
         from: "info@zondoor.com",
         to: "zondoor1@gmail.com",
-        subject: `Z-on Door: New Contact Form Submission from ${contactData.name}`,
+        subject: `Z-ON: New Contact Form Submission from ${contactData.name}`,
         content: emailContent,
         html: emailContent,
       });
