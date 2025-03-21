@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -55,7 +56,10 @@ const ContactForm = () => {
     
     try {
       // Step 1: Save to Supabase database
-      await saveToSupabase();
+      const saveSuccess = await saveToSupabase();
+      if (!saveSuccess) {
+        throw new Error("Failed to save your message to our database");
+      }
 
       // Step 2: Send email via Supabase Edge Function
       const response = await supabase.functions.invoke('send-contact-email', {
@@ -65,6 +69,20 @@ const ContactForm = () => {
       console.log("Edge function response:", response);
 
       if (response.error) {
+        // If it's an SMTP error but the data was saved, show a user-friendly message
+        if (response.data && response.data.note && response.data.note.includes("saved to our database")) {
+          toast.success("Your message was saved, but there was an issue sending the email notification. We'll still receive your message.");
+          setShowSuccessDialog(true);
+          
+          // Reset the form
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            message: ""
+          });
+          return;
+        }
         throw new Error(`Edge function error: ${response.error.message || 'Unknown error'}`);
       }
 
