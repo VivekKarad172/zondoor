@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
+import { SmtpClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -47,11 +47,12 @@ serve(async (req) => {
       const client = new SmtpClient();
 
       // Connect to SMTP server with your credentials
-      await client.connectTLS({
+      await client.connect({
         hostname: "smtp-relay.sendinblue.com",
         port: 587,
         username: "887c5c001@smtp-brevo.com",
         password: "tfTnhSdZ6NPsx8Dr",
+        tls: true,
       });
       
       console.log("Connected to SMTP server");
@@ -86,8 +87,13 @@ serve(async (req) => {
 
       // Send the email
       await client.send({
-        from: "info@zondoor.com",
-        to: "zondoor1@gmail.com",
+        from: {
+          address: "info@zondoor.com",
+          name: "Z-ON",
+        },
+        to: [{
+          address: "zondoor1@gmail.com",
+        }],
         subject: `Z-ON: New Contact Form Submission from ${contactData.name}`,
         content: emailContent,
         html: emailContent,
