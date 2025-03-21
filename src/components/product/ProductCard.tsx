@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
 import ImageSelector from "@/components/media/ImageSelector";
@@ -36,6 +36,7 @@ const ProductCard = ({
   const isCncCard = type === "cnc";
   const [localImage, setLocalImage] = useState(image || "");
   const [imageError, setImageError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [localObjectFit, setLocalObjectFit] = useState<"contain" | "cover" | "fill" | "none" | "scale-down">(objectFit);
   
   const defaultDescription = 
@@ -43,6 +44,20 @@ const ProductCard = ({
     isColorCard ? color : 
     "Precision CNC groove detailing for added sophistication";
   
+  // Preload images for better performance
+  useEffect(() => {
+    if (image && !isLoaded) {
+      const img = new Image();
+      img.onload = () => {
+        setIsLoaded(true);
+      };
+      img.onerror = () => {
+        setImageError(true);
+      };
+      img.src = image;
+    }
+  }, [image, isLoaded]);
+
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     console.log(`Failed to load image: ${image}`);
     e.currentTarget.src = "/placeholder.svg";
@@ -104,14 +119,19 @@ const ProductCard = ({
             image && (
               <div className="relative h-full flex justify-center group cursor-pointer" 
                    onClick={() => onImageClick && image && onImageClick(image, name)}>
+                {!isLoaded && !imageError && (
+                  <div className="absolute inset-0 bg-gray-100 animate-pulse"></div>
+                )}
                 <img
                   src={imageError ? "/placeholder.svg" : image}
                   alt={name}
                   className={cn(
                     `w-auto max-w-full object-${objectFit} transition-transform duration-500 group-hover:scale-105`,
-                    "min-h-[350px] max-h-[350px]"
+                    "min-h-[350px] max-h-[350px]",
+                    isLoaded ? "opacity-100" : "opacity-0"
                   )}
                   loading="lazy"
+                  onLoad={() => setIsLoaded(true)}
                   onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">

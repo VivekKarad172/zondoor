@@ -11,12 +11,24 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ 
   onFinishLoading, 
-  duration = 800 // Further reduced from 1000 to 800
+  duration = 800
 }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    // Preload critical images
+    const imagesToPreload = [
+      "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png", // Logo
+      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png"  // Hero image
+    ];
+    
+    // Create new image objects and set sources to preload
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+    
     // More efficient progress calculation
     const interval = setInterval(() => {
       setProgress(prev => {
@@ -32,7 +44,7 @@ const LoadingScreen = ({
       // Reduced delay for exit animation to improve speed
       setTimeout(() => {
         onFinishLoading();
-      }, 150); // Reduced from 200
+      }, 150);
     }, duration);
 
     return () => {

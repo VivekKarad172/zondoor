@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Index";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -10,6 +10,7 @@ import { MediaProvider } from "./contexts/media";
 import { useIsMobile } from "./hooks/use-mobile";
 import { Helmet } from "react-helmet";
 import { Skeleton } from "./components/ui/skeleton";
+import LoadingScreen from "./components/LoadingScreen";
 
 // Lazy load non-home pages to improve initial load performance
 const Products = lazy(() => import("./pages/ProductsPage"));
@@ -36,12 +37,20 @@ function App() {
   const location = useLocation();
   const { user } = useAuth();
   const isMobile = useIsMobile();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Handle initial loading
+  const handleFinishLoading = () => {
+    setIsLoading(false);
+  };
 
   // Preload critical assets
   useEffect(() => {
+    // Preload critical images for faster subsequent page loads
     const preloadImages = [
       "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png", // Logo
-      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png"  // Hero image
+      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png",  // Hero image
+      "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png"   // Another main image
     ];
     
     preloadImages.forEach(src => {
@@ -61,67 +70,72 @@ function App() {
         {/* Add font display swap for better loading performance */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap&display=swap" />
       </Helmet>
-      <MediaProvider>
-        <div className="relative">
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={
-                <Suspense fallback={<PageLoader />}>
-                  <About />
-                </Suspense>
-              } />
-              <Route path="/products" element={
-                <Suspense fallback={<PageLoader />}>
-                  <Products />
-                </Suspense>
-              } />
-              <Route path="/process" element={
-                <Suspense fallback={<PageLoader />}>
-                  <ProcessPage />
-                </Suspense>
-              } />
-              <Route path="/gallery" element={
-                <Suspense fallback={<PageLoader />}>
-                  <Gallery />
-                </Suspense>
-              } />
-              <Route path="/contact" element={
-                <Suspense fallback={<PageLoader />}>
-                  <Contact />
-                </Suspense>
-              } />
-              <Route path="/blog/:id" element={
-                <Suspense fallback={<PageLoader />}>
-                  <BlogPostPage />
-                </Suspense>
-              } />
-              <Route path="/blog" element={
-                <Suspense fallback={<PageLoader />}>
-                  <BlogPage />
-                </Suspense>
-              } />
-              <Route path="/blog-management" element={
-                <Suspense fallback={<PageLoader />}>
-                  <BlogManagementPage />
-                </Suspense>
-              } />
-              <Route path="*" element={
-                <Suspense fallback={<PageLoader />}>
-                  <NotFound />
-                </Suspense>
-              } />
-            </Routes>
-          </AnimatePresence>
-        </div>
-        <WhatsAppButton 
-          phoneNumber="+919601748998" 
-          message={isMobile 
-            ? "Hello, I'd like to enquire about your doors." 
-            : "Hello, I'm interested in Z-ON DOOR products and would like more information about your PVC embossed doors."}
-        />
-        <Toaster position="top-right" />
-      </MediaProvider>
+      
+      {isLoading ? (
+        <LoadingScreen onFinishLoading={handleFinishLoading} duration={500} />
+      ) : (
+        <MediaProvider>
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <About />
+                  </Suspense>
+                } />
+                <Route path="/products" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Products />
+                  </Suspense>
+                } />
+                <Route path="/process" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <ProcessPage />
+                  </Suspense>
+                } />
+                <Route path="/gallery" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Gallery />
+                  </Suspense>
+                } />
+                <Route path="/contact" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <Contact />
+                  </Suspense>
+                } />
+                <Route path="/blog/:id" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BlogPostPage />
+                  </Suspense>
+                } />
+                <Route path="/blog" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BlogPage />
+                  </Suspense>
+                } />
+                <Route path="/blog-management" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <BlogManagementPage />
+                  </Suspense>
+                } />
+                <Route path="*" element={
+                  <Suspense fallback={<PageLoader />}>
+                    <NotFound />
+                  </Suspense>
+                } />
+              </Routes>
+            </AnimatePresence>
+          </div>
+          <WhatsAppButton 
+            phoneNumber="+919601748998" 
+            message={isMobile 
+              ? "Hello, I'd like to enquire about your doors." 
+              : "Hello, I'm interested in Z-ON DOOR products and would like more information about your PVC embossed doors."}
+          />
+          <Toaster position="top-right" />
+        </MediaProvider>
+      )}
     </div>
   );
 }

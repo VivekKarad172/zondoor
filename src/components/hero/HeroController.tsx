@@ -11,6 +11,7 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [objectFit, setObjectFit] = useState<"cover" | "contain" | "fill" | "none" | "scale-down">("cover");
   const intervalRef = useRef<number | null>(null);
+  const imagesLoadedRef = useRef<boolean[]>([]);
   
   const defaultDoorImages: DoorImage[] = [
     {
@@ -32,6 +33,23 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
   ];
 
   const [localImages, setLocalImages] = useState<DoorImage[]>(doorImages || defaultDoorImages);
+
+  // Preload the first two images for immediate display
+  useEffect(() => {
+    const preloadFirstImages = () => {
+      // Preload only first two images for initial display
+      for (let i = 0; i < Math.min(2, localImages.length); i++) {
+        const img = new Image();
+        img.onload = () => {
+          // Mark image as loaded
+          imagesLoadedRef.current[i] = true;
+        };
+        img.src = localImages[i].src;
+      }
+    };
+    
+    preloadFirstImages();
+  }, [localImages]);
 
   const goToNextSlide = () => {
     setCurrentImageIndex((prevIndex) => 
@@ -63,12 +81,6 @@ export const useHeroController = ({ doorImages }: UseHeroControllerProps) => {
     if (!isEditing) {
       // Add visibility change listener
       document.addEventListener('visibilitychange', handleVisibilityChange);
-      
-      // Only preload first two images for faster initial load
-      for (let i = 0; i < Math.min(2, localImages.length); i++) {
-        const img = new Image();
-        img.src = localImages[i].src;
-      }
       
       // Set slide show interval
       intervalRef.current = window.setInterval(goToNextSlide, 5000);

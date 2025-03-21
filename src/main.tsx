@@ -5,13 +5,27 @@ import App from './App.tsx';
 import './index.css';
 import { AuthProvider } from './contexts/AuthContext';
 
+// Create a function to initialize the app
+const initializeApp = () => {
+  const rootElement = document.getElementById("root");
+  
+  if (rootElement) {
+    createRoot(rootElement).render(
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    );
+  } else {
+    console.error("Root element not found");
+  }
+};
+
 // Wait for DOM to be fully loaded before rendering
-document.addEventListener('DOMContentLoaded', () => {
-  createRoot(document.getElementById("root")!).render(
-    <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </BrowserRouter>
-  );
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  // DOM already loaded, initialize immediately
+  initializeApp();
+}
