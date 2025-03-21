@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,6 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { CheckCircle2 } from "lucide-react";
-import emailjs from '@emailjs/browser';
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
@@ -56,46 +54,31 @@ const ContactForm = () => {
     setSubmitError("");
     
     try {
-      // Configure EmailJS with the correct service ID, template ID, and public key
-      emailjs.init("Dhi_nSPjB8lIwWJRa");
-      
-      // Create a template parameters object
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        to_name: "Z-on Door",
-        reply_to: formData.email
-      };
+      // Step 1: Save to Supabase database
+      await saveToSupabase();
 
-      // Use the correct service and template IDs
-      const emailResponse = await emailjs.send(
-        "service_d12z5pf",  // Your EmailJS service ID
-        "template_41f2o47", // Your EmailJS template ID
-        templateParams
-      );
+      // Step 2: Send email via Supabase Edge Function
+      const response = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
 
-      console.log("EmailJS Response:", emailResponse);
+      console.log("Edge function response:", response);
 
-      // If email was sent successfully, save to Supabase as well
-      if (emailResponse.status === 200) {
-        await saveToSupabase();
-        
-        // Show success toast and dialog
-        toast.success("Thank you for reaching out! We will respond soon.");
-        setShowSuccessDialog(true);
-        
-        // Reset the form
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: ""
-        });
-      } else {
-        throw new Error("Failed to send email. Status: " + emailResponse.status);
+      if (response.error) {
+        throw new Error(`Edge function error: ${response.error.message || 'Unknown error'}`);
       }
+
+      // Show success toast and dialog
+      toast.success("Thank you for reaching out! We will respond soon.");
+      setShowSuccessDialog(true);
+      
+      // Reset the form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitError("There was a problem sending your message. Please try again later or contact us directly at zondoor1@gmail.com");
