@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { SmtpClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
+import { SMTPClient } from "https://deno.land/x/denomailer@0.12.0/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -44,18 +44,19 @@ serve(async (req) => {
 
     try {
       // Initialize SMTP client
-      const client = new SmtpClient();
-
-      // Connect to SMTP server with your credentials
-      await client.connect({
-        hostname: "smtp-relay.sendinblue.com",
-        port: 587,
-        username: "887c5c001@smtp-brevo.com",
-        password: "tfTnhSdZ6NPsx8Dr",
-        tls: true,
+      const client = new SMTPClient({
+        connection: {
+          hostname: "smtp-relay.sendinblue.com",
+          port: 587,
+          tls: true,
+          auth: {
+            username: "887c5c001@smtp-brevo.com",
+            password: "tfTnhSdZ6NPsx8Dr",
+          },
+        },
       });
       
-      console.log("Connected to SMTP server");
+      console.log("SMTP client initialized");
 
       // Prepare email content
       const emailContent = `
@@ -87,22 +88,13 @@ serve(async (req) => {
 
       // Send the email
       await client.send({
-        from: {
-          address: "info@zondoor.com",
-          name: "Z-ON",
-        },
-        to: [{
-          address: "zondoor1@gmail.com",
-        }],
+        from: "info@zondoor.com",
+        to: "zondoor1@gmail.com",
         subject: `Z-ON: New Contact Form Submission from ${contactData.name}`,
-        content: emailContent,
         html: emailContent,
       });
       
       console.log("Email sent successfully");
-      
-      // Close the connection
-      await client.close();
 
       return new Response(
         JSON.stringify({ success: true, message: "Email sent successfully" }),
