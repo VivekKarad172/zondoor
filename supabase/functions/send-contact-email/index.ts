@@ -43,15 +43,15 @@ serve(async (req) => {
     });
 
     try {
-      // Initialize SMTP client
+      // Initialize SMTP client with the new credentials
       const client = new SMTPClient({
         connection: {
-          hostname: "smtp-relay.sendinblue.com",
+          hostname: "smtp-relay.brevo.com",
           port: 587,
           tls: true,
           auth: {
-            username: "887c5c001@smtp-brevo.com",
-            password: "tfTnhSdZ6NPsx8Dr",
+            username: "887c5c002@smtp-brevo.com",
+            password: "7Tb8mKBL3zYPhjcX",
           },
         },
       });
@@ -72,7 +72,7 @@ serve(async (req) => {
           </head>
           <body>
             <div class="container">
-              <h1>New Contact Form Submission</h1>
+              <h1>New Website Inquiry</h1>
               <div class="info">
                 <p><span class="label">Name:</span> ${contactData.name}</p>
                 <p><span class="label">Email:</span> ${contactData.email}</p>
@@ -88,16 +88,16 @@ serve(async (req) => {
 
       // Send the email
       await client.send({
-        from: "info@zondoor.com",
-        to: "zondoor1@gmail.com",
-        subject: `Z-ON: New Contact Form Submission from ${contactData.name}`,
+        from: "INFO@ZONDOOR.COM",
+        to: "ZONDOOR1@GMAIL.COM",
+        subject: "New Website Inquiry",
         html: emailContent,
       });
       
       console.log("Email sent successfully");
 
       return new Response(
-        JSON.stringify({ success: true, message: "Email sent successfully" }),
+        JSON.stringify({ success: true, message: "Your message has been sent successfully!" }),
         { 
           status: 200, 
           headers: { ...corsHeaders, "Content-Type": "application/json" } 
@@ -109,7 +109,7 @@ serve(async (req) => {
       // Return a more specific error that includes SMTP details
       return new Response(
         JSON.stringify({ 
-          error: "Failed to send email via SMTP", 
+          error: "Failed to send your message. Please try again.", 
           details: emailError.message,
           note: "Your message was still saved to our database"
         }),

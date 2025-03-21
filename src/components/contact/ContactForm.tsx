@@ -49,8 +49,42 @@ const ContactForm = () => {
     }
   };
 
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      toast.error("Please enter your name");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email");
+      return false;
+    }
+    if (!formData.phone.trim()) {
+      toast.error("Please enter your phone number");
+      return false;
+    }
+    if (!formData.message.trim()) {
+      toast.error("Please enter your message");
+      return false;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate the form
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitError("");
     
@@ -87,7 +121,7 @@ const ContactForm = () => {
       }
 
       // Show success toast and dialog
-      toast.success("Thank you for reaching out! We will respond soon.");
+      toast.success(response.data?.message || "Your message has been sent successfully!");
       setShowSuccessDialog(true);
       
       // Reset the form
@@ -99,8 +133,8 @@ const ContactForm = () => {
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitError("There was a problem sending your message. Please try again later or contact us directly at zondoor1@gmail.com");
-      toast.error("Failed to send your message. Please try again or email us directly.");
+      setSubmitError("Failed to send your message. Please try again.");
+      toast.error("Failed to send your message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
