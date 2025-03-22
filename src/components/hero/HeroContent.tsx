@@ -9,7 +9,13 @@ interface HeroContentProps {
   catalogPdfUrl?: string;
 }
 
-const HeroContent = ({ specifications, catalogPdfUrl = "https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing" }: HeroContentProps) => {
+const HeroContent = ({ specifications, catalogPdfUrl = "1lCoKIPFn63So99eKhnYt8w49DXo9_UAa" }: HeroContentProps) => {
+  const handleDownloadCatalog = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Direct download link format for Google Drive
+    window.open(`https://drive.google.com/uc?export=download&id=${catalogPdfUrl}`, "_blank");
+  };
+
   return (
     <div className="lg:col-span-6 lg:col-start-1 lg:pr-8 max-w-2xl">
       <AnimateInView animation="fade-in" delay={300}>
@@ -58,10 +64,8 @@ const HeroContent = ({ specifications, catalogPdfUrl = "https://drive.google.com
           >
             Explore Products
           </a>
-          <a
-            href={catalogPdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleDownloadCatalog}
             className={cn(
               "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30",
               "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
@@ -71,7 +75,7 @@ const HeroContent = ({ specifications, catalogPdfUrl = "https://drive.google.com
           >
             <Download size={20} className="mr-2" />
             Download Catalog
-          </a>
+          </button>
         </div>
       </AnimateInView>
     </div>

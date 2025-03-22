@@ -29,6 +29,12 @@ const Index = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  const handleDownloadCatalog = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Direct download link format for Google Drive
+    window.open("https://drive.google.com/uc?export=download&id=1lCoKIPFn63So99eKhnYt8w49DXo9_UAa", "_blank");
+  };
+
   if (isLoading) {
     return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={800} />; // Reduced duration
   }
@@ -65,15 +71,13 @@ const Index = () => {
                     Contact Us
                   </Button>
                 </Link>
-                <a 
-                  href="https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing"
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={handleDownloadCatalog}
                   className="inline-flex items-center justify-center bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-full font-medium transition-all duration-300"
                 >
                   <Download size={20} className="mr-2" />
                   Download Catalog
-                </a>
+                </button>
               </div>
             </div>
           </AnimateInView>

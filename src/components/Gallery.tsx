@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { AnimateInView } from "./ui/motion";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,12 @@ const Gallery = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = "auto";
+  };
+
+  const handleDownloadCatalog = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Direct download link format for Google Drive
+    window.open("https://drive.google.com/uc?export=download&id=1lCoKIPFn63So99eKhnYt8w49DXo9_UAa", "_blank");
   };
 
   return (
@@ -150,15 +157,13 @@ const Gallery = () => {
               Download our catalog or contact us for personalized assistance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={handleDownloadCatalog}
                 className="inline-flex items-center justify-center bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] shadow-lg"
               >
                 <Download size={20} className="mr-2" />
                 Download Full Catalog
-              </a>
+              </button>
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-2px] border border-primary-foreground/40"

@@ -5,6 +5,12 @@ import { cn } from "@/lib/utils";
 import { Download } from "lucide-react";
 
 const ProductActions = () => {
+  const handleDownloadCatalog = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Direct download link format for Google Drive
+    window.open("https://drive.google.com/uc?export=download&id=1lCoKIPFn63So99eKhnYt8w49DXo9_UAa", "_blank");
+  };
+
   return (
     <AnimateInView animation="fade-in" delay={300}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
@@ -13,10 +19,8 @@ const ProductActions = () => {
           <p className="text-foreground/80 mb-6">
             Get our complete catalog with all door designs, color options, and technical specifications.
           </p>
-          <a
-            href="https://drive.google.com/file/d/1lCoKIPFn63So99eKhnYt8w49DXo9_UAa/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleDownloadCatalog}
             className={cn(
               "bg-primary text-primary-foreground hover:bg-primary/90",
               "px-6 py-3 rounded-md font-medium inline-flex items-center",
@@ -25,7 +29,7 @@ const ProductActions = () => {
           >
             <Download size={20} className="mr-2" />
             Download Catalog
-          </a>
+          </button>
         </div>
         
         <div className="bg-primary text-white p-6 rounded-md shadow-md">
