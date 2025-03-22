@@ -14,7 +14,7 @@ import { AnimateInView } from "@/components/ui/motion";
 import ProductsSection from "@/components/product/ProductsSection";
 import LoadingScreen from "@/components/LoadingScreen";
 import { Helmet } from "react-helmet";
-import { Download } from "lucide-react";
+import DownloadCatalogButton from "@/components/DownloadCatalogButton";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,12 +28,6 @@ const Index = () => {
     
     return () => clearTimeout(timeout);
   }, []);
-
-  const handleDownloadCatalog = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // Direct download link format for Google Drive
-    window.open("https://drive.google.com/uc?export=download&id=1lCoKIPFn63So99eKhnYt8w49DXo9_UAa", "_blank");
-  };
 
   if (isLoading) {
     return <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={800} />; // Reduced duration
@@ -71,13 +65,11 @@ const Index = () => {
                     Contact Us
                   </Button>
                 </Link>
-                <button 
-                  onClick={handleDownloadCatalog}
-                  className="inline-flex items-center justify-center bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-full font-medium transition-all duration-300"
-                >
-                  <Download size={20} className="mr-2" />
-                  Download Catalog
-                </button>
+                <DownloadCatalogButton 
+                  variant="primary" 
+                  size="lg" 
+                  className="rounded-full px-8"
+                />
               </div>
             </div>
           </AnimateInView>

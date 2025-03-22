@@ -1,8 +1,9 @@
 
 import React from "react";
-import { Check, Download } from "lucide-react";
+import { Check } from "lucide-react";
 import { AnimateInView } from "../ui/motion";
 import { cn } from "@/lib/utils";
+import DownloadCatalogButton from "@/components/DownloadCatalogButton";
 
 interface HeroContentProps {
   specifications: string[];
@@ -10,12 +11,6 @@ interface HeroContentProps {
 }
 
 const HeroContent = ({ specifications, catalogPdfUrl = "1lCoKIPFn63So99eKhnYt8w49DXo9_UAa" }: HeroContentProps) => {
-  const handleDownloadCatalog = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // Direct download link format for Google Drive
-    window.open(`https://drive.google.com/uc?export=download&id=${catalogPdfUrl}`, "_blank");
-  };
-
   return (
     <div className="lg:col-span-6 lg:col-start-1 lg:pr-8 max-w-2xl">
       <AnimateInView animation="fade-in" delay={300}>
@@ -64,18 +59,10 @@ const HeroContent = ({ specifications, catalogPdfUrl = "1lCoKIPFn63So99eKhnYt8w4
           >
             Explore Products
           </a>
-          <button
-            onClick={handleDownloadCatalog}
-            className={cn(
-              "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30",
-              "px-5 py-2.5 rounded-md font-medium inline-flex items-center",
-              "transition-all duration-300 transform hover:translate-y-[-2px]",
-              "shadow-sm"
-            )}
-          >
-            <Download size={20} className="mr-2" />
-            Download Catalog
-          </button>
+          <DownloadCatalogButton 
+            variant="white" 
+            catalogId={catalogPdfUrl}
+          />
         </div>
       </AnimateInView>
     </div>
