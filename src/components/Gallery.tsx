@@ -1,10 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AnimateInView } from "./ui/motion";
 import { cn } from "@/lib/utils";
 import { doorCategories, doorGalleryItems } from "./product/GalleryData";
 import ImageModal from "./ui/image-modal";
 import { Download } from "lucide-react";
+import OptimizedImage from "./ui/optimized-image";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -16,17 +17,20 @@ const Gallery = () => {
     description: ""
   });
 
-  useEffect(() => {
+  // Memoize filtered items to prevent unnecessary re-renders
+  const displayItems = useMemo(() => {
     if (selectedCategory === "all") {
-      setFilteredItems(doorGalleryItems);
+      return doorGalleryItems;
     } else {
-      setFilteredItems(
-        doorGalleryItems.filter(item => 
-          item.category.includes(selectedCategory)
-        )
+      return doorGalleryItems.filter(item => 
+        item.category.includes(selectedCategory)
       );
     }
   }, [selectedCategory]);
+
+  useEffect(() => {
+    setFilteredItems(displayItems);
+  }, [displayItems]);
 
   const openModal = (image: string, alt: string, description: string) => {
     setSelectedImage({ src: image, alt, description });
@@ -95,17 +99,18 @@ const Gallery = () => {
               className="h-full"
             >
               <div className="bg-background border border-border/50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                <div className="relative overflow-hidden cursor-pointer group" 
+                <div 
+                  className="relative overflow-hidden cursor-pointer group" 
                   onClick={() => openModal(item.image, item.name, item.description)}
+                  style={{ aspectRatio: '4/3' }}
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
+                  <OptimizedImage
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full transition-transform duration-500 group-hover:scale-105"
+                    objectFit="cover"
+                    priority={index < 4}
+                  />
                   <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
                     <div className="bg-white/90 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <svg 

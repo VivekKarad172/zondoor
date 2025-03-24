@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* Import fonts efficiently */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,34 +10,24 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 250 28% 17%;
-
     --card: 0 0% 100%;
     --card-foreground: 250 28% 17%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 250 28% 17%;
-
     --primary: 260 75% 45%;
     --primary-foreground: 260 40% 98%;
-
     --secondary: 250 19% 27%;
     --secondary-foreground: 260 40% 98%;
-
     --muted: 260 40% 96.1%;
     --muted-foreground: 250 16.3% 46.9%;
-
     --accent: 260 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 350 84.2% 60.2%;
     --destructive-foreground: 260 40% 98%;
-
     --border: 250 31.8% 91.4%;
     --input: 250 31.8% 91.4%;
     --ring: 260 75% 45%;
-
     --radius: 0.3rem;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -49,28 +41,20 @@
   .dark {
     --background: 250 47% 11%;
     --foreground: 260 40% 98%;
-
     --card: 250 47% 11%;
     --card-foreground: 260 40% 98%;
-
     --popover: 250 47% 11%;
     --popover-foreground: 260 40% 98%;
-
     --primary: 260 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 250 32.6% 17.5%;
     --secondary-foreground: 260 40% 98%;
-
     --muted: 250 32.6% 17.5%;
     --muted-foreground: 250 20.2% 65.1%;
-
     --accent: 250 32.6% 17.5%;
     --accent-foreground: 260 40% 98%;
-
     --destructive: 350 62.8% 30.6%;
     --destructive-foreground: 260 40% 98%;
-
     --border: 250 32.6% 17.5%;
     --input: 250 32.6% 17.5%;
     --ring: 250 26.8% 83.9%;
@@ -126,24 +110,6 @@
   .section-subtitle {
     @apply text-lg text-foreground/70 mb-10 max-w-3xl mx-auto;
   }
-  
-  /* SEO-friendly classes */
-  .pvc-doors {
-    @apply text-primary;
-  }
-  
-  .affordable-doors {
-    @apply font-semibold;
-  }
-  
-  .best-doors-india {
-    @apply text-lg;
-  }
-  
-  /* Add sticky navigation for mobile */
-  .sticky-nav {
-    @apply sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm;
-  }
 }
 
 /* Improved scrollbar styling */
@@ -161,7 +127,7 @@
 }
 
 * {
-  transition: all 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 #root {
@@ -181,15 +147,20 @@
   }
 }
 
-/* Grid pattern backgrounds */
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
+/* Loading animation */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(86, 39, 176, 0.2);
+  border-radius: 50%;
+  border-top-color: rgba(86, 39, 176, 1);
+  animation: spin 1s ease-in-out infinite;
 }
 
-/* Animation keyframes for the process video */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -198,9 +169,4 @@
 @keyframes slideUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }

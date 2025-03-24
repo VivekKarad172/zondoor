@@ -1,0 +1,22 @@
+
+{
+  "name": "Z-on Door - Premium PVC Doors",
+  "short_name": "Z-on Door",
+  "description": "Manufacturer of premium quality 3D PVC doors, WPC doors, and PVC screens",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5627b0",
+  "icons": [
+    {
+      "src": "/lovable-uploads/6d66a164-c432-48fb-a062-83894f2841eb.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/lovable-uploads/6d66a164-c432-48fb-a062-83894f2841eb.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

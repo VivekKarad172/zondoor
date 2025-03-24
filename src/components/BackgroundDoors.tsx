@@ -1,11 +1,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { designOptions } from "./product/ProductData";
+import OptimizedImage from "./ui/optimized-image";
 
 const BackgroundDoors = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedDoorIndex, setSelectedDoorIndex] = useState<number | null>(null);
   const [localBackgroundDoors, setLocalBackgroundDoors] = useState(
     designOptions.filter((_, index) => index % 2 === 0).slice(0, 10).map(door => ({
       id: door.id,
@@ -22,27 +22,29 @@ const BackgroundDoors = () => {
       
       doors.forEach((door, index) => {
         const doorEl = door as HTMLElement;
-        // Increase rotation and movement for more dramatic effect
-        const speed = 0.18 + (index % 3) * 0.05;
-        const rotation = scrollY * speed;
-        const translateY = scrollY * (0.25 + (index % 4) * 0.05);
-        const translateX = Math.sin(scrollY * 0.003) * (25 + (index % 3) * 15);
-        const scale = 1 + Math.sin(scrollY * 0.001) * 0.1;
-        
-        doorEl.style.transform = `translateY(${translateY}px) translateX(${translateX}px) rotate(${rotation}deg) scale(${scale})`;
-        doorEl.style.opacity = `${Math.max(0.2, 0.5 - (scrollY * 0.0003))}`;
+        // Use RequestAnimationFrame for better performance
+        requestAnimationFrame(() => {
+          // Increase rotation and movement for more dramatic effect
+          const speed = 0.18 + (index % 3) * 0.05;
+          const rotation = scrollY * speed;
+          const translateY = scrollY * (0.25 + (index % 4) * 0.05);
+          const translateX = Math.sin(scrollY * 0.003) * (25 + (index % 3) * 15);
+          const scale = 1 + Math.sin(scrollY * 0.001) * 0.1;
+          
+          doorEl.style.transform = `translateY(${translateY}px) translateX(${translateX}px) rotate(${rotation}deg) scale(${scale})`;
+          doorEl.style.opacity = `${Math.max(0.2, 0.5 - (scrollY * 0.0003))}`;
+        });
       });
     };
     
     // Call handler once to initialize positions
     handleScroll();
     
-    window.addEventListener('scroll', handleScroll);
+    // Use passive event listener for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isEditing]);
 
-  // Background doors will no longer be editable
-  // Remove the edit button and editing functionality
   return (
     <div 
       ref={containerRef}
@@ -63,11 +65,12 @@ const BackgroundDoors = () => {
             zIndex: -10 - index
           }}
         >
-          <img
+          <OptimizedImage
             src={door.image !== "/placeholder.svg" ? door.image : "/placeholder.svg"}
             alt=""
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-            loading="lazy"
+            className="w-full h-full rounded-lg shadow-xl"
+            objectFit="cover"
+            priority={false}
           />
         </div>
       ))}

@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 interface HeroSlideProps {
   src: string;
@@ -19,18 +20,6 @@ const HeroSlide = ({
 }: HeroSlideProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Get the Tailwind class based on objectFit prop
-  const getObjectFitClass = () => {
-    switch(objectFit) {
-      case "cover": return "object-cover";
-      case "contain": return "object-contain";
-      case "fill": return "object-fill";
-      case "none": return "object-none";
-      case "scale-down": return "object-scale-down";
-      default: return "object-cover";
-    }
-  };
-
   return (
     <div 
       className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
@@ -44,16 +33,13 @@ const HeroSlide = ({
         </div>
       )}
       
-      <img
+      <OptimizedImage
         src={src}
         alt={alt}
-        className={`w-full h-full ${getObjectFitClass()} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
-        loading={index <= 1 ? "eager" : "lazy"}
+        className="w-full h-full"
+        objectFit={objectFit}
         onLoad={() => setIsLoaded(true)}
-        width="1920"
-        height="1080"
-        fetchPriority={index === 0 ? "high" : "auto"}
-        decoding="async"
+        priority={index <= 1}
       />
       
       {/* Enhanced overlay gradient for better text visibility */}
