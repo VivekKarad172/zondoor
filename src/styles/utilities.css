@@ -1,0 +1,44 @@
+
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-20;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  .wesmarc-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-6 text-secondary;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-foreground/70 mb-10 max-w-3xl mx-auto;
+  }
+}
+
+/* Improved scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(240, 240, 240, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+* {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}

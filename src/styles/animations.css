@@ -1,0 +1,24 @@
+
+/* Loading animation */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(86, 39, 176, 0.2);
+  border-radius: 50%;
+  border-top-color: rgba(86, 39, 176, 1);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
