@@ -42,11 +42,11 @@ const Navbar = () => {
             <img src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" alt="Z-ON DOOR Logo" className="h-20 md:h-22" />
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Properly structured with ul/li */}
           <ul className="hidden md:flex items-center space-x-1">
             {navLinks.map((link, index) => (
-              <AnimateInView key={link.name} animation="fade-in" delay={index * 100 + 300}>
-                <li>
+              <li key={link.name}>
+                <AnimateInView animation="fade-in" delay={index * 100 + 300}>
                   <Link 
                     to={link.href} 
                     className={cn(
@@ -57,8 +57,8 @@ const Navbar = () => {
                   >
                     {link.name.toUpperCase()}
                   </Link>
-                </li>
-              </AnimateInView>
+                </AnimateInView>
+              </li>
             ))}
             <li>
               <a 
@@ -76,15 +76,28 @@ const Navbar = () => {
           </ul>
 
           {/* Mobile Menu Button */}
-          <button onClick={toggleMenu} className="md:hidden flex items-center" aria-label="Toggle Menu">
+          <button 
+            onClick={toggleMenu} 
+            className="md:hidden flex items-center" 
+            aria-label="Toggle Menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
             {isOpen ? <X size={24} className={scrolled ? "text-gray-800" : "text-white"} /> : <Menu size={24} className={scrolled ? "text-gray-800" : "text-white"} />}
           </button>
         </nav>
 
-        {/* Mobile Menu */}
-        <div className={cn("fixed inset-0 bg-white z-50 transition-transform duration-300 transform md:hidden", isOpen ? "translate-x-0" : "translate-x-full")}>
+        {/* Mobile Menu - Properly structured with ul/li */}
+        <div 
+          id="mobile-menu"
+          className={cn("fixed inset-0 bg-white z-50 transition-transform duration-300 transform md:hidden", isOpen ? "translate-x-0" : "translate-x-full")}
+          aria-hidden={!isOpen}
+        >
           <div className="flex justify-end p-6">
-            <button onClick={toggleMenu} aria-label="Close Menu">
+            <button 
+              onClick={toggleMenu} 
+              aria-label="Close Menu"
+            >
               <X size={24} className="text-secondary" />
             </button>
           </div>
