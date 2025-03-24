@@ -9,7 +9,6 @@ import { useAuth } from "./contexts/AuthContext";
 import { MediaProvider } from "./contexts/media";
 import { useIsMobile } from "./hooks/use-mobile";
 import { Helmet } from "react-helmet";
-import { Skeleton } from "./components/ui/skeleton";
 import LoadingScreen from "./components/LoadingScreen";
 
 // Lazy load non-home pages to improve initial load performance
@@ -23,13 +22,10 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogManagementPage = lazy(() => import("./pages/BlogManagementPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Simpler loading fallback for better performance
+// Simple loading fallback
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="w-full max-w-md p-8">
-      <Skeleton className="h-8 w-3/4 mb-4" />
-      <Skeleton className="h-64 w-full mb-4" />
-    </div>
+    <div className="loader"></div>
   </div>
 );
 
@@ -39,25 +35,15 @@ function App() {
   const isMobile = useIsMobile();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Handle initial loading
-  const handleFinishLoading = () => {
-    setIsLoading(false);
-  };
-
-  // Preload critical assets
+  // Shorter loading time
   useEffect(() => {
-    // Preload critical images for faster subsequent page loads
-    const preloadImages = [
-      "/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png", // Logo
-      "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png",  // Hero image
-      "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png"   // Another main image
-    ];
-    
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
+    if (isLoading) {
+      // Reduced loading time
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 300); // Significantly reduced
+    }
+  }, [isLoading]);
 
   return (
     <div className="App">
@@ -65,14 +51,10 @@ function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* Add font display swap for better loading performance */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap&display=swap" />
       </Helmet>
       
       {isLoading ? (
-        <LoadingScreen onFinishLoading={handleFinishLoading} duration={500} />
+        <LoadingScreen onFinishLoading={() => setIsLoading(false)} duration={300} />
       ) : (
         <MediaProvider>
           <div className="relative">

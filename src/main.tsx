@@ -5,51 +5,31 @@ import App from './App.tsx';
 import './index.css';
 import { AuthProvider } from './contexts/AuthContext';
 
-// Create a function to initialize the app
-const initializeApp = () => {
+// Simplify initialization for faster loading
+const startApp = () => {
   const rootElement = document.getElementById("root");
   
   if (rootElement) {
-    // Create a placeholder for first contentful paint
-    rootElement.innerHTML = '<div class="loading-screen"><div class="loader"></div></div>';
-    
-    // Use requestIdleCallback for non-critical initialization
-    const startApp = () => {
-      createRoot(rootElement).render(
-        <BrowserRouter>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </BrowserRouter>
-      );
-    };
-    
-    // Use requestIdleCallback if available, otherwise setTimeout
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(startApp);
-    } else {
-      setTimeout(startApp, 10);
-    }
+    createRoot(rootElement).render(
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
+    );
   } else {
     console.error("Root element not found");
   }
 };
 
-// Wait for DOM to be fully loaded before rendering
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-  // DOM already loaded, initialize immediately
-  initializeApp();
-}
+// Start app immediately
+startApp();
 
-// Add service worker registration for caching
-if ('serviceWorker' in navigator && window.location.hostname !== 'localhost') {
+// Only register service worker in production
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').then(registration => {
-      console.log('SW registered:', registration);
-    }).catch(error => {
-      console.log('SW registration failed:', error);
+    navigator.serviceWorker.register('/sw.js').catch(error => {
+      console.error('SW registration failed:', error);
     });
   });
 }

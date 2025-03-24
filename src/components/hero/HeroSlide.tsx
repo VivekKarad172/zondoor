@@ -1,7 +1,5 @@
 
 import React, { useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import OptimizedImage from "@/components/ui/optimized-image";
 
 interface HeroSlideProps {
   src: string;
@@ -20,30 +18,27 @@ const HeroSlide = ({
 }: HeroSlideProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Only load active or adjacent slides to improve performance
+  if (!isActive && Math.abs(index) > 1) {
+    return null;
+  }
+
   return (
     <div 
-      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+      className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
         isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
       }`}
     >
-      {/* Show skeleton placeholder while loading */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Skeleton className="w-full h-full" />
-        </div>
-      )}
-      
-      <OptimizedImage
+      <img
         src={src}
         alt={alt}
-        className="w-full h-full"
-        objectFit={objectFit}
+        className={`w-full h-full object-${objectFit} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        loading={index <= 1 ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
-        priority={index <= 1}
       />
       
-      {/* Enhanced overlay gradient for better text visibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+      {/* Simplified overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
     </div>
   );
 };
