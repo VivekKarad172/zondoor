@@ -26,19 +26,23 @@ const ImageModal = ({ isOpen, onClose, imageSrc, imageAlt, imageDescription }: I
     }
   }, [isOpen, imageSrc]);
 
-  // Prevent body scrolling when modal is open
+  // Prevent body scrolling when modal is open and restore it when closed
   useEffect(() => {
+    // Save the current overflow style
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    
     if (isOpen) {
-      // Save the current overflow style
-      const originalStyle = window.getComputedStyle(document.body).overflow;
       // Prevent scrolling on the body
       document.body.style.overflow = 'hidden';
-      
-      // Restore the original style when modal closes
-      return () => {
-        document.body.style.overflow = originalStyle;
-      };
+    } else {
+      // Restore scrolling when modal is closed
+      document.body.style.overflow = 'auto';
     }
+    
+    // Cleanup function to ensure body scrolling is restored
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [isOpen]);
 
   const handleZoomIn = () => {

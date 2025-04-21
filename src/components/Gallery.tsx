@@ -35,12 +35,10 @@ const Gallery = () => {
   const openModal = (image: string, alt: string, description: string) => {
     setSelectedImage({ src: image, alt, description });
     setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = "auto";
   };
 
   const handleDownloadCatalog = (e: React.MouseEvent) => {

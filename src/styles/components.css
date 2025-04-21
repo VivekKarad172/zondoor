@@ -12,3 +12,13 @@
   background-color: var(--background);
   z-index: 9999;
 }
+
+/* Ensure body is scrollable after loader is removed */
+body.no-scroll {
+  overflow: hidden;
+}
+
+body {
+  overflow: auto;
+  overflow-x: hidden;
+}
