@@ -219,7 +219,7 @@ export const blogPosts: BlogPost[] = [
       <p>When selecting a <strong>PVC door</strong>, always check for <strong>water resistance, durability, design, and affordability</strong>. With <strong>Z-on Door</strong>, you can be sure of getting the <strong>best quality at the best price</strong>. Upgrade your home with a <strong>stylish and durable PVC door today!</strong></p>
     `,
     date: "2024-05-18",
-    image: "/lovable-uploads/3af36dd7-ee22-4078-8b78-71eeacbe06c0.png", 
+    image: "/lovable-uploads/5df7fb1e-0d8d-4255-828a-5e4bf605111c.png", 
     author: "Z-ON DOOR Team",
     category: "guide",
     readTime: 6
