@@ -1,4 +1,3 @@
-
 export interface BlogPost {
   id: number;
   title: string;
@@ -14,6 +13,163 @@ export interface BlogPost {
 
 // Export blog posts array
 export const blogPosts: BlogPost[] = [
+  {
+    id: 5,
+    title: "Why PVC Embossed Doors Are the Best Choice for Modern Homes - Complete Guide 2024",
+    excerpt: "Discover why PVC embossed doors are superior to wooden doors. Learn about waterproof, termite-proof features and why Z-on Door offers the best quality PVC doors for bathrooms, bedrooms, and all rooms.",
+    content: `
+      <h3>Why Choose PVC Embossed Doors Over Traditional Wooden Doors?</h3>
+      <p>When searching for the perfect door for your home, you've probably wondered: "Which door is better - PVC or wooden?" The answer is clear. <strong>PVC embossed doors</strong> are the superior choice for modern homes, offering unmatched durability, style, and value for money.</p>
+      
+      <img src="/lovable-uploads/1d616f19-3474-4390-adf6-a9f8be0faeed.png" alt="Beautiful PVC embossed door in modern home interior" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+      
+      <h3>🏆 Top 8 Reasons Why PVC Embossed Doors Are the Best Investment</h3>
+      
+      <h4>1️⃣ 100% Waterproof & Moisture Resistant</h4>
+      <p>Unlike wooden doors that swell, warp, and rot when exposed to water, <strong>PVC embossed doors are completely waterproof</strong>. This makes them perfect for:</p>
+      <ul>
+        <li><strong>Bathroom doors</strong> - No more worrying about steam damage</li>
+        <li><strong>Kitchen doors</strong> - Resistant to cooking moisture</li>
+        <li><strong>Balcony doors</strong> - Weather-proof against rain</li>
+        <li><strong>Toilet doors</strong> - Hygienic and easy to clean</li>
+      </ul>
+      
+      <h4>2️⃣ Termite-Proof & Pest Resistant</h4>
+      <p>Wooden doors are vulnerable to termites, which can cause thousands in damage. <strong>PVC doors are 100% termite-proof</strong>, giving you peace of mind and long-term savings.</p>
+      
+      <h4>3️⃣ Zero Maintenance Required</h4>
+      <p>Forget about annual painting, polishing, or varnishing! PVC embossed doors require <strong>zero maintenance</strong>. Simply wipe with a damp cloth to keep them looking new for years.</p>
+      
+      <h4>4️⃣ Cost-Effective & Budget-Friendly</h4>
+      <p>While wooden doors require ongoing maintenance costs, PVC doors offer:</p>
+      <ul>
+        <li>Lower initial cost than premium wood</li>
+        <li>No painting or polishing expenses</li>
+        <li>Longer lifespan (15+ years)</li>
+        <li>No replacement costs due to damage</li>
+      </ul>
+      
+      <h4>5️⃣ Superior Design Options</h4>
+      <p>Modern PVC embossed doors offer <strong>stunning 3D designs</strong> that look exactly like premium wood but perform much better. Available in numerous patterns and colors to match any home décor.</p>
+      
+      <h4>6️⃣ Lightweight Yet Strong</h4>
+      <p>PVC doors are lighter than wooden doors, making them easier to install and operate, while still providing excellent security and durability.</p>
+      
+      <h4>7️⃣ Fire Resistant Properties</h4>
+      <p>High-quality PVC doors offer better fire resistance compared to wooden doors, adding an extra layer of safety to your home.</p>
+      
+      <h4>8️⃣ Eco-Friendly Choice</h4>
+      <p>By choosing PVC doors, you're helping preserve forests and choosing a more sustainable option for your home.</p>
+      
+      <h3>🔬 What Makes Z-on Door's PVC Embossed Doors Superior?</h3>
+      
+      <img src="/lovable-uploads/8154b26d-cfe1-4121-a50a-60d68bfec138.png" alt="Z-on Door PVC door construction layers showing quality materials" style="width: 100%; height: auto; margin: 20px 0; border-radius: 8px;" />
+      
+      <p>Not all PVC doors are created equal. Here's what makes <strong>Z-on Door the best choice</strong> for your home:</p>
+      
+      <h4>🎯 Premium 7-Layer Construction</h4>
+      <p>Our doors feature advanced construction with:</p>
+      <ul>
+        <li><strong>5mm Decorative PVC Sheet</strong> on both sides for durability</li>
+        <li><strong>PVC Foam Frame</strong> for lightweight strength</li>
+        <li><strong>MS Square Pipe Internal Framing</strong> for maximum stability</li>
+        <li><strong>PVC Hollow Core</strong> for insulation</li>
+        <li><strong>Premium PVC Film</strong> for beautiful wood-like finish</li>
+        <li><strong>30mm Thickness</strong> for superior performance</li>
+        <li><strong>Lock Rail PVC Form Board</strong> for secure fitting</li>
+      </ul>
+      
+      <h4>📏 Perfect Sizing for Every Need</h4>
+      <ul>
+        <li><strong>Width:</strong> 24 to 34 inches (customizable)</li>
+        <li><strong>Height:</strong> 72 to 89 inches (standard and custom)</li>
+        <li><strong>Thickness:</strong> 30mm for optimal strength</li>
+      </ul>
+      
+      <h4>🎨 Extensive Color & Design Range</h4>
+      <p>Choose from <strong>14 different colors</strong> and multiple design patterns to match your home's aesthetic perfectly.</p>
+      
+      <h3>💡 Common Questions People Ask When Buying Doors</h3>
+      
+      <h4>❓ "Which door is best for bathroom?"</h4>
+      <p><strong>Answer:</strong> PVC embossed doors are the best choice for bathrooms because they're 100% waterproof, won't swell or warp, and are easy to clean and maintain.</p>
+      
+      <h4>❓ "Are PVC doors cheaper than wooden doors?"</h4>
+      <p><strong>Answer:</strong> Yes, when you consider total cost of ownership. PVC doors cost less initially and require zero maintenance, while wooden doors need regular painting and repairs.</p>
+      
+      <h4>❓ "How long do PVC doors last?"</h4>
+      <p><strong>Answer:</strong> High-quality PVC doors like Z-on Door's can last 15+ years without any maintenance, compared to wooden doors that may need replacement in 8-10 years.</p>
+      
+      <h4>❓ "Do PVC doors look cheap?"</h4>
+      <p><strong>Answer:</strong> Modern PVC embossed doors look exactly like premium wood doors but perform much better. Our 3D embossing technology creates realistic wood textures.</p>
+      
+      <h4>❓ "Which brand PVC door is best?"</h4>
+      <p><strong>Answer:</strong> Z-on Door is the best choice because we use premium materials, advanced construction, and offer the best warranty and after-sales service.</p>
+      
+      <h3>🏠 Perfect Applications for PVC Embossed Doors</h3>
+      <ul>
+        <li><strong>Bathroom doors</strong> - Waterproof and hygienic</li>
+        <li><strong>Bedroom doors</strong> - Stylish and noise-reducing</li>
+        <li><strong>Kitchen doors</strong> - Easy to clean and maintain</li>
+        <li><strong>Balcony doors</strong> - Weather-resistant</li>
+        <li><strong>Office doors</strong> - Professional appearance</li>
+        <li><strong>Toilet doors</strong> - Moisture and odor resistant</li>
+        <li><strong>Store room doors</strong> - Pest-proof storage</li>
+      </ul>
+      
+      <h3>🛡️ Why Choose Z-on Door Over Competitors?</h3>
+      <ul>
+        <li>✅ <strong>Premium Quality Materials</strong> - We use only the best PVC compounds</li>
+        <li>✅ <strong>Advanced Manufacturing</strong> - State-of-the-art production facility</li>
+        <li>✅ <strong>Rigorous Quality Control</strong> - Every door is tested before delivery</li>
+        <li>✅ <strong>Competitive Pricing</strong> - Best value for money in the market</li>
+        <li>✅ <strong>Expert Installation</strong> - Professional fitting service</li>
+        <li>✅ <strong>Comprehensive Warranty</strong> - Peace of mind guarantee</li>
+        <li>✅ <strong>Pan-India Service</strong> - Available across major cities</li>
+      </ul>
+      
+      <h3>💰 Cost Comparison: PVC vs Wooden Doors</h3>
+      <p><strong>Wooden Door Total Cost (5 years):</strong></p>
+      <ul>
+        <li>Initial cost: ₹8,000-15,000</li>
+        <li>Annual maintenance: ₹2,000 x 5 = ₹10,000</li>
+        <li>Replacement due to damage: ₹5,000</li>
+        <li><strong>Total: ₹23,000-30,000</strong></li>
+      </ul>
+      
+      <p><strong>Z-on Door PVC Door Total Cost (5 years):</strong></p>
+      <ul>
+        <li>Initial cost: ₹6,000-12,000</li>
+        <li>Maintenance cost: ₹0</li>
+        <li>Replacement cost: ₹0</li>
+        <li><strong>Total: ₹6,000-12,000</strong></li>
+      </ul>
+      
+      <p><strong>You save ₹15,000+ over 5 years with Z-on Door!</strong></p>
+      
+      <h3>🚀 Ready to Upgrade Your Home?</h3>
+      <p>Don't compromise on quality when it comes to your home's doors. Choose <strong>Z-on Door's premium PVC embossed doors</strong> for:</p>
+      <ul>
+        <li>Unmatched durability and performance</li>
+        <li>Beautiful designs that enhance your home</li>
+        <li>Zero maintenance hassles</li>
+        <li>Long-term cost savings</li>
+        <li>Professional installation and service</li>
+      </ul>
+      
+      <p><strong>Contact Z-on Door today</strong> for a free consultation and quote. Our experts will help you choose the perfect doors for your home and provide professional installation services.</p>
+      
+      <p>📞 <strong>Call us now</strong> or visit our showroom to see the quality difference yourself!</p>
+      
+      <h3>🔍 Frequently Searched Terms</h3>
+      <p>Whether you're searching for "best PVC door brand", "waterproof bathroom doors", "termite proof doors", "low maintenance doors", "modern door designs", or "affordable quality doors" - Z-on Door has the perfect solution for your needs.</p>
+    `,
+    date: "2024-12-20",
+    image: "/lovable-uploads/1d616f19-3474-4390-adf6-a9f8be0faeed.png",
+    author: "Z-ON DOOR Team",
+    category: "product",
+    readTime: 8
+  },
   {
     id: 4,
     title: "How to Choose the Best PVC Door for Your Home – A Complete Guide",
