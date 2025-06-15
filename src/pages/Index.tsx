@@ -11,6 +11,7 @@ import { AnimateInView, ScrollReveal, StaggerContainer } from "@/components/ui/m
 import ProductsSection from "@/components/product/ProductsSection";
 import { Helmet } from "react-helmet";
 import DownloadCatalogButton from "@/components/DownloadCatalogButton";
+import Footer from "@/components/Footer"; // <-- The missing import
 
 // Lazy load heavy sections for faster first paint (code splitting)
 const Testimonials = lazy(() => import("@/components/Testimonials"));
@@ -104,4 +105,3 @@ const Index = () => {
 };
 
 export default Index;
-
