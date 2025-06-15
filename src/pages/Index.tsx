@@ -1,19 +1,27 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Process from "@/components/Process";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Testimonials from "@/components/Testimonials";
-import Gallery from "@/components/Gallery";
-import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AnimateInView, ScrollReveal, StaggerContainer } from "@/components/ui/motion";
 import ProductsSection from "@/components/product/ProductsSection";
 import { Helmet } from "react-helmet";
 import DownloadCatalogButton from "@/components/DownloadCatalogButton";
+
+// Lazy load heavy sections for faster first paint (code splitting)
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const Gallery = lazy(() => import("@/components/Gallery"));
+
+// Simple spinner fallback
+const SectionLoader = () => (
+  <div className="flex justify-center items-center py-12 w-full">
+    <div className="loader"></div>
+  </div>
+);
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,13 +54,18 @@ const Index = () => {
         <WhyChooseUs />
       </ScrollReveal>
       
-      <AnimateInView animation="zoom-in" delay={200}>
-        <Testimonials />
-      </AnimateInView>
+      {/* Lazy load Testimonials and Gallery to reduce initial bundle */}
+      <Suspense fallback={<SectionLoader />}>
+        <AnimateInView animation="zoom-in" delay={200}>
+          <Testimonials />
+        </AnimateInView>
+      </Suspense>
       
-      <ScrollReveal direction="up" delay={150}>
-        <Gallery />
-      </ScrollReveal>
+      <Suspense fallback={<SectionLoader />}>
+        <ScrollReveal direction="up" delay={150}>
+          <Gallery />
+        </ScrollReveal>
+      </Suspense>
       
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -91,3 +104,4 @@ const Index = () => {
 };
 
 export default Index;
+
