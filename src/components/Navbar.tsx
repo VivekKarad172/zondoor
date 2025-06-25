@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,28 +68,10 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            
-            {/* Theme Toggle */}
-            <ThemeToggle 
-              variant="ghost" 
-              size="sm"
-              className={cn(
-                "transition-colors",
-                isScrolled ? "text-gray-700 hover:text-primary" : "text-white hover:text-primary-foreground"
-              )}
-            />
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center space-x-2">
-            <ThemeToggle 
-              variant="ghost" 
-              size="sm"
-              className={cn(
-                "transition-colors",
-                isScrolled ? "text-gray-700 hover:text-primary" : "text-white hover:text-primary-foreground"
-              )}
-            />
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
