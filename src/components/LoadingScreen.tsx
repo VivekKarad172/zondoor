@@ -34,7 +34,7 @@ const LoadingScreen = ({
     >
       <div className="text-center">
         <img 
-          src="/lovable-uploads/b8cb2ade-faa3-464d-b0b9-7d0a8c03d6f1.png" 
+          src="/lovable-uploads/671e2f94-982a-4275-b3be-5f1834a9a2c8.png" 
           alt="Z-ON DOOR Logo" 
           className="mx-auto h-16 mb-6"
           width="180"

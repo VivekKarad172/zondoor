@@ -45,9 +45,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-primary">
-              Z-ON DOOR
-            </div>
+            <img 
+              src="/lovable-uploads/671e2f94-982a-4275-b3be-5f1834a9a2c8.png" 
+              alt="Z-ON DOOR Logo" 
+              className="h-12 md:h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
