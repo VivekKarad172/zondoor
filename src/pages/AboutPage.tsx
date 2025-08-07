@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 const AboutPage = () => {
   useEffect(() => {
-    // Update document title
-    document.title = "About Us | Z-on Door - 3D PVC Doors Manufacturer";
+    // Update document title with SEO keywords
+    document.title = "About Z-on Door | Premium PVC Door Manufacturer | Bathroom & Interior Doors";
 
     // Scroll to top on page load
     window.scrollTo(0, 0);
@@ -29,12 +29,12 @@ const AboutPage = () => {
                     Our Mission & Values
                   </h2>
                   <p className="text-foreground/80 mb-6">
-                    At Z-ON DOOR, our mission is to provide high-quality, affordable doors that 
-                    combine aesthetic appeal with practical functionality. We believe every home 
-                    deserves beautiful doors that last.
+                    At Z-ON DOOR, our mission is to provide waterproof, termite-proof PVC doors for bathroom, 
+                    toilet, bedroom and interior spaces. We specialize in long-lasting, high-quality doors that 
+                    combine aesthetic appeal with practical functionality for washroom and home interiors.
                   </p>
                   <ul className="space-y-3">
-                    {["Quality - We never compromise on the materials we use", "Affordability - Premium products at reasonable prices", "Innovation - Continuously improving our designs and processes", "Customer Satisfaction - Your happiness is our priority", "Sustainability - Environmentally responsible manufacturing"].map((item, index) => <li key={index} className="flex items-start">
+                    {["Quality - Waterproof and termite-proof PVC doors for long-lasting performance", "Affordable - Premium PVC doors for bathroom and bedroom at reasonable prices", "Innovation - Advanced manufacturing of interior and washroom doors", "Customer Satisfaction - Perfect door solutions for your interior needs", "Sustainability - Eco-friendly PVC door manufacturing processes"].map((item, index) => <li key={index} className="flex items-start">
                         <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

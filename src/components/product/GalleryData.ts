@@ -2,12 +2,13 @@
 // Door gallery data
 
 export const doorCategories = [
-  { id: "all", name: "All Doors" },
-  { id: "bathroom", name: "Bathroom Doors" },
-  { id: "bedroom", name: "Bedroom Doors" },
-  { id: "living", name: "Living Room Doors" },
-  { id: "entrance", name: "Entrance Doors" },
-  { id: "special", name: "Special Designs" }
+  { id: "all", name: "All PVC Doors" },
+  { id: "bathroom", name: "PVC Doors for Bathroom" },
+  { id: "bedroom", name: "PVC Doors for Bedroom" },
+  { id: "interior", name: "Interior PVC Doors" },
+  { id: "waterproof", name: "Waterproof Doors" },
+  { id: "toilet", name: "PVC Doors for Toilet" },
+  { id: "washroom", name: "Washroom Doors" }
 ];
 
 export const doorGalleryItems = [
@@ -16,7 +17,7 @@ export const doorGalleryItems = [
     name: "ZN-01 Classic Design",
     image: "/lovable-uploads/c9565cf2-322b-42b1-99bd-bbad8bfa8263.png",
     category: ["bedroom", "living"],
-    description: "Premium embossed pattern with precise detailing, ideal for modern bedroom and living spaces"
+    description: "Premium PVC door with embossed pattern, waterproof and termite-proof, ideal for bedroom and interior spaces"
   },
   {
     id: 2,
@@ -36,8 +37,8 @@ export const doorGalleryItems = [
     id: 4,
     name: "3D Emboss Design Door",
     image: "/lovable-uploads/75b2a0cb-8b53-4f2e-a82d-b10dded0e479.png",
-    category: ["bathroom", "bedroom"],
-    description: "Stunning 3D embossed design door with premium wood finish, perfect for adding elegance to any room"
+    category: ["bathroom", "bedroom", "toilet", "washroom"],
+    description: "Waterproof PVC door for bathroom and bedroom with 3D embossed design, termite-proof and long-lasting for interior use"
   },
   // Adding some of the existing door designs from ProductData.ts
   {

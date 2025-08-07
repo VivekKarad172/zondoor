@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet";
 
 const ContactPage = () => {
   useEffect(() => {
-    // Update document title
-    document.title = "Contact Us | Z-on Door - 3D PVC Doors Manufacturer";
+    // Update document title with SEO keywords
+    document.title = "Contact Z-on Door | PVC Doors for Bathroom, Bedroom & Interior | Surat";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
@@ -18,8 +18,9 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <Helmet>
-        <title>Contact Us | Z-on Door - 3D PVC Doors Manufacturer</title>
-        <meta name="description" content="Contact Z-on Door for premium 3D PVC doors in Surat, Gujarat. Reach out for quotes on bathroom doors, balcony doors, bedroom doors, WPC doors and PVC screens." />
+        <title>Contact Z-on Door | PVC Doors for Bathroom, Bedroom & Interior | Surat</title>
+        <meta name="description" content="Contact Z-on Door for waterproof PVC doors for bathroom, toilet, bedroom & interior. Get quotes for termite-proof, long-lasting doors in Surat, Gujarat." />
+        <meta name="keywords" content="contact pvc door manufacturer, bathroom door quote, bedroom door price, interior door supplier surat, waterproof door dealer" />
       </Helmet>
       <Navbar />
       <div className="pt-28 lg:pt-32">

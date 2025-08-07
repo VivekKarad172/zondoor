@@ -14,8 +14,8 @@ const BlogPage = () => {
   const { user } = useAuth();
   
   useEffect(() => {
-    // Update document title
-    document.title = "Blog | Z-on Door - 3D PVC Doors Manufacturer";
+    // Update document title with SEO keywords
+    document.title = "PVC Door Blog | Bathroom, Bedroom & Interior Door Guides | Z-on Door";
     
     window.scrollTo(0, 0);
   }, []);
@@ -23,8 +23,9 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-white relative">
       <Helmet>
-        <title>Blog | Z-on Door - 3D PVC Doors Manufacturer</title>
-        <meta name="description" content="Read the latest blogs about 3D PVC doors, door designs, and industry trends. Z-on Door offers expert insights on door selection and maintenance in Surat, Gujarat." />
+        <title>PVC Door Blog | Bathroom, Bedroom & Interior Door Guides | Z-on Door</title>
+        <meta name="description" content="Expert guides on PVC doors for bathroom, bedroom & interior spaces. Learn about waterproof, termite-proof, long-lasting doors for washroom and home interiors." />
+        <meta name="keywords" content="pvc door blog, bathroom door guide, bedroom door tips, interior door advice, waterproof door maintenance, pvc door installation" />
       </Helmet>
       <div className="fixed top-0 left-0 w-full z-50">
         <Navbar />

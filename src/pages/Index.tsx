@@ -30,8 +30,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white relative">
       <Helmet>
-        <title>Z-on Door | Best 3D PVC Doors Manufacturer in India</title>
-        <meta name="description" content="Discover premium-quality 3D PVC doors for bathrooms, balconies, and bedrooms. Z-on Door offers durable and stylish WPC and PVC screen doors in Surat, Gujarat." />
+        <title>PVC Doors for Bathroom, Bedroom & Interior | Z-on Door Manufacturer</title>
+        <meta name="description" content="Premium PVC doors for bathroom, toilet, bedroom & interior spaces. Waterproof, termite-proof, long-lasting doors for washroom & interior design. Best PVC door manufacturer in Surat, Gujarat." />
+        <meta name="keywords" content="pvc door for bathroom, pvc door for toilet, bathroom door, bedroom door, interior door, waterproof door for bathroom, termite proof door, long lasting door, washroom door, pvc doors surat" />
       </Helmet>
       <Navbar />
       

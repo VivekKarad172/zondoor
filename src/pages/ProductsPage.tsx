@@ -6,8 +6,14 @@ import { AnimateInView } from "@/components/ui/motion";
 
 const ProductsPage = () => {
   useEffect(() => {
-    // Update document title
-    document.title = "Products | Z-on Door - 3D PVC Doors Manufacturer";
+    // Update document title with SEO keywords
+    document.title = "PVC Doors for Bathroom, Bedroom & Interior | Z-on Door Products";
+    
+    // Add meta description dynamically
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Premium PVC doors for bathroom, toilet, bedroom & interior. Waterproof, termite-proof, long-lasting doors for washroom & all interior spaces. Best quality PVC door manufacturer.');
+    }
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
@@ -20,9 +26,9 @@ const ProductsPage = () => {
         <section className="py-10 bg-white">
           <div className="container mx-auto px-4">
             <AnimateInView animation="fade-in">
-              <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Our Products</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">PVC Doors for Bathroom, Bedroom & Interior</h1>
               <p className="text-center text-muted-foreground mb-6 max-w-3xl mx-auto">
-                Explore our premium range of PVC and WPC doors designed for every space and style preference
+                Premium waterproof and termite-proof PVC doors for bathroom, toilet, bedroom and interior spaces. Long-lasting doors designed for washroom and all interior applications.
               </p>
             </AnimateInView>
           </div>

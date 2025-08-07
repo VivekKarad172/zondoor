@@ -46,13 +46,43 @@ export const cncOptions = [
   { id: 10, name: "Grid Pattern", image: "/lovable-uploads/78b8dec8-0caf-4cdc-8110-3fa851ee9bb1.png" },
 ];
 
-// Categories for dropdown
+// Categories for dropdown with SEO-optimized names
 export const categories = [
-  { id: "all", name: "All Products" },
+  { id: "all", name: "All PVC Doors" },
+  { id: "bathroom", name: "PVC Doors for Bathroom" },
+  { id: "bedroom", name: "PVC Doors for Bedroom" },
+  { id: "interior", name: "Interior PVC Doors" },
+  { id: "waterproof", name: "Waterproof Doors" },
   { id: "premium", name: "Premium PVC Doors" },
-  { id: "economy", name: "Economy PVC Doors" },
-  { id: "frp", name: "FRP Doors" },
-  { id: "custom", name: "Custom Designs" },
+  { id: "custom", name: "Custom Door Designs" },
+];
+
+// SEO-optimized product descriptions
+export const productDescriptions = [
+  {
+    id: 1,
+    name: "Premium PVC Door for Bathroom",
+    description: "Waterproof and termite-proof PVC door perfect for bathroom and washroom applications. Long-lasting door with moisture resistance.",
+    keywords: ["pvc door for bathroom", "waterproof door", "bathroom door", "washroom door"]
+  },
+  {
+    id: 2, 
+    name: "PVC Door for Bedroom",
+    description: "Stylish and durable PVC door designed for bedroom and interior spaces. Termite-proof and long-lasting door for home interiors.",
+    keywords: ["pvc door for bedroom", "bedroom door", "interior door", "long lasting door"]
+  },
+  {
+    id: 3,
+    name: "Interior PVC Door",
+    description: "Premium quality interior PVC door suitable for all indoor spaces. Termite-proof and waterproof door for modern homes.",
+    keywords: ["interior door", "pvc door", "indoor door", "termite proof door"]
+  },
+  {
+    id: 4,
+    name: "Waterproof Door for Toilet",
+    description: "Specially designed waterproof PVC door for toilet and bathroom areas. Moisture-resistant and long-lasting door solution.",
+    keywords: ["pvc door for toilet", "waterproof door for bathroom", "toilet door", "moisture resistant door"]
+  }
 ];
 
 // Add website connection information

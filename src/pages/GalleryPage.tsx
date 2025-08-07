@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet";
 
 const GalleryPage = () => {
   useEffect(() => {
-    // Update document title
-    document.title = "Door Gallery | Z-on Door - 3D PVC Doors Manufacturer";
+    // Update document title with SEO keywords
+    document.title = "PVC Door Gallery | Bathroom, Bedroom & Interior Doors | Z-on Door";
     
     // Scroll to top on page load
     window.scrollTo(0, 0);
@@ -32,8 +32,9 @@ const GalleryPage = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <Helmet>
-        <title>Door Gallery | Z-on Door - 3D PVC Doors Manufacturer</title>
-        <meta name="description" content="Explore our collection of premium 3D PVC doors for bathrooms, balconies, and bedrooms. View our stylish WPC and PVC screen doors manufactured in Surat, Gujarat." />
+        <title>PVC Door Gallery | Bathroom, Bedroom & Interior Doors | Z-on Door</title>
+        <meta name="description" content="View our premium PVC door gallery featuring waterproof doors for bathroom, toilet, bedroom and interior spaces. Termite-proof, long-lasting doors for washroom and home interiors." />
+        <meta name="keywords" content="pvc door gallery, bathroom door designs, bedroom door styles, interior door collection, waterproof door options, washroom doors" />
         {/* Add caching headers */}
         <meta http-equiv="Cache-Control" content="max-age=604800, must-revalidate" />
       </Helmet>
