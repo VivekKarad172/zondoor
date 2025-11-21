@@ -35,6 +35,7 @@ const GalleryPage = () => {
         <title>PVC Door Gallery | Bathroom, Bedroom & Interior Doors | Z-on Door</title>
         <meta name="description" content="View our premium PVC door gallery featuring waterproof doors for bathroom, toilet, bedroom and interior spaces. Termite-proof, long-lasting doors for washroom and home interiors." />
         <meta name="keywords" content="pvc door gallery, bathroom door designs, bedroom door styles, interior door collection, waterproof door options, washroom doors" />
+        <link rel="canonical" href="https://zondoor.com/gallery" />
         {/* Add caching headers */}
         <meta http-equiv="Cache-Control" content="max-age=604800, must-revalidate" />
       </Helmet>

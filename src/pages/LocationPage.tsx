@@ -12,6 +12,15 @@ const LocationPage = () => {
     // Update document title
     document.title = "Our Location | Z-on Door - 3D PVC Doors Manufacturer";
     
+    // Add canonical tag
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://zondoor.com/location');
+    
     // Scroll to top on page load
     window.scrollTo(0, 0);
 

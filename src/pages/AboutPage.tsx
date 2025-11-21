@@ -11,6 +11,15 @@ const AboutPage = () => {
     // Update document title with SEO keywords
     document.title = "About Z-on Door | Premium PVC Door Manufacturer | Bathroom & Interior Doors";
 
+    // Add canonical tag
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://zondoor.com/about');
+
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);

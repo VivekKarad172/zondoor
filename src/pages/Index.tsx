@@ -33,6 +33,7 @@ const Index = () => {
         <title>PVC Doors for Bathroom, Bedroom & Interior | Z-on Door Manufacturer</title>
         <meta name="description" content="Premium PVC doors for bathroom, toilet, bedroom & interior spaces. Waterproof, termite-proof, long-lasting doors for washroom & interior design. Best PVC door manufacturer in Surat, Gujarat." />
         <meta name="keywords" content="pvc door for bathroom, pvc door for toilet, bathroom door, bedroom door, interior door, waterproof door for bathroom, termite proof door, long lasting door, washroom door, pvc doors surat" />
+        <link rel="canonical" href="https://zondoor.com/" />
       </Helmet>
       <Navbar />
       
