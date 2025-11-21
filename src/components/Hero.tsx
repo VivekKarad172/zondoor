@@ -32,6 +32,15 @@ const Hero = ({ doorImages, specifications }: HeroProps) => {
       id="home"
       className="relative h-screen w-full flex items-center bg-gray-50 overflow-hidden"
     >
+      {/* Logo in top left corner */}
+      <div className="absolute top-8 left-8 z-30">
+        <img 
+          src="/lovable-uploads/logo-zondoor.png" 
+          alt="Z-ON DOOR Logo" 
+          className="h-16 md:h-20 w-auto"
+        />
+      </div>
+
       {/* Full-screen slideshow background */}
       <div className="absolute inset-0 w-full h-full">
         {localImages.map((image, index) => (
