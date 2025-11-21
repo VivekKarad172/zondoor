@@ -15,6 +15,15 @@ const ProductsPage = () => {
       metaDescription.setAttribute('content', 'Premium PVC doors for bathroom, toilet, bedroom & interior. Waterproof, termite-proof, long-lasting doors for washroom & all interior spaces. Best quality PVC door manufacturer.');
     }
     
+    // Add canonical tag
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://zondoor.com/products');
+    
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);

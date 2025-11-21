@@ -26,6 +26,7 @@ const BlogPage = () => {
         <title>PVC Door Blog | Bathroom, Bedroom & Interior Door Guides | Z-on Door</title>
         <meta name="description" content="Expert guides on PVC doors for bathroom, bedroom & interior spaces. Learn about waterproof, termite-proof, long-lasting doors for washroom and home interiors." />
         <meta name="keywords" content="pvc door blog, bathroom door guide, bedroom door tips, interior door advice, waterproof door maintenance, pvc door installation" />
+        <link rel="canonical" href="https://zondoor.com/blog" />
       </Helmet>
       <div className="fixed top-0 left-0 w-full z-50">
         <Navbar />
