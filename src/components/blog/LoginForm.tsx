@@ -82,7 +82,7 @@ const LoginForm = () => {
             required
           />
           <p className="text-xs text-muted-foreground mt-1">
-            Demo credentials: admin@zondoor.com / admin123
+            Demo credentials: 
           </p>
         </div>
 
