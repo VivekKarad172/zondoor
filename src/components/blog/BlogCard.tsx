@@ -1,18 +1,30 @@
 
 import React from "react";
-import { CalendarDays, Clock, User } from "lucide-react";
+import { CalendarDays, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import { BlogPost } from "./BlogData";
-import { formatDate } from "./blogUtils";
+import { BlogPost } from "@/types/blog";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return '';
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const excerpt = post.subtitle || (post.content_blocks || [])
+    .find(block => block.type === 'paragraph')?.['text']?.substring(0, 150) || '';
+
   // Function to determine category color
   const getCategoryColor = (category: string) => {
-    switch (category) {
+    const cat = category.toLowerCase();
+    switch (cat) {
       case "product":
         return "bg-primary/10 text-primary";
       case "design":
@@ -30,7 +42,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="relative h-56 overflow-hidden group">
         <img
-          src={post.image}
+          src={post.main_image_url || '/placeholder.svg'}
           alt={post.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
@@ -43,28 +55,24 @@ const BlogCard = ({ post }: BlogCardProps) => {
           </span>
         </div>
         <h3 className="text-xl font-bold mb-3 line-clamp-2 h-14">{post.title}</h3>
-        <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+        <p className="text-muted-foreground mb-4 line-clamp-3">{excerpt}</p>
         
         <div className="flex items-center text-sm text-muted-foreground mb-4">
-          <div className="flex items-center mr-4">
-            <CalendarDays size={14} className="mr-1" />
-            <span>{formatDate(post.date)}</span>
-          </div>
+          {post.published_at && (
+            <div className="flex items-center mr-4">
+              <CalendarDays size={14} className="mr-1" />
+              <span>{formatDate(post.published_at)}</span>
+            </div>
+          )}
           <div className="flex items-center">
             <Clock size={14} className="mr-1" />
-            <span>{post.readTime} min read</span>
+            <span>{post.read_time} min read</span>
           </div>
         </div>
         
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-2">
-              <User size={16} />
-            </div>
-            <span className="text-sm font-medium">{post.author}</span>
-          </div>
+        <div className="flex items-center justify-end">
           <Link 
-            to={`/blog/${post.id}`} 
+            to={`/blog/${post.slug}`} 
             className="text-primary font-medium text-sm hover:underline"
           >
             Read More

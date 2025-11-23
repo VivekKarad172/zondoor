@@ -18,8 +18,11 @@ const About = lazy(() => import("./pages/AboutPage"));
 const Gallery = lazy(() => import("./pages/GalleryPage"));
 const Contact = lazy(() => import("./pages/ContactPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const BlogPostDetailPage = lazy(() => import("./pages/BlogPostDetailPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogManagementPage = lazy(() => import("./pages/BlogManagementPage"));
+const BlogAdminPage = lazy(() => import("./pages/admin/BlogAdminPage"));
+const BlogEditorPage = lazy(() => import("./pages/admin/BlogEditorPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Simple loading fallback
@@ -87,19 +90,29 @@ function App() {
                       <Contact />
                     </Suspense>
                   } />
-                  <Route path="/blog/:id" element={
-                    <Suspense fallback={<PageLoader />}>
-                      <BlogPostPage />
-                    </Suspense>
-                  } />
                   <Route path="/blog" element={
                     <Suspense fallback={<PageLoader />}>
                       <BlogPage />
                     </Suspense>
                   } />
+                  <Route path="/blog/:slug" element={
+                    <Suspense fallback={<PageLoader />}>
+                      <BlogPostDetailPage />
+                    </Suspense>
+                  } />
                   <Route path="/blog-management" element={
                     <Suspense fallback={<PageLoader />}>
                       <BlogManagementPage />
+                    </Suspense>
+                  } />
+                  <Route path="/admin/blog" element={
+                    <Suspense fallback={<PageLoader />}>
+                      <BlogAdminPage />
+                    </Suspense>
+                  } />
+                  <Route path="/admin/blog/:id" element={
+                    <Suspense fallback={<PageLoader />}>
+                      <BlogEditorPage />
                     </Suspense>
                   } />
                   <Route path="*" element={
