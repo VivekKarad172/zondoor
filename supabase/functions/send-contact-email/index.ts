@@ -43,17 +43,14 @@ serve(async (req) => {
     });
 
     try {
-      // Initialize SMTP client with the new credentials - using SmtpClient (lowercase 's') instead of SMTPClient
-      const client = new SmtpClient({
-        connection: {
-          hostname: "smtp-relay.brevo.com",
-          port: 587,
-          tls: true,
-          auth: {
-            username: "887c5c002@smtp-brevo.com",
-            password: "7Tb8mKBL3zYPhjcX",
-          },
-        },
+      // Initialize SMTP client with the new credentials
+      const client = new SmtpClient();
+      
+      await client.connectTLS({
+        hostname: "smtp-relay.brevo.com",
+        port: 587,
+        username: "887c5c002@smtp-brevo.com",
+        password: "7Tb8mKBL3zYPhjcX",
       });
       
       console.log("SMTP client initialized");
@@ -106,12 +103,13 @@ serve(async (req) => {
     } catch (emailError) {
       console.error("Error sending email:", emailError);
       
+      const errorMessage = emailError instanceof Error ? emailError.message : "Unknown error";
+      
       // Return a more specific error that includes SMTP details
       return new Response(
         JSON.stringify({ 
           error: "Failed to send your message. Please try again.", 
-          details: emailError.message,
-          note: "Your message was still saved to our database"
+          details: errorMessage
         }),
         { 
           status: 500, 
@@ -122,10 +120,12 @@ serve(async (req) => {
   } catch (error) {
     console.error("Error processing request:", error);
     
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    
     return new Response(
       JSON.stringify({ 
         error: "Failed to process your request", 
-        details: error.message 
+        details: errorMessage 
       }),
       { 
         status: 500, 
