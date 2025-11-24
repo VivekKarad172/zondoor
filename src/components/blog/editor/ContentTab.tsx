@@ -21,24 +21,31 @@ const ContentTab = ({
   return (
     <div className="space-y-4">
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Excerpt (Brief Summary)</label>
+        <label className="block text-sm font-medium mb-1">Short Summary</label>
+        <p className="text-xs text-muted-foreground mb-2">
+          A short description that appears in the blog list (1-2 sentences)
+        </p>
         <Textarea
           name="excerpt"
           value={excerpt}
           onChange={onExcerptChange}
-          placeholder="Write a brief excerpt for the blog post"
+          placeholder="Write a short summary of your blog post..."
           rows={2}
         />
       </div>
       
       <div>
-        <label className="block text-sm font-medium mb-1">Content</label>
+        <label className="block text-sm font-medium mb-1">Blog Content</label>
+        <p className="text-xs text-muted-foreground mb-2">
+          Write your blog post here. You can use the formatting buttons to style your text.
+        </p>
         <FormatToolbar onFormatClick={onFormatClick} />
         <Textarea
           value={content}
           onChange={onContentChange}
-          className="font-mono text-sm"
+          className="font-sans text-sm"
           rows={15}
+          placeholder="Start writing your blog content here..."
         />
       </div>
     </div>

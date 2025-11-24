@@ -1,5 +1,8 @@
-
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Upload, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface ImagePreviewProps {
   imageUrl: string;
@@ -8,27 +11,123 @@ interface ImagePreviewProps {
 }
 
 const ImagePreview = ({ imageUrl, onImageChange, readOnly = true }: ImagePreviewProps) => {
+  const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file",
+        description: "Please select an image file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please select an image under 5MB",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(filePath);
+
+      onImageChange(publicUrl);
+      
+      toast({
+        title: "Success",
+        description: "Image uploaded successfully"
+      });
+    } catch (error: any) {
+      toast({
+        title: "Upload failed",
+        description: error.message || "Failed to upload image",
+        variant: "destructive"
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleRemove = () => {
+    onImageChange("");
+  };
+
   return (
-    <div className="w-full aspect-[16/9] rounded-md overflow-hidden bg-muted/40">
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="Featured image"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="flex items-center justify-center h-full">
-          <div className="text-center p-4">
-            <div className="h-10 w-10 mx-auto text-muted-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
+    <div className="space-y-3">
+      <div className="w-full aspect-[16/9] rounded-md overflow-hidden bg-muted/40 relative">
+        {imageUrl ? (
+          <>
+            <img
+              src={imageUrl}
+              alt="Featured image"
+              className="w-full h-full object-cover"
+            />
+            {!readOnly && (
+              <Button
+                type="button"
+                variant="destructive"
+                size="sm"
+                className="absolute top-2 right-2"
+                onClick={handleRemove}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center p-4">
+              <Upload className="h-10 w-10 mx-auto text-muted-foreground" />
+              <p className="text-sm text-muted-foreground mt-2">
+                {readOnly ? "Featured image for your post" : "Click below to upload image"}
+              </p>
             </div>
-            <p className="text-sm text-muted-foreground mt-2">Featured image for your post</p>
           </div>
-        </div>
+        )}
+      </div>
+      
+      {!readOnly && (
+        <>
+          <input
+            type="file"
+            id="featured-image-upload"
+            accept="image/*"
+            onChange={handleFileChange}
+            disabled={uploading}
+            className="hidden"
+          />
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={() => document.getElementById('featured-image-upload')?.click()}
+            disabled={uploading}
+          >
+            {uploading ? "Uploading..." : imageUrl ? "Change Image" : "Upload Image"}
+          </Button>
+        </>
       )}
     </div>
   );
