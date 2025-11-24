@@ -19,10 +19,16 @@ const BlogPostContent: React.FC<BlogPostContentProps> = ({ blocks }) => {
         }
 
         if (block.type === 'paragraph') {
+          // Split by double line breaks to create paragraphs
+          const paragraphs = block.text.split(/\n\n+/);
           return (
-            <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-              {block.text}
-            </p>
+            <div key={index}>
+              {paragraphs.map((para, pIndex) => (
+                <p key={pIndex} className="mb-4 text-foreground leading-relaxed whitespace-pre-line">
+                  {para.trim()}
+                </p>
+              ))}
+            </div>
           );
         }
 
@@ -42,7 +48,7 @@ const BlogPostContent: React.FC<BlogPostContentProps> = ({ blocks }) => {
                 className="rounded-lg max-w-full h-auto inline-block"
               />
               {block.caption && (
-                <figcaption className="text-sm text-gray-600 mt-2">
+                <figcaption className="text-sm text-muted-foreground mt-2">
                   {block.caption}
                 </figcaption>
               )}

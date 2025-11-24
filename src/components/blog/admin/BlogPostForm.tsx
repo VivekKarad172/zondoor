@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BlogPost, BLOG_CATEGORIES } from "@/types/blog";
-import BlockEditor from "./BlockEditor";
-import ImageSelector from "@/components/media/ImageSelector";
+import ImageUpload from "./ImageUpload";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,17 +16,18 @@ interface BlogPostFormProps {
 
 const BlogPostForm: React.FC<BlogPostFormProps> = ({ post, onSave }) => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<Partial<BlogPost>>({
-    title: '',
-    subtitle: '',
-    slug: '',
-    category: 'Guide',
-    main_image_url: '',
-    read_time: 5,
-    seo_title: '',
-    seo_description: '',
-    content_blocks: [],
-    ...post
+  const [formData, setFormData] = useState({
+    title: post?.title || '',
+    subtitle: post?.subtitle || '',
+    slug: post?.slug || '',
+    category: post?.category || 'Guide',
+    main_image_url: post?.main_image_url || '',
+    read_time: post?.read_time || 5,
+    seo_title: post?.seo_title || '',
+    seo_description: post?.seo_description || '',
+    content: post?.content_blocks?.[0]?.type === 'paragraph' 
+      ? post.content_blocks[0].text 
+      : ''
   });
   const [saving, setSaving] = useState(false);
 
@@ -44,7 +45,18 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({ post, onSave }) => {
   const handleSave = async (publish: boolean) => {
     setSaving(true);
     try {
-      await onSave(formData, publish);
+      // Convert simple content to content_blocks format
+      const contentBlocks = formData.content ? [
+        {
+          type: 'paragraph' as const,
+          text: formData.content
+        }
+      ] : [];
+
+      await onSave({
+        ...formData,
+        content_blocks: contentBlocks
+      }, publish);
       navigate('/admin/blog');
     } finally {
       setSaving(false);
@@ -111,28 +123,23 @@ const BlogPostForm: React.FC<BlogPostFormProps> = ({ post, onSave }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Main Image</label>
-              <ImageSelector
-                value={formData.main_image_url || ''}
-                onChange={(url) => setFormData({ ...formData, main_image_url: url })}
-                aspectRatio={16/9}
-                placeholder="Upload or select main image"
-              />
-              <Input
-                className="mt-2"
-                value={formData.main_image_url || ''}
-                onChange={(e) => setFormData({ ...formData, main_image_url: e.target.value })}
-                placeholder="Or paste image URL"
-              />
-            </div>
+            <ImageUpload
+              value={formData.main_image_url}
+              onChange={(url) => setFormData({ ...formData, main_image_url: url })}
+            />
 
             <div>
-              <label className="block text-sm font-medium mb-2">Content Blocks</label>
-              <BlockEditor
-                blocks={formData.content_blocks || []}
-                onChange={(blocks) => setFormData({ ...formData, content_blocks: blocks })}
+              <label className="block text-sm font-medium mb-2">Content</label>
+              <Textarea
+                value={formData.content}
+                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                placeholder="Write your blog post content here..."
+                rows={15}
+                className="font-sans"
               />
+              <p className="text-xs text-muted-foreground mt-1">
+                Write your content in plain text. You can use line breaks for paragraphs.
+              </p>
             </div>
           </div>
         </TabsContent>
