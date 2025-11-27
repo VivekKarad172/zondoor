@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { BlogPost } from "./BlogData";
+import { BlogPost } from "@/types/blog";
 import { formatDate } from "./blogUtils";
 import {
   Table,
@@ -45,7 +44,7 @@ type User = {
 interface BlogPostsListProps {
   posts: BlogPost[];
   onEdit: (post: BlogPost) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
   currentUser?: User | null;
   isAdmin?: boolean;
 }
@@ -58,12 +57,12 @@ const BlogPostsList = ({
   isAdmin = false 
 }: BlogPostsListProps) => {
   const [search, setSearch] = useState("");
-  const [postToDelete, setPostToDelete] = useState<number | null>(null);
+  const [postToDelete, setPostToDelete] = useState<string | null>(null);
 
   const filteredPosts = posts.filter(
     (post) =>
       post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
+      post.subtitle?.toLowerCase().includes(search.toLowerCase()) ||
       post.category.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -71,7 +70,7 @@ const BlogPostsList = ({
     setSearch(e.target.value);
   };
 
-  const confirmDelete = (id: number) => {
+  const confirmDelete = (id: string) => {
     setPostToDelete(id);
   };
 
@@ -86,7 +85,8 @@ const BlogPostsList = ({
   const canModifyPost = (post: BlogPost) => {
     if (!currentUser) return false;
     if (isAdmin) return true;
-    return post.authorId === currentUser.id;
+    // All logged-in users can edit all posts for now
+    return true;
   };
 
   const getCategoryColor = (category: string) => {
@@ -142,7 +142,10 @@ const BlogPostsList = ({
                       {post.title}
                       <div className="text-xs text-muted-foreground mt-1 flex items-center gap-3">
                         <span className="flex items-center gap-1">
-                          <Clock size={12} /> {post.readTime} min read
+                          <Clock size={12} /> {post.read_time || 5} min read
+                        </span>
+                        <span className={`${post.status === 'published' ? 'text-green-600' : 'text-orange-600'} font-medium`}>
+                          {post.status === 'published' ? '● Published' : '● Draft'}
                         </span>
                       </div>
                     </div>
@@ -154,13 +157,13 @@ const BlogPostsList = ({
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     <div className="flex items-center gap-1 text-sm">
-                      <CalendarDays size={14} /> {formatDate(post.date)}
+                      <CalendarDays size={14} /> {formatDate(post.published_at || post.created_at)}
                     </div>
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
                     <div className="flex items-center gap-1">
                       <User size={14} /> 
-                      {post.author}
+                      Admin
                       {!canModifyPost(post) && <Lock size={12} className="text-muted-foreground ml-1" />}
                     </div>
                   </TableCell>
@@ -172,7 +175,7 @@ const BlogPostsList = ({
                         asChild
                         className="h-8 w-8 p-0"
                       >
-                        <Link to={`/blog/${post.id}`}>
+                        <Link to={`/blog/${post.slug}`}>
                           <span className="sr-only">View</span>
                           <Eye size={14} />
                         </Link>
