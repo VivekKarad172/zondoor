@@ -21,7 +21,7 @@ const BlogHeader = ({ onCreatePost, isEditing }: BlogHeaderProps) => {
       <div>
         <h1 className="text-3xl md:text-4xl font-bold">Blog Management</h1>
         <p className="text-muted-foreground">
-          Logged in as {user.name} ({isAdmin() ? "Admin" : "Editor"})
+          Logged in as {user.email} ({isAdmin() ? "Admin" : "Editor"})
         </p>
       </div>
       

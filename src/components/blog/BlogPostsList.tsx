@@ -18,7 +18,7 @@ import {
   Eye,
   CalendarDays,
   Clock,
-  User,
+  User as UserIcon,
   Lock,
 } from "lucide-react";
 import {
@@ -33,13 +33,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Link } from "react-router-dom";
-
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: "admin" | "editor" | "user";
-};
+import { User } from "@supabase/supabase-js";
 
 interface BlogPostsListProps {
   posts: BlogPost[];
@@ -162,7 +156,7 @@ const BlogPostsList = ({
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
                     <div className="flex items-center gap-1">
-                      <User size={14} /> 
+                      <UserIcon size={14} />
                       Admin
                       {!canModifyPost(post) && <Lock size={12} className="text-muted-foreground ml-1" />}
                     </div>
