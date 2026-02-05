@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,8 +17,8 @@ const LoginForm = () => {
     setIsLoading(true);
     
     try {
-      const success = await login(email, password);
-      if (success) {
+      const result = await login(email, password);
+      if (result.success) {
         toast({
           title: "Login successful",
           description: "Welcome to the blog management system",
@@ -27,7 +26,7 @@ const LoginForm = () => {
       } else {
         toast({
           title: "Login failed",
-          description: "Invalid email or password",
+          description: result.error || "Invalid email or password",
           variant: "destructive",
         });
       }
@@ -81,9 +80,6 @@ const LoginForm = () => {
             placeholder="Enter your password"
             required
           />
-          <p className="text-xs text-muted-foreground mt-1">
-            Demo credentials: 
-          </p>
         </div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
