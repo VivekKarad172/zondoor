@@ -98,7 +98,7 @@ serve(async (req) => {
       
       await client.connectTLS({
         hostname: "smtp-relay.brevo.com",
-        port: 587,
+        port: 465,
         username: smtpUsername,
         password: smtpPassword,
       });
