@@ -124,6 +124,7 @@ function App() {
                 </Routes>
               </AnimatePresence>
             </div>
+            <AIChatbot />
             <WhatsAppButton 
               phoneNumber="+919601748998" 
               message={isMobile 
