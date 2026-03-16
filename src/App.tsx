@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Index";
 import WhatsAppButton from "./components/WhatsAppButton";
+import AIChatbot from "./components/AIChatbot";
 import { Toaster } from "sonner";
 import { AnimatePresence } from "framer-motion";
 import { useAuth } from "./contexts/AuthContext";
@@ -123,6 +124,7 @@ function App() {
                 </Routes>
               </AnimatePresence>
             </div>
+            <AIChatbot />
             <WhatsAppButton 
               phoneNumber="+919601748998" 
               message={isMobile 
