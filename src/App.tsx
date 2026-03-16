@@ -24,6 +24,7 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogManagementPage = lazy(() => import("./pages/BlogManagementPage"));
 const BlogAdminPage = lazy(() => import("./pages/admin/BlogAdminPage"));
 const BlogEditorPage = lazy(() => import("./pages/admin/BlogEditorPage"));
+const DashboardPage = lazy(() => import("./pages/admin/DashboardPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Simple loading fallback
@@ -114,6 +115,11 @@ function App() {
                   <Route path="/admin/blog/:id" element={
                     <Suspense fallback={<PageLoader />}>
                       <BlogEditorPage />
+                    </Suspense>
+                  } />
+                  <Route path="/admin/dashboard" element={
+                    <Suspense fallback={<PageLoader />}>
+                      <DashboardPage />
                     </Suspense>
                   } />
                   <Route path="*" element={
