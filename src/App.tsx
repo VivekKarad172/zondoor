@@ -117,6 +117,11 @@ function App() {
                       <BlogEditorPage />
                     </Suspense>
                   } />
+                  <Route path="/admin/dashboard" element={
+                    <Suspense fallback={<PageLoader />}>
+                      <DashboardPage />
+                    </Suspense>
+                  } />
                   <Route path="*" element={
                     <Suspense fallback={<PageLoader />}>
                       <NotFound />
