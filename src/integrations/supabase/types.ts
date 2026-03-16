@@ -65,6 +65,90 @@ export type Database = {
         }
         Relationships: []
       }
+      inventory: {
+        Row: {
+          created_at: string | null
+          id: string
+          min_stock: number
+          name: string
+          reorder_qty: number
+          stock: number
+          unit: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          min_stock?: number
+          name: string
+          reorder_qty?: number
+          stock?: number
+          unit?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          min_stock?: number
+          name?: string
+          reorder_qty?: number
+          stock?: number
+          unit?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          dealer: string
+          height: number
+          id: string
+          notes: string | null
+          order_date: string
+          order_number: string
+          phone: string
+          product: string
+          qty: number
+          status: string
+          updated_at: string | null
+          urgent: boolean
+          width: number
+        }
+        Insert: {
+          created_at?: string | null
+          dealer: string
+          height?: number
+          id?: string
+          notes?: string | null
+          order_date?: string
+          order_number: string
+          phone: string
+          product: string
+          qty?: number
+          status?: string
+          updated_at?: string | null
+          urgent?: boolean
+          width?: number
+        }
+        Update: {
+          created_at?: string | null
+          dealer?: string
+          height?: number
+          id?: string
+          notes?: string | null
+          order_date?: string
+          order_number?: string
+          phone?: string
+          product?: string
+          qty?: number
+          status?: string
+          updated_at?: string | null
+          urgent?: boolean
+          width?: number
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
